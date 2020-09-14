@@ -1,0 +1,120 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block content %}
+	<!-- Home Design -->
+	<section class="home-six parallax ulockd_bgi3" data-stellar-background-ratio="0.3">
+		<div class="container">
+			<div class="row home-content">
+				<div class="col-lg-8">
+					<div class="home-text">
+						<h2 class="fz40">Rent-in & Rent-out</h2>
+						<p class="color-white">A web platform where farmers can easy rent-out their Tractors & Implement’s which they don’t need and rent-in what they want to use.</p>
+					</div>
+				</div>
+				<div class="col-lg-12">
+					<div class="home-job-search-box mt20 mb20">
+						<form class="form-inline">
+							<div class="search_option_one">
+							    <div class="form-group">
+							    	<label for="exampleInputName"><span class="flaticon-search"></span></label>
+							    	<input type="text" class="form-control h70" id="exampleInputName" placeholder="Equipments name">
+							    </div>
+							</div>
+							<div class="search_option_two">
+							    <div class="form-group">
+							    	<label for="exampleInputEmail"><span class="flaticon-location-pin"></span></label>
+							    	<input type="text" class="form-control h70" id="exampleInputEmail" placeholder="Location">
+							    </div>
+							</div>
+							<div class="search_option_button">
+							    <button type="submit" class="btn btn-thm btn-dark h70">Search</button>								
+							</div>
+						</form>
+					</div>
+				</div>
+			</div>
+		</div>
+	</section>
+
+	<section class="expert-freelancer bgc-fa pb20">
+		<div class="container">
+			<div class="row">
+				<div class="col-lg-12">
+					<div class="ulockd-main-title">
+						<h4>POPULAR EQUIPMENTS</h4>
+						<h3 class="mt0">Quality equipment, ready to go</h3>
+					</div>
+				</div>
+			</div>
+			<div class="row">
+				<div class="col-lg-12">
+					<div class="ef_slider2">
+						{% for category in tractor_categories %}
+						<div class="item">
+							<div class="ef_post home6">
+								<div class="ef_header">
+									<h4 class="hr_rate">{{category.name}}</h4>
+								</div>
+								<a href="{% url 'equipments:tractor-category' category.pk %}">
+									<div class="thumb text-center" style="margin-top: 100px;">
+										<img class="img-fluid" src="{{category.image.url }}" alt="">
+									</div>
+								</a>
+								
+							</div>
+						</div>
+						{% endfor %}
+					</div>
+				</div>
+			</div>
+		</div>
+	</section>
+
+
+	<section class="popular-job bgc-fa">
+		<div class="container">
+			<div class="row">
+				<div class="col-lg-12">
+					<div class="ulockd-main-title">
+						<h4>EQUIPMENTS</h4>
+						<h3 class="mt0">Browse the largest Equipments in the industry</h3>
+					</div>
+				</div>
+			</div>
+			<div class="row">
+				{% for category in tractor_categories %}
+				<div class="col-6 col-sm-4 col-lg-3 pt-3">
+					<a href="{% url 'equipments:tractor-category' category.pk %}" class="icon_hvr_img_box card">
+						<div class="overlay">
+							<div class="icon"></div>
+							<div class="details">
+								<div class="row">
+									<div class="col-8"><h5>{{category.name}}</h5></div>
+								<div class="col-4"><img src="{{category.image.url }}" alt="icon" class="float-right mr-3" style="width: 50px; height:auto;"></div>
+								</div>
+							</div>
+						</div>
+					</a>
+				</div>
+				{% endfor %}
+				{% for category in implement_categories %}
+				<div class="col-6 col-sm-4 col-lg-3 pt-3">
+					<a href="{% url 'equipments:implement-category' category.pk %}" class="icon_hvr_img_box card">
+						<div class="overlay">
+							<div class="icon"></div>
+							<div class="details">
+								<div class="row">
+									<div class="col-8"><h5>{{category.name}} Implements</h5></div>
+								<div class="col-4"><img src="{{category.image.url }}" alt="icon" class="float-right mr-3" style="width: 50px; height:auto;"></div>
+								</div>
+							</div>
+						</div>
+					</a>
+				</div>
+				{% endfor %}
+			</div>
+		</div>
+	</section>
+
+{% endblock content %}

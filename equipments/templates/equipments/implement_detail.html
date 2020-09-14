@@ -1,0 +1,118 @@
+{% extends 'base.html' %}
+{% load static %}
+
+
+
+{% block stylesheet %}
+
+{% endblock stylesheet %}
+
+
+{% block content %}
+	<!-- Inner Page Breadcrumb -->
+	<section class="inner_page_breadcrumb bgc-orange" aria-label="breadcrumb">
+		<div class="container">
+			<div class="row">
+				<div class="col-lg-12">
+					<h4 class="breadcrumb_title float-left">All Equipments</h4>
+					<ol class="breadcrumb float-right">
+					    <li class="breadcrumb-item"><a href="#">Home</a></li>
+					    <li class="breadcrumb-item active" aria-current="page">All Equipments</li>
+					</ol>
+				</div>
+			</div>
+		</div>
+    </section>
+    
+    <!--Tractor one page -->
+    <section class="single-equipment-page">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-3 col-xl-3">
+                    <img src="{% static 'mains/images/compact.png' %}" alt="">
+                </div>
+                <div class="col-lg-6 col-xl-6">
+                    <div class="candidate_personal_info style2">
+						<div class="details">
+							<span class="text-orange fwb">Full Time</span>
+							<h4>UX/UI Designer Web & Mobile Platforms</h4>
+							<p>
+                                Due to ongoing growth, this fun & energetic International corporate based on the outskirts of Oxford, is seeking a UX/UI Designer to join an innovative team, focused on delivering exciting User Experiences and great functionality, across both Web & Mobile platforms.
+                            </p><br>
+                            <hr>
+                            <p><strong>Pricing and Location</strong></p>
+							<ul class="address_list">
+								<li class="list-inline-item"><span class="flaticon-location-pin"></span> Bothell, WA, USA</li>
+								<li class="list-inline-item"><span class="flaticon-price"></span> $13.00 - $18.00 per hour</li>
+							</ul>
+						</div>
+					</div>
+                </div>
+                <div class="col-lg-3 col-xl-3">
+                    <div class="candidate_personal_overview style3">
+                        <p class="small_txt">Sign in to view account pricing</p>
+                        <div class="text-center">
+                            <label for="">Start Date</label>
+                        <input id="datepicker">
+                        <label for="">End Date</label>
+                        <input id="datepicker">
+                        <label for="">Quantity</label>
+                        <input type="text">
+                        <label for="">Transport</label>
+                        <input type="text">
+                        </div>
+                        
+                        <br><br>
+                        <a class="btn btn-block btn-primary" href="">Add to cart</a>
+                      
+                      
+					</div>
+                </div>
+            </div>
+        </div>
+
+    </section>
+
+
+    <section class="expert-freelancer bgc-fa pb20">
+		<div class="container">
+			<div class="row">
+				<div class="col-lg-12">
+					<div class="ulockd-main-title">
+						<h4>SIMILAR EQUIPMENTS</h4>
+					</div>
+				</div>
+			</div>
+			<div class="row">
+				<div class="col-lg-12">
+					<div class="ef_slider2">
+						{% for implement in implements %}
+						<div class="item">
+							<div class="ef_post home6">
+								<div class="ef_header">
+                                    <h4 class="hr_rate">{{tractor.tractor_type.name}}</h4>
+                                    <h5>{{tractor.name}}</h5>
+								</div>
+								<a href="{% url 'equipments:implement-detail' implement.id %}">
+									<div class="thumb text-center" style="margin-top: 100px;">
+										<img class="img-fluid" src="{{implement.file.url }}" alt="">
+									</div>
+								</a>
+							</div>
+						</div>
+						{% endfor %}
+					</div>
+				</div>
+			</div>
+		</div>
+	</section>
+
+
+
+    {% block javascript %}
+
+    {% endblock javascript %}
+    
+ 
+
+{% endblock %}

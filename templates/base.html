@@ -1,0 +1,234 @@
+{% load static %}
+<!DOCTYPE html>
+<html dir="ltr" lang="en">
+
+<!-- Mirrored from grandetest.com/theme/careerup-html/index6.html by HTTrack Website Copier/3.x [XR&CO'2014], Sat, 28 Dec 2019 19:10:01 GMT -->
+<head>
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="keywords" content="candidates, career, employment, freelance, glassdoor, Human Resource Management, indeed, job board, job listing, job portal, job postings, jobs, listings, recruitment, resume">
+<meta name="CreativeLayers" content="ATFN">
+<!-- css file -->
+<link rel="stylesheet" href="{% static 'mains/css/bootstrap.min.css' %}">
+<link rel="stylesheet" href="{% static 'mains/css/style.css' %}">
+<!-- Responsive stylesheet -->
+<link rel="stylesheet" href="{% static 'mains/css/responsive.css' %}">	
+<!-- Fengyuan Chen's Datepicker -->
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/datepicker/0.6.5/datepicker.min.css" integrity="sha256-b88RdwbRJEzRx95nCuuva+hO5ExvXXnpX+78h8DjyOE=" crossorigin="anonymous" />
+
+
+<!-- Title -->
+<title>{% block title %}Fagrimacs - Farm Equipments Rental Platform{% endblock title %}</title>
+<!-- Favicon -->
+<link href="{% static 'mains/images/favicon.png' %}" sizes="128x128" rel="shortcut icon" type="image/x-icon" />
+<link href="{% static 'main/images/favicon.png' %}" sizes="128x128" rel="shortcut icon" />
+
+    {% block stylesheet %}
+    {% endblock stylesheet %}
+</head>
+<body>
+<div class="wrapper">
+	<div class="preloader"></div>
+
+	<!-- Main Header Nav -->
+	<header class="header-nav menu_style_home_six navbar-scrolltofixed stricky main-menu">
+		<div class="container">
+		    <!-- Ace Responsive Menu -->
+		    <nav>
+		        <!-- Menu Toggle btn-->
+		        <div class="menu-toggle">
+		            <img class="nav_logo_img img-fluid" src="{% static 'mains/images/logo.png' %}" alt="logo">
+		            <button type="button" id="menu-btn">
+		                <span class="icon-bar"></span>
+		                <span class="icon-bar"></span>
+		                <span class="icon-bar"></span>
+		            </button>
+		        </div>
+		        <a href="/" class="navbar_brand float-left dn-smd mt10">
+		            <img class="img-fluid" src="{% static 'mains/images/logo.png' %}" alt="logo">
+		        </a>
+		        <!-- Responsive Menu Structure-->
+		        <ul id="respMenu" class="ace-responsive-menu" data-menu-style="horizontal">
+					{% if request.user.is_authenticated %}
+					<li><a href="{% url 'accounts:logout' %}"><span class="title">Logout</span></a></li>
+					{% if request.user.role == 'farmer' %}
+					<li><a href="{% url 'farmers:dashboard' %}"><span class="title ">Dashboard</span></a></li>
+					{% elif request.user.role == 'owner' %}
+					<li><a href="{% url 'owners:dashboard' %}"><span class="title ">Dashboard</span></a></li>
+					{% elif request.user.role == 'expert' %}
+					<li><a href="{% url 'experts:dashboard' %}"><span class="title ">Dashboard</span></a></li>
+					{% else %}
+					<li><a href="{% url 'admins:dashboard' %}"><span class="title ">Dashboard</span></a></li>
+					{% endif %}
+					{% else %}
+					<div class="pull-right dn-smd mt-3">
+						<a href="{% url 'accounts:login' %}" class="btn btn-outline-success">Login</a>
+						<a href="{% url 'accounts:signup' %}" class="btn btn-success">Signup</a>
+					</div>
+					{% endif %}
+					<li><a href="#"><span class="title ">Contact us</span></a></li>
+		            <li><a href="#"><span class="title">Hire Experts</span></a></li>
+		            <li>
+						<a href="#"><span class="title">Browse Equipments</span></a>
+						<ul>
+							<li><a href="{% url 'equipments:all-tractors' %}"><span class="title">All Tractors</span></a></li>
+							<li><a href="{% url 'equipments:all-implements' %}"><span class="title">Browse Implements</span></a></li>
+						</ul>
+					</li>
+		            <li><a href="#"><span class="title">About us</span></a></li>
+					<li><a href="/"><span class="title">Home</span></a></li>
+					
+		        </ul>
+		    </nav>
+		    <!-- End of Responsive Menu -->
+		</div>
+	</header>
+
+
+	<!-- Main Header Nav For Mobile -->
+	<div id="page" class="stylehome1 home6 h0">
+		<div class="mobile-menu">
+			<div class="header stylehome1 home6">
+	            <img class="nav_logo_img img-fluid float-left mt25" src="{% static 'mains/images/logo.png' %}" alt="logo">
+				<a class="bgc-seagreen" href="#menu"><span></span></a>
+			</div>
+		</div><!-- /.mobile-menu -->
+		<nav id="menu" class="stylehome1">
+			<ul>
+				<li><a href="/"><span class="title">Home</span></a></li>
+				<li><a href="#"><span class="title">About us</span></a></li>
+				<li><a href="#"><span class="title">Browse Equipments</span></a></li>
+				<li><a href="#"><span class="title">Hire Experts</span></a></li>
+				<li><a href="#"><span class="title">Contact us</span></a></li>
+				{% if request.user.is_authenticated %}
+		        	{% if request.user.role == 'farmer' %}
+					<li><a href="{% url 'farmers:dashboard' %}"><span class="title ">Dashboard</span></a></li>
+					{% elif request.user.role == 'owner' %}
+					<li><a href="{% url 'owners:dashboard' %}"><span class="title ">Dashboard</span></a></li>
+					{% elif request.user.role == 'expert' %}
+					<li><a href="{% url 'experts:dashboard' %}"><span class="title ">Dashboard</span></a></li>
+					{% else %}
+					<li><a href="{% url 'admins:dashboard' %}"><span class="title ">Dashboard</span></a></li>
+					{% endif %}
+				<li><a href="{% url 'accounts:logout' %}"><span class="title">Logout</span></a></li>
+				{% else %}
+				<li><a href="{% url 'accounts:login' %}"><span class="title">Login</span></a></li>
+				<li><a href="{% url 'accounts:signup' %}"><span class="title">Signup</span></a></li>
+				{% endif %}
+			</ul>
+		</nav>
+	</div>
+  {% block content %}
+  {% endblock content %}
+
+
+	<!-- Our Footer -->
+	<section class="footer_one home6">
+		<div class="container">
+			<div class="row">
+				<div class="col-sm-6 col-md-4 col-md-3 col-lg-2">
+					<div class="quick_link_widget">
+						<h4>Quick Links</h4>
+						<ul class="list-unstyled">
+							<li><a href="#">Job Packages</a></li>
+							<li><a href="#">Post New Job</a></li>
+							<li><a href="#">Jobs Listing</a></li>
+							<li><a href="#">Jobs Style Grid</a></li>
+							<li><a href="#">Employer Listing</a></li>
+							<li><a href="#">Employers Grid</a></li>
+						</ul>
+					</div>
+				</div>
+				<div class="col-sm-6 col-md-4 col-md-3 col-lg-3">
+					<div class="candidate_widget">
+						<h4>For Candidates</h4>
+						<ul class="list-unstyled">
+							<li><a href="#">User Dashboard</a></li>
+							<li><a href="#">CV Packages</a></li>
+							<li><a href="#">Candidate Listing</a></li>
+							<li><a href="#">Candidates Grid</a></li>
+						</ul>
+					</div>
+				</div>
+				<div class="col-sm-4 col-md-4 col-md-3 col-lg-3">
+					<div class="employe_widget">
+						<h4>For Employers</h4>
+						<ul class="list-unstyled">
+							<li><a href="#">Post New</a></li>
+							<li><a href="#">Job Employer Listing</a></li>
+							<li><a href="#">Employers Grid</a></li>
+							<li><a href="#">Job Packages</a></li>
+							<li><a href="#">Jobs Listing</a></li>
+							<li><a href="#">Jobs Style Grid</a></li>
+						</ul>
+					</div>
+				</div>
+				<div class="col-sm-8 col-md-6 col-md-3 col-lg-4">
+					<div class="newsletter_widget home6">
+						<h4>Newsletter</h4>
+						<p>Subscribe to CareerUp Pacific newsletter to get the latest jobs posted, candidates ,and other latest news stay updated.</p>
+						<form class="form-inline mailchimp_form">
+							<label class="sr-only" for="inlineFormInputMail2">Name</label>
+							<input type="email" class="form-control mb-2 mr-sm-2" id="inlineFormInputMail2" placeholder="Enter your email address">
+							<button type="submit" class="btn btn-primary mb-2"><span class="fa fa-paper-plane-o"></span></button>
+						</form>
+					</div>
+				</div>
+			</div>
+		</div>
+	</section>
+
+	<!-- Our Footer Bottom Area -->
+	<section class="footer_bottom_area home6 p0">
+		<div class="container">
+			<div class="row pt30 pb20">
+				<div class="col-lg-4">
+					<div class="copyright-widget tac-smd">
+						<p>© 2020 Fagrimacs Entreprise. All Rights Reserved.</p>
+					</div>
+				</div>
+				<div class="col-lg-8">
+					<div class="footer_social_widget home6">
+						<ul>
+							<li class="list-inline-item"><a href="#"><i class="fa fa-facebook"></i></a></li>
+							<li class="list-inline-item"><a href="#"><i class="fa fa-twitter"></i></a></li>
+							<li class="list-inline-item"><a href="#"><i class="fa fa-instagram"></i></a></li>
+							<li class="list-inline-item"><a href="#"><i class="fa fa-pinterest"></i></a></li>
+							<li class="list-inline-item"><a href="#"><i class="fa fa-dribbble"></i></a></li>
+						</ul>
+					</div>
+				</div>
+			</div>
+		</div>
+	</section>
+<a class="scrollToHome text-thm" href="#"><i class="flaticon-rocket-launch"></i></a>
+</div>
+<!-- Wrapper End -->
+<script type="text/javascript" src="{% static 'mains/js/jquery-3.3.1.js' %}"></script>
+<script type="text/javascript" src="{% static 'mains/js/jquery-migrate-3.0.0.min.js' %}"></script>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/datepicker/0.6.5/datepicker.min.js" integrity="sha256-/7FLTdzP6CfC1VBAj/rsp3Rinuuu9leMRGd354hvk0k=" crossorigin="anonymous"></script>
+
+<script type="text/javascript" src="{% static 'mains/js/popper.min.js' %}"></script>
+<script type="text/javascript" src="{% static 'mains/js/bootstrap.min.js' %}"></script>
+<script type="text/javascript" src="{% static 'mains/js/jquery.mmenu.all.js' %}"></script>
+<script type="text/javascript" src="{% static 'mains/js/ace-responsive-menu.js' %}"></script>
+<script type="text/javascript" src="{% static 'mains/js/bootstrap-select.min.js' %}"></script>
+<script type="text/javascript" src="{% static 'mains/js/snackbar.min.js' %}"></script>
+<script type="text/javascript" src="{% static 'mains/js/simplebar.js' %}"></script>
+<script type="text/javascript" src="{% static 'mains/js/parallax.js' %}"></script>
+<script type="text/javascript" src="{% static 'mains/js/scrollto.js' %}"></script>
+<script type="text/javascript" src="{% static 'mains/js/jquery-scrolltofixed-min.js' %}"></script>
+<script type="text/javascript" src="{% static 'mains/js/jquery.counterup.js' %}"></script>
+<script type="text/javascript" src="{% static 'mains/js/wow.min.js' %}"></script>
+<script type="text/javascript" src="{% static 'mains/js/progressbar.js' %}"></script>
+<script type="text/javascript" src="{% static 'mains/js/slider.js' %}"></script>
+<script type="text/javascript" src="{% static 'mains/js/timepicker.js' %}"></script>
+<!-- Custom script for all pages --> 
+<script type="text/javascript" src="{% static 'mains/js/script.js' %}"></script>
+
+{% block javascript %}
+{% endblock javascript%}
+</body>
+</html>

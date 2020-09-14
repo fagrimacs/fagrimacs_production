@@ -1,0 +1,150 @@
+from django.db import models
+from multiselectfield import MultiSelectField
+
+from accounts.models import CustomUser
+
+
+class TractorCategory(models.Model):
+    name = models.CharField(max_length=100)
+    image = models.ImageField(upload_to='tractor_category')
+
+    def __str__(self):
+        return self.name
+
+
+DRIVE_TYPE = (
+    ('', 'Please Select'),
+    ('two wheel drive', 'Two wheel Drive'),
+    ('four wheel drive', 'Four wheel Drive'),
+)
+TRANSMISSION_MODE = (
+    ('', 'Please Select'),
+    ('gear', 'Gear'),
+    ('manual', 'Manual'),
+    ('hydrostatic', 'Hydrostatic'),
+    ('turbochanged', 'Turbocharged'),
+)
+HITCHING_TYPE = (
+    ('', 'Please Select'),
+    ('two point hitches', 'Two-point hitches'),
+    ('three point hitches', 'Three-point hitches'),
+)
+YES_NO = (
+    ('', 'Please Select'),
+    ('yes', 'yes'),
+    ('no', 'No'),
+)
+ATTACHMENT_MODE = (
+    ('', 'Please select'),
+    ('frontend loader', 'frontend loader'),
+    ('backhoe', 'Backhoe'),
+    ('both', 'Both'),
+)
+FARM_SERVICES = (
+    ('soil cultivations', 'Soil cultivations'),
+    ('planting', 'Planting'),
+    ('haversting/post-haversting', 'Haversting/Post-Haversting'),
+    ('fertilizing & pest-control', 'Fertilizing & Pest-control'),
+    ('drainage & irrigation', 'Drainage & Irrigation'),
+    ('loading', 'Loading'),
+    ('hay making', 'Hay making'),
+    ('miscellaneous', 'Miscellaneous'),
+)
+STATUS = (
+    ('pending', 'Pending'),
+    ('approved', 'Approved'),
+)
+
+class Tractor(models.Model):
+    created = models.DateTimeField(auto_now_add=True)
+    modified = models.DateTimeField(auto_now=True)
+    user = models.ForeignKey(CustomUser, on_delete=models.CASCADE)
+    tractor_type = models.ForeignKey(TractorCategory, verbose_name='What type of Tractor?', on_delete=models.SET('others'))
+    drive_type = models.CharField(max_length=100, verbose_name='What Drive Type', choices=DRIVE_TYPE)
+    name = models.CharField(max_length=200, verbose_name='Name/Models of Tractor', help_text='eg. John Deere 6190R')
+    mode_of_transmission = models.CharField(max_length=100, verbose_name='Mode of Transmission', choices=TRANSMISSION_MODE)
+    engine_hp = models.CharField(max_length=100, verbose_name='Engine Horse Power (eg. 75hp)')
+    drawbar_hp = models.CharField(max_length=100, verbose_name='Drawbar Horse Power (eg. 65hp)')
+    pto_hp = models.CharField(max_length=100, verbose_name='PTO Horse Power (eg. 85hp)')
+    hydraulic_capacity = models.CharField(max_length=100, help_text='Use a SI units of gpm or psi', verbose_name='Hydaulic capacity (gallon per minutes(gpm) or psi-pound per square inchies)')
+    type_of_hitching = models.CharField(max_length=100, verbose_name='What is Hitching type?', choices=HITCHING_TYPE)
+    cab = models.CharField(max_length=100, choices=YES_NO, verbose_name='Does have a cab?')
+    rollover_protection = models.CharField(max_length=100, choices=YES_NO, verbose_name='Does have the rollover protection?')
+    fuel_consumption = models.CharField(max_length=100, verbose_name='Fuel consumption (gallon per hour on operation)')
+    attachment_mode = models.CharField(max_length=100, verbose_name='What mode of attachment?', choices=ATTACHMENT_MODE)
+    operator = models.CharField(max_length=100, choices=YES_NO, verbose_name='Do you have an operator(s)?')
+    file = models.FileField(upload_to='tractors_photos/', verbose_name='Upload the Tractor pictures', help_text='Upload quality picture of real tractor you have, only 5 picture.')
+    other_informations = models.TextField(blank=True, verbose_name='Describe your Tractor')
+    price_hour = models.CharField(max_length=100, verbose_name='Specify the price per Hour')
+    price_hectare = models.CharField(max_length=100, verbose_name='Specify the price per Hectare')
+    farm_services = MultiSelectField(choices=FARM_SERVICES, verbose_name='What are farming service(s) do you offer?')
+    agree_terms = models.BooleanField(default=False, verbose_name='Do your Accept our Terms and Conditions?')
+    status = models.CharField(choices=STATUS, max_length=100, default='pending')
+
+
+    def __str__(self):
+        return self.name
+
+
+
+class ImplementCategory(models.Model):
+    name = models.CharField(max_length=100)
+    image = models.ImageField(upload_to='implements_category')
+
+    def __str__(self):
+        return self.name
+
+
+class ImplementSubCategory(models.Model):
+    category = models.ForeignKey(ImplementCategory, on_delete=models.CASCADE)
+    name = models.CharField(max_length=100)
+
+    def __str__(self):
+        return self.name
+
+
+OPERATION_MODE = (
+    ('', 'Please Select'),
+    ('tractor drive','Tractor drive'),
+    ('self-propelled','Self-propelled'),
+)
+class Implement(models.Model):
+    created = models.DateTimeField(auto_now_add=True)
+    modified = models.DateTimeField(auto_now=True)
+    user = models.ForeignKey(CustomUser, on_delete=models.CASCADE)
+    name = models.CharField(max_length=100, verbose_name='Name/Models of Implement')
+    category = models.ForeignKey(ImplementCategory, on_delete=models.SET('others'), verbose_name='What category of your Implement')
+    subcategory = models.ForeignKey(ImplementSubCategory, on_delete=models.SET('others'), verbose_name='What is subcategory of your Implement')
+    width = models.CharField(max_length=50, verbose_name='Width of the Implement', help_text='SI UNITS in metre',)
+    weight = models.CharField(max_length=50, verbose_name='Weight of the Implement', help_text='SI UNITS in KG')
+    operation_mode = models.CharField(max_length=100, choices=OPERATION_MODE, verbose_name='What is mode of operation?')
+    pto = models.CharField(max_length=100, verbose_name='What is Horse Power required for Operation?')
+    hydraulic_capacity = models.CharField(max_length=100, verbose_name='What is Hydaulic capacity required to lift?')
+    operator = models.CharField(max_length=100, choices=YES_NO, verbose_name='Do you have an operator(s)?')
+    file = models.FileField(upload_to='implements_photos/', verbose_name='Upload the Implement pictures', help_text='Upload quality picture of real implement you have, only 5 picture.')
+    other_informations = models.TextField(blank=True, verbose_name='Describe your Implement')
+    price_hour = models.CharField(max_length=100, verbose_name='Specify the price per Hour')
+    price_hectare = models.CharField(max_length=100, verbose_name='Specify the price per Hectare')
+    agree_terms = models.BooleanField(default=False, verbose_name='Do your Accept our Terms and Conditions?')
+    status = models.CharField(choices=STATUS, max_length=100, default='pending')
+
+    def __str__(self):
+        return self.name
+
+
+class Equipment(models.Model):
+    TYPE = (
+        ('', 'Please select'),
+        ('tractor', 'Tractor'),
+        ('implement', 'Implement'),
+        ('other_equipment', 'Other Equipment'),
+    )
+    type = models.CharField(max_length=100, verbose_name='What Equipment you want to Add?', choices=TYPE)
+
+    def __str__(self):
+        return self.name
+
+class Phone(models.Model):
+    phone = models.CharField(max_length=18)
+
+
