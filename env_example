@@ -1,0 +1,25 @@
+DEBUG=True
+
+SECRET_KEY=9mx2b0j+kmica392dz=a%yre8rf8@c6@+4a_e^_77bh43@c-vv
+
+GOOGLE_RECAPTCHA_SECRET_KEY=ewqerxrer
+
+ALLOWED_HOSTS=.localhost
+
+
+# Credentials for database
+
+DB_NAME=
+DB_USER=
+DB_HOST=
+DB_PASSWORD=
+DB_PORT=
+
+#Email Credentials
+
+EMAIL_BACKEND=django.core.mail.backends.smtp.EmailBackend
+EMAIL_HOST=mail.fagrimacs.com
+EMAIL_HOST_USER=noreply@fagrimacs.com
+EMAIL_PORT=465
+EMAIL_USE_SSL=True 
+EMAIL_HOST_PASSWORD=
