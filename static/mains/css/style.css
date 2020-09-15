@@ -15,7 +15,7 @@
 @import url(map-css/searcher.css);
 @import url(map-css/info-box.css);
 @import url(timecounter.css);
-@import url(https://fonts.googleapis.com/css?family=Nunito:400,600,800&amp;subset=vietnamese);
+@import url(https://fonts.googleapis.com/css?family=Roboto:400,600,800&amp;subset=vietnamese);
 html{
     font-size:100%
 }
@@ -23,7 +23,7 @@ body{
     background-attachment:fixed;
     background-color:#fff;
     color:#6d6d6d;
-    font-family:Nunito,sans-serif;
+    font-family:Roboto,sans-serif;
     font-size:16px;
     line-height:1.642;
     overflow-x:hidden;
@@ -1449,7 +1449,7 @@ header.header-nav.menu_style_home_six .sign_up_btn .btn{
 }
 .footer_social_widget p{
     display:inline-block;
-    color:#979797
+    color:#f99222
 }
 .footer_top_area.home3 .footer_social_widget p{
     color:#969ca9
@@ -1458,7 +1458,7 @@ header.header-nav.menu_style_home_six .sign_up_btn .btn{
     text-align:right
 }
 .footer_social_widget li{
-    background-color:#353535;
+    background-color:rgb(255, 255, 255);
     border-radius:4px;
     height:40px;
     line-height:40px;
@@ -1501,10 +1501,10 @@ header.header-nav.menu_style_home_six .sign_up_btn .btn{
     color:#fff
 }
 .footer_social_widget.home6 li{
-    background-color:#101219
+    background-color:#c9c7c7
 }
 .footer_social_widget.home6 li:hover{
-    background-color:#333745
+    background-color:#f99222
 }
 .footer_social_widget.home6 li:hover a{
     color:#fff
@@ -1520,7 +1520,7 @@ header.header-nav.menu_style_home_six .sign_up_btn .btn{
 }
 .copyright-widget p{
     margin-bottom:0;
-    color:#979797
+    color:#e7e6e6
 }
 .footer_one.home3,.footer_top_area.home3{
     background-color:#1f2532
@@ -1574,11 +1574,11 @@ header.header-nav.menu_style_home_six .sign_up_btn .btn{
     margin-top:15px
 }
 .newsletter_widget .mailchimp_form .form-control{
-    background-color:#1a1a1a;
+    background-color:#c2c0c0;
     border:1px solid transparent;
     border-radius:4px;
     box-shadow:none;
-    color:#707070;
+    color:#000000;
     height:50px;
     width:80%
 }
@@ -1592,13 +1592,13 @@ header.header-nav.menu_style_home_six .sign_up_btn .btn{
     background-color:#1c327e
 }
 .footer_one.home6 .newsletter_widget .mailchimp_form button{
-    background-color:#333745
+    background-color:#f99222
 }
 .mailchimp_form.home5 .form-control{
     background-color:#fafafa
 }
 .newsletter_widget.home6 .mailchimp_form .form-control{
-    background-color:#101219
+    background-color:#e2e2e2
 }
 .footer_menu{
     padding-left:60px
@@ -1658,10 +1658,10 @@ header.header-nav.menu_style_home_six .sign_up_btn .btn{
     color:#8b8b8b
 }
 .footer_bottom_area.home6,.footer_one.home6{
-    background-color:#023300
+    background-color:#012200
 }
 .footer_one.home6{
-    border-bottom:1px solid #012c00
+    border-bottom:1px solid #cacaca
 }
 .inner_page_breadcrumb{
     margin-top:60px
@@ -6564,8 +6564,8 @@ a.text-thm:hover{
 .bgc-orange{
     background-color:#f99222
 }
-.bgc-f2{
-    background-color:#f2f2f2
+.bgc-deep-green{
+    background-color:#094900
 }
 .bgc-f3{
     background-color:#f3f3f3
@@ -7676,151 +7676,15 @@ a.text-thm:hover{
     margin-bottom:0;
     margin-top:0
 }
-.ulockd_bgi1{
-    background-attachment:scroll;
-    background-image:url(../images/background/1.jpg);
-    background-position:center top;
-    background-repeat:no-repeat;
-    -webkit-background-size:cover;
-    -moz-background-size:cover;
-    -o-background-size:cover;
-    background-size:cover
-}
-.ulockd_bgi2{
-    background-attachment:scroll;
-    background-image:url(../images/background/2.jpg);
-    background-position:center top;
-    background-repeat:no-repeat;
-    -webkit-background-size:cover;
-    -moz-background-size:cover;
-    -o-background-size:cover;
-    background-size:cover
-}
-.ulockd_bgi3{
-    background-attachment:scroll;
-    background-image:url(../images/banner.png);
-    background-position:center top!important;
-    background-repeat:no-repeat;
-    -webkit-background-size:cover;
-    -moz-background-size:cover;
-    -o-background-size:cover;
-    background-size:cover
-}
-.ulockd_bgi4{
-    background-attachment:scroll;
-    background-image:url(../images/background/4.html);
-    background-position:center top;
-    background-repeat:no-repeat;
-    -webkit-background-size:cover;
-    -moz-background-size:cover;
-    -o-background-size:cover;
-    background-size:cover
-}
 .ulockd_bgi5{
     background-attachment:scroll;
-    background-image:url(../images/background/5.html);
+    background-image:url(../images/banner.png);
     background-position:center top;
     background-repeat:no-repeat;
     -webkit-background-size:cover;
     -moz-background-size:cover;
     -o-background-size:cover;
     background-size:cover
-}
-.ulockd_bgi6{
-    background-attachment:scroll;
-    background-image:url(../images/background/6.html);
-    background-position:center 40%;
-    background-repeat:no-repeat;
-    -webkit-background-size:cover;
-    -moz-background-size:cover;
-    -o-background-size:cover;
-    background-size:cover
-}
-.ulockd_bgs1{
-    background-attachment:scroll;
-    background-image:url(../images/background/split-one.html);
-    background-position:right center;
-    background-repeat:no-repeat;
-    -webkit-background-size:cover;
-    -moz-background-size:cover;
-    -o-background-size:cover;
-    background-size:cover
-}
-.ulockd_bgih1{
-    background-attachment:scroll;
-    background-image:url(../images/home/h1.jpg);
-    background-position:center right !important;
-    background-repeat:no-repeat;
-    -webkit-background-size:cover;
-    -moz-background-size:cover;
-    -o-background-size:cover;
-    background-size:cover;
-    height:700px
-}
-.ulockd_bgih2{
-    background-attachment:scroll;
-    background-image:url(../images/home/h2.jpg);
-    background-position:center bottom!important;
-    background-repeat:no-repeat;
-    -webkit-background-size:cover;
-    -moz-background-size:cover;
-    -o-background-size:cover;
-    background-size:cover
-}
-.ulockd_bgih3{
-    background-attachment:scroll;
-    background-image:url(../images/home/h3.jpg);
-    background-position:center top;
-    background-repeat:no-repeat;
-    -webkit-background-size:cover;
-    -moz-background-size:cover;
-    -o-background-size:cover;
-    background-size:cover
-}
-.ulockd_bgih4{
-    background-attachment:scroll;
-    background-image:url(../images/home/h4.html);
-    background-position:center top;
-    background-repeat:no-repeat;
-    -webkit-background-size:cover;
-    -moz-background-size:cover;
-    -o-background-size:cover;
-    background-size:cover
-}
-.ulockd_bgih5{
-    background-attachment:scroll;
-    background-image:url(../images/home/h5.html);
-    background-position:center top;
-    background-repeat:no-repeat;
-    -webkit-background-size:cover;
-    -moz-background-size:cover;
-    -o-background-size:cover;
-    background-size:cover
-}
-.ulockd_bgp1{
-    background-attachment:scroll;
-    background-image:url(../images/pattern/1.html)
-}
-.ulockd_bgp2{
-    background-attachment:scroll;
-    background-image:url(../images/pattern/2.html)
-}
-.ulockd_bgp3{
-    background-attachment:scroll;
-    background-image:url(../images/pattern/3.html)
-}
-.ulockd_bgp4{
-    background-attachment:scroll;
-    background-image:url(../images/pattern/4.html)
-}
-.ulockd_bgp5{
-    background-attachment:scroll;
-    background-image:url(../images/pattern/5.html)
-}
-.ulockd_bgp6{
-    background-attachment:scroll;
-    background-image:url(../images/pattern/6.html);
-    background-repeat:no-repeat
 }
 section{
     padding:60px 0;
@@ -8138,28 +8002,6 @@ section{
     background-size:cover;
     z-index:1;
     position:relative
-}
-.divider{
-    background-attachment:scroll!important;
-    background-image:url(../images/background/1.jpg);
-    background-position:center center;
-    background-repeat:no-repeat;
-    -webkit-background-size:cover;
-    -moz-background-size:cover;
-    -o-background-size:cover;
-    background-size:cover;
-    overflow-x:hidden;
-    position:relative;
-    overflow-y:hidden
-}
-.divider:before{
-    background-color:rgba(17,17,17,.75);
-    content:"";
-    height:100%;
-    left:0;
-    position:absolute;
-    top:0;
-    width:100%
 }
 .form_control{
     border-radius:0;
@@ -8494,4 +8336,13 @@ label{
 }
 button.btn.my-2.my-sm-0{
     box-shadow:none
+}
+.green-strip{
+    margin-top: -10px;
+}
+.green-strip h1{
+    color:white;
+    font-size:30px;
+    font-weight: 300px;
+    /* text-align: center; */
 }
