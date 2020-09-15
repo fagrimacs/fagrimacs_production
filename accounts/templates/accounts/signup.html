@@ -6,7 +6,7 @@
   <div class="container">
     <div class="row">
       <div class="col-md-6 offset-md-3 form">
-        <h2 class="text-center pt-5">Signup</h2>
+        <h2 class="text-center pt-5">Create Account</h2>
         <form method="post" class="pt-2" autocomplete="off" novalidate>
           {% csrf_token %}
           {{ form | crispy }}
@@ -14,7 +14,7 @@
           <button type="submit" name="submit" class="btn btn-success mt-3 btn-lg">Register</button>
         </form>
         <div class="pt-3 pb-3">
-          <p>Already on Dealme? <a href="{% url 'accounts:login' %}">Login</a></p>
+          <p>Already on Fagrimacs? <a href="{% url 'accounts:login' %}">Login</a></p>
         </div>
       </div>
     </div>

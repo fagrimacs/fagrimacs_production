@@ -30,12 +30,12 @@ SECRET_KEY = config('SECRET_KEY')
 DEBUG = config('DEBUG', cast=bool)
 
 if not DEBUG:
-    ALLOWED_HOSTS = ['.fagrimacs.com','fagrimacs.com','www.fagrimacs.com']
+    ALLOWED_HOSTS = ['.fagrimacs.com', 'fagrimacs.com', 'www.fagrimacs.com']
     GOOGLE_RECAPTCHA_SECRET_KEY = config('GOOGLE_RECAPTCHA_SECRET_KEY')
-    SECURE_SSL_REDIRECT=True
-    SECURE_PROXY_SSL_HEADER=('HTTP_X_FORWARDED_PROTO', 'https')
-    SESSION_COOKIE_SECURE=True
-    SESSION_EXPIRE_AT_BROWSER_CLOSE=True
+    SECURE_SSL_REDIRECT = True
+    SECURE_PROXY_SSL_HEADER = ('HTTP_X_FORWARDED_PROTO', 'https')
+    SESSION_COOKIE_SECURE = True
+    SESSION_EXPIRE_AT_BROWSER_CLOSE = True
 else:
     ALLOWED_HOST = []
 
@@ -50,7 +50,7 @@ INSTALLED_APPS = [
     'experts',
     'admins',
     'equipments',
-    
+
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
@@ -98,7 +98,7 @@ WSGI_APPLICATION = 'config.wsgi.application'
 if not DEBUG:
     DATABASES = {
         'default': {
-            #'ENGINE': 'django.db.backends.mysql',
+            # 'ENGINE': 'django.db.backends.mysql',
             'ENGINE': 'django.db.backends.postgresql_psycopg2',
             'NAME': config('DB_NAME'),
             'USER': config('DB_USER'),
@@ -137,7 +137,7 @@ AUTH_PASSWORD_VALIDATORS = [
     },
 ]
 
-#Emails Backends
+# Emails Backends
 if not DEBUG:
     EMAIL_BACKEND = config('EMAIL_BACKEND')
     EMAIL_HOST = config('EMAIL_HOST')
@@ -178,10 +178,11 @@ MEDIA_URL = '/media/'
 
 if not DEBUG:
     STATICFILES_DIRS = [
-        BASE_DIR+"/static",]
+        BASE_DIR+"/static",
+    ]
 
-    MEDIA_ROOT = '/home/fagrimac/public_html/media'
-    STATIC_ROOT = '/home/fagrimac/public_html/static'
+    MEDIA_ROOT = config('MEDIA_ROOT')
+    STATIC_ROOT = config('STATIC_ROOT')
 else:
-    STATICFILES_DIRS = [os.path.join(BASE_DIR, 'static'),]
+    STATICFILES_DIRS = [os.path.join(BASE_DIR, 'static'), ]
     MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
