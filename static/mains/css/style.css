@@ -1544,7 +1544,7 @@ header.header-nav.menu_style_home_six .sign_up_btn .btn{
     margin-bottom:20px
 }
 .candidate_widget li a,.employe_widget li a,.quick_link_widget li a{
-    color:#9e9e9e;
+    color:#ffffff;
     line-height:35px;
     -webkit-transition:all .3s ease 0s;
     -moz-transition:all .3s ease 0s;
@@ -1552,20 +1552,20 @@ header.header-nav.menu_style_home_six .sign_up_btn .btn{
     transition:all .3s ease 0s
 }
 .footer_one.home3 .candidate_widget li a,.footer_one.home3 .employe_widget li a,.footer_one.home3 .quick_link_widget li a{
-    color:#969ca9
+    color:#ffffff
 }
 .footer_one.home3 .candidate_widget li:hover a,.footer_one.home3 .employe_widget li:hover a,.footer_one.home3 .quick_link_widget li:hover a{
     color:#fff
 }
 .candidate_widget.home5 h4,.employe_widget.home5 h4,.newsletter_widget.home5 h4{
-    color:#262626
+    color:#d3cfcf
 }
 .candidate_widget li:hover a,.employe_widget li:hover a,.quick_link_widget li:hover a{
     color:#fff;
     text-decoration:underline
 }
 .newsletter_widget p{
-    color:#9e9e9e
+    color:#fffefe
 }
 .footer_one.home3 .newsletter_widget p{
     color:#969ca9
@@ -1658,10 +1658,10 @@ header.header-nav.menu_style_home_six .sign_up_btn .btn{
     color:#8b8b8b
 }
 .footer_bottom_area.home6,.footer_one.home6{
-    background-color:#1b1e28
+    background-color:#023300
 }
 .footer_one.home6{
-    border-bottom:1px solid #363a48
+    border-bottom:1px solid #012c00
 }
 .inner_page_breadcrumb{
     margin-top:60px
