@@ -27,7 +27,7 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 SECRET_KEY = config('SECRET_KEY')
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = config('DEBUG', cast=bool)
+DEBUG = config('DEBUG', cast=bool, default=False)
 
 if not DEBUG:
     ALLOWED_HOSTS = ['.fagrimacs.com', 'fagrimacs.com', 'www.fagrimacs.com']
@@ -178,10 +178,11 @@ MEDIA_URL = '/media/'
 
 if not DEBUG:
     STATICFILES_DIRS = [
-        BASE_DIR+"/static",]
+        BASE_DIR+"/static",
+    ]
 
-    MEDIA_ROOT = '/home/fagrimac/public_html/media'
-    STATIC_ROOT = '/home/fagrimac/public_html/static'
+    MEDIA_ROOT = config('MEDIA_ROOT')
+    STATIC_ROOT = config('STATIC_ROOT')
 else:
-    STATICFILES_DIRS = [os.path.join(BASE_DIR, 'static'),]
+    STATICFILES_DIRS = [os.path.join(BASE_DIR, 'static'), ]
     MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
