@@ -46,10 +46,10 @@
 		<nav id="menu" class="stylehome1">
 			<ul>
 				<li><a href="/"><span class="title">Home</span></a></li>
-				<li><a href="#"><span class="title">About us</span></a></li>
+				<li><a href="{% url 'mains:about' %}"><span class="title">About us</span></a></li>
 				<li><a href="#"><span class="title">Browse Equipments</span></a></li>
-				<li><a href="#"><span class="title">Hire Experts</span></a></li>
-				<li><a href="#"><span class="title">Contact us</span></a></li>
+				<li><a href="{% url 'mains:experts' %}"><span class="title">Hire Experts</span></a></li>
+				<li><a href="{% url 'mains:contact' %}"><span class="title">Contact us</span></a></li>
 				{% if request.user.is_authenticated %}
 		        	{% if request.user.role == 'farmer' %}
 					<li><a href="{% url 'farmers:dashboard' %}"><span class="title ">Dashboard</span></a></li>
