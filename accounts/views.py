@@ -20,7 +20,6 @@ class UserLoginView(LoginView):
     """View for user to login in platform """
     template_name = 'accounts/login.html'
 
-
     def get_success_url(self):
         url = self.get_redirect_url()
         if url:
@@ -49,12 +48,11 @@ class UserLoginView(LoginView):
             return f'/admin/'
 
 
-
 def signup(request):
     form = SignUpForm(request.POST or None)
     if form.is_valid():
         user = form.save()
-        user.email = form.cleaned_data['email']
+        user_email = form.cleaned_data['email']
         user.save()
 
         # Create profile
@@ -79,7 +77,7 @@ def signup(request):
         message = get_template('accounts/account_activation_email.html').render({
             'confirm_url': url
         })
-        mail = EmailMessage('Fagrimacs Account Confirmation', message, to=[user.email], from_email=settings.EMAIL_HOST_USER)
+        mail = EmailMessage('Fagrimacs Account Confirmation', message, to=[user_email], from_email=settings.EMAIL_HOST_USER)
         mail.content_subtype = 'html'
         mail.send()
 
@@ -89,7 +87,6 @@ def signup(request):
     return render(request, 'accounts/signup.html', {
         'form': form,
     })
-
 
 
 class ConfirmRegistrationView(TemplateView):
@@ -109,7 +106,3 @@ class ConfirmRegistrationView(TemplateView):
             context['message'] = 'Registration complete. Please login'
 
         return render(request, 'accounts/registration_complete.html', context)
-
-
-class UserLogoutView(LogoutView):
-    template_name = 'accounts/logout.html'
