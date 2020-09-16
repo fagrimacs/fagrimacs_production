@@ -38,9 +38,10 @@ class CustomUser(AbstractBaseUser):
         unique=True,
     )
     name = models.CharField(max_length=100, verbose_name='Full name')
-    phone = PhoneNumberField(verbose_name='Phone Number')
+    phone = PhoneNumberField(verbose_name='Phone Number',
+                             help_text='+255 xxx xxx xxx')
     ABOUT_US = [
-        ('', 'please select'),
+        (None, 'Please Select'),
         ('Whatsapp status', 'Whatsapp status'),
         ('Internet search', 'Internet Search'),
         ('Instagram', 'Instagram'),
@@ -54,7 +55,7 @@ class CustomUser(AbstractBaseUser):
         ('Other', 'Other'),
     ]
     ROLE = [
-        ('', 'Please select'),
+        (None, 'Please Select'),
         ('farmer', 'Farmer'),
         ('owner', 'Equipment Owner'),
         ('expert', 'Expert'),
