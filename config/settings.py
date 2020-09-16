@@ -178,11 +178,10 @@ MEDIA_URL = '/media/'
 
 if not DEBUG:
     STATICFILES_DIRS = [
-        BASE_DIR+"/static",
-    ]
+        BASE_DIR+"/static",]
 
-    MEDIA_ROOT = config('MEDIA_ROOT')
-    STATIC_ROOT = config('STATIC_ROOT')
+    MEDIA_ROOT = '/home/fagrimac/public_html/media'
+    STATIC_ROOT = '/home/fagrimac/public_html/static'
 else:
-    STATICFILES_DIRS = [os.path.join(BASE_DIR, 'static'), ]
+    STATICFILES_DIRS = [os.path.join(BASE_DIR, 'static'),]
     MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
