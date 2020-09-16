@@ -101,7 +101,8 @@ class Tractor(models.Model):
     file = models.FileField(
         upload_to='tractors_photos/',
         verbose_name='Upload the Tractor pictures',
-        help_text='Upload quality picture of real tractor you have, only 5 picture.')
+        help_text=('Upload quality picture of real tractor you have,'
+                   ' only 5 picture.'))
     other_informations = models.TextField(
         blank=True, verbose_name='Describe your Tractor')
     price_hour = models.CharField(
@@ -113,7 +114,8 @@ class Tractor(models.Model):
         verbose_name='What are farming service(s) do you offer?')
     agree_terms = models.BooleanField(
         default=False, verbose_name='Do your Accept our Terms and Conditions?')
-    status = models.CharField(choices=STATUS, max_length=100, default='pending')
+    status = models.CharField(
+        choices=STATUS, max_length=100, default='pending')
 
     def __str__(self):
         return self.name

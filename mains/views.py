@@ -11,6 +11,8 @@ class Homepage(TemplateView):
         context = super(Homepage, self).get_context_data(**kwargs)
         context['tractor_categories'] = TractorCategory.objects.all()
         context['implement_categories'] = ImplementCategory.objects.all()
-        
-
         return context
+
+
+class AboutView(TemplateView):
+    template_name = 'mains/about.html'
