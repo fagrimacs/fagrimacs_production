@@ -1,6 +1,7 @@
 from django.shortcuts import render
-from django.views.generic import TemplateView
+from django.views.generic import TemplateView, ListView
 
+from experts.models import ExpertProfile
 from equipments.models import ImplementCategory, TractorCategory
 
 
@@ -16,3 +17,7 @@ class Homepage(TemplateView):
 
 class AboutView(TemplateView):
     template_name = 'mains/about.html'
+
+
+class ExpertsList(ListView):
+    model = ExpertProfile
