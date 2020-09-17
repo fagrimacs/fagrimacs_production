@@ -18,7 +18,8 @@ class CustomUserManager(BaseUserManager):
         user.save(using=self._db)
         return user
 
-    def create_superuser(self, email, name, role, phone, hear_about_us, password=None):
+    def create_superuser(self, email, name, role, phone,
+                         hear_about_us, password=None):
 
         user = self.create_user(
             email,
@@ -62,8 +63,12 @@ class CustomUser(AbstractBaseUser):
         ('admin', 'Admin'),
         ('superuser', 'Superuser'),
     ]
-    hear_about_us = models.CharField(max_length=150, verbose_name='How did you hear about us?', choices=ABOUT_US)
-    role = models.CharField(choices=ROLE, max_length=100, verbose_name='What is your primary role in platform?')
+    hear_about_us = models.CharField(
+        max_length=150, verbose_name='How did you hear about us?',
+        choices=ABOUT_US)
+    role = models.CharField(
+        choices=ROLE, max_length=100,
+        verbose_name='What is your primary role in platform?')
     is_active = models.BooleanField(default=False)
     is_superuser = models.BooleanField(default=False)
 

@@ -8,6 +8,9 @@ class TractorCategory(models.Model):
     name = models.CharField(max_length=100)
     image = models.ImageField(upload_to='tractor_category')
 
+    class Meta:
+        verbose_name_plural = 'Tractor Categories'
+
     def __str__(self):
         return self.name
 
@@ -28,11 +31,6 @@ HITCHING_TYPE = (
     (None, 'Please Select'),
     ('two point hitches', 'Two-point hitches'),
     ('three point hitches', 'Three-point hitches'),
-)
-YES_NO = (
-    (None, 'Please Select'),
-    ('yes', 'Yes'),
-    ('no', 'No'),
 )
 ATTACHMENT_MODE = (
     (None, 'Please select'),
@@ -71,12 +69,12 @@ class Tractor(models.Model):
     mode_of_transmission = models.CharField(
         max_length=100, verbose_name='Mode of Transmission',
         choices=TRANSMISSION_MODE)
-    engine_hp = models.CharField(
-        max_length=100, verbose_name='Engine Horse Power (eg. 75hp)')
-    drawbar_hp = models.CharField(
-        max_length=100, verbose_name='Drawbar Horse Power (eg. 65hp)')
-    pto_hp = models.CharField(
-        max_length=100, verbose_name='PTO Horse Power (eg. 85hp)')
+    engine_hp = models.PositiveIntegerField(
+        verbose_name='Engine Horse Power (eg. 75hp)')
+    drawbar_hp = models.PositiveIntegerField(
+        verbose_name='Drawbar Horse Power (eg. 65hp)')
+    pto_hp = models.PositiveIntegerField(
+        verbose_name='PTO Horse Power (eg. 85hp)')
     hydraulic_capacity = models.CharField(
         max_length=100, help_text='Use a SI units of gpm or psi',
         verbose_name=('Hydaulic capacity (gallon per minutes(gpm)'
@@ -84,20 +82,16 @@ class Tractor(models.Model):
     type_of_hitching = models.CharField(
         max_length=100, verbose_name='What is Hitching type?',
         choices=HITCHING_TYPE)
-    cab = models.CharField(
-        max_length=100, choices=YES_NO, verbose_name='Does have a cab?')
-    rollover_protection = models.CharField(
-        max_length=100, choices=YES_NO,
+    cab = models.BooleanField(verbose_name='Does have a cab?')
+    rollover_protection = models.BooleanField(
         verbose_name='Does have the rollover protection?')
-    fuel_consumption = models.CharField(
-        max_length=100,
+    fuel_consumption = models.PositiveIntegerField(
         verbose_name='Fuel consumption (gallon per hour on operation)')
     attachment_mode = models.CharField(
         max_length=100, verbose_name='What mode of attachment?',
         choices=ATTACHMENT_MODE)
-    operator = models.CharField(
-        max_length=100, choices=YES_NO,
-        verbose_name='Do you have an operator(s)?')
+    operator = models.BooleanField(default=False,
+                                   verbose_name='Do you have an operator(s)?')
     file = models.FileField(
         upload_to='tractors_photos/',
         verbose_name='Upload the Tractor pictures',
@@ -105,10 +99,10 @@ class Tractor(models.Model):
                    ' only 5 picture.'))
     other_informations = models.TextField(
         blank=True, verbose_name='Describe your Tractor')
-    price_hour = models.CharField(
-        max_length=100, verbose_name='Specify the price per Hour')
-    price_hectare = models.CharField(
-        max_length=100, verbose_name='Specify the price per Hectare')
+    price_hour = models.PositiveIntegerField(
+        verbose_name='Specify the price per Hour in TShs.')
+    price_hectare = models.PositiveIntegerField(
+        verbose_name='Specify the price per Hectare')
     farm_services = MultiSelectField(
         choices=FARM_SERVICES,
         verbose_name='What are farming service(s) do you offer?')
@@ -125,6 +119,9 @@ class ImplementCategory(models.Model):
     name = models.CharField(max_length=100)
     image = models.ImageField(upload_to='implements_category')
 
+    class Meta:
+        verbose_name_plural = 'Implement Categories'
+
     def __str__(self):
         return self.name
 
@@ -132,6 +129,9 @@ class ImplementCategory(models.Model):
 class ImplementSubCategory(models.Model):
     category = models.ForeignKey(ImplementCategory, on_delete=models.CASCADE)
     name = models.CharField(max_length=100)
+
+    class Meta:
+        verbose_name_plural = 'Implement Subcategories'
 
     def __str__(self):
         return self.name
@@ -156,23 +156,19 @@ class Implement(models.Model):
     subcategory = models.ForeignKey(
         ImplementSubCategory, on_delete=models.SET('others'),
         verbose_name='What is subcategory of your Implement')
-    width = models.CharField(max_length=50,
-                             verbose_name='Width of the Implement',help_text='SI UNITS in metre',)
-    weight = models.CharField(
-        max_length=50, verbose_name='Weight of the Implement',
-        help_text='SI UNITS in KG')
+    width = models.PositiveIntegerField(
+        verbose_name='Width of the Implement', help_text='SI UNITS in metre',)
+    weight = models.PositiveIntegerField(
+        verbose_name='Weight of the Implement', help_text='SI UNITS in KG')
     operation_mode = models.CharField(
         max_length=100, choices=OPERATION_MODE,
         verbose_name='What is mode of operation?')
-    pto = models.CharField(
-        max_length=100,
+    pto = models.PositiveIntegerField(
         verbose_name='What is Horse Power required for Operation?')
     hydraulic_capacity = models.CharField(
         max_length=100,
         verbose_name='What is Hydaulic capacity required to lift?')
-    operator = models.CharField(
-        max_length=100, choices=YES_NO,
-        verbose_name='Do you have an operator(s)?')
+    operator = models.BooleanField(verbose_name='Do you have an operator(s)?')
     file = models.FileField(
         upload_to='implements_photos/',
         verbose_name='Upload the Implement pictures',
@@ -180,13 +176,14 @@ class Implement(models.Model):
                    " only 5 pictures."))
     other_informations = models.TextField(
         blank=True, verbose_name='Describe your Implement')
-    price_hour = models.CharField(
-        max_length=100, verbose_name='Specify the price per Hour')
-    price_hectare = models.CharField(
-        max_length=100, verbose_name='Specify the price per Hectare')
+    price_hour = models.PositiveIntegerField(
+        verbose_name='Specify the price per Hour')
+    price_hectare = models.PositiveIntegerField(
+        verbose_name='Specify the price per Hectare')
     agree_terms = models.BooleanField(
         default=False, verbose_name='Do your Accept our Terms and Conditions?')
-    status = models.CharField(choices=STATUS, max_length=100, default='pending')
+    status = models.CharField(
+        choices=STATUS, max_length=100, default='pending')
 
     def __str__(self):
         return self.name
