@@ -3,15 +3,30 @@ from .models import Tractor, Implement, ImplementSubCategory
 
 
 class TractorForm(forms.ModelForm):
-    file = forms.FileField(label='Upload the Tractor pictures', widget=forms.ClearableFileInput(attrs={'multiple': True}))
+    file = forms.FileField(
+        label='Upload the Tractor pictures',
+        widget=forms.ClearableFileInput(attrs={'multiple': True}))
+    # cab = forms.TypedChoiceField(
+    #     label='Does have a cab?',
+    #     coerce=lambda x: x == 'True',
+    #     choices=((False, 'No'), (True, 'Yes')),
+    #     widget=forms.RadioSelect,
+    # )
+    other_informations = forms.CharField(
+        label='Describe your Tractor',
+        required=False,
+        widget=forms.Textarea(attrs={'rows': 3})
+    )
 
     class Meta:
         model = Tractor
-        exclude = ['user', 'created', 'modefied','status',]
+        exclude = ['user', 'created', 'modefied', 'status', ]
 
 
 class ImplementForm(forms.ModelForm):
-    file = forms.FileField(label='Upload the Implement pictures', widget=forms.ClearableFileInput(attrs={'multiple': True}))
+    file = forms.FileField(
+        label='Upload the Implement pictures',
+        widget=forms.ClearableFileInput(attrs={'multiple': True}))
 
     class Meta:
         model = Implement

@@ -82,9 +82,9 @@ class Tractor(models.Model):
     type_of_hitching = models.CharField(
         max_length=100, verbose_name='What is Hitching type?',
         choices=HITCHING_TYPE)
-    cab = models.BooleanField(verbose_name='Does have a cab?')
+    cab = models.BooleanField(verbose_name='Does have a cab?', default=False)
     rollover_protection = models.BooleanField(
-        verbose_name='Does have the rollover protection?')
+        verbose_name='Does have the rollover protection?', default=False)
     fuel_consumption = models.PositiveIntegerField(
         verbose_name='Fuel consumption (gallon per hour on operation)')
     attachment_mode = models.CharField(
