@@ -5,7 +5,6 @@ from phonenumber_field.modelfields import PhoneNumberField
 
 class CustomUserManager(BaseUserManager):
     def create_user(self, email, name, password=None):
-
         if not email:
             raise ValueError('You must have an Email Address')
 
@@ -20,7 +19,6 @@ class CustomUserManager(BaseUserManager):
 
     def create_superuser(self, email, name, role, phone,
                          hear_about_us, password=None):
-
         user = self.create_user(
             email,
             password=password,

@@ -15,6 +15,11 @@ from owners.models import OwnerProfile
 from experts.models import ExpertProfile
 from admins.models import AdminProfile
 
+if not settings.DEBUG:
+    BASE_URL = 'https://fagrimacs.com'
+else:
+    BASE_URL = 'http://127.0.0.1:8000'
+
 
 class UserLoginView(LoginView):
     """View for user to login in platform """
@@ -26,22 +31,26 @@ class UserLoginView(LoginView):
             return url
         elif self.request.user.role == 'farmer':
             if self.request.user.farmerprofile.region == '':
-                return reverse('farmers:update-profile', kwargs={'pk': self.request.user.pk})
+                return reverse('farmers:update-profile',
+                               kwargs={'pk': self.request.user.pk})
             else:
                 return reverse('farmers:dashboard')
         elif self.request.user.role == 'owner':
             if self.request.user.ownerprofile.region == '':
-                return reverse('owners:update-profile', kwargs={'pk': self.request.user.pk})
+                return reverse('owners:update-profile',
+                               kwargs={'pk': self.request.user.pk})
             else:
                 return reverse('owners:dashboard')
         elif self.request.user.role == 'expert':
             if self.request.user.expertprofile.region == '':
-                return reverse('experts:update-profile', kwargs={'pk': self.request.user.pk})
+                return reverse('experts:update-profile',
+                               kwargs={'pk': self.request.user.pk})
             else:
                 return reverse('experts:dashboard')
         elif self.request.user.role == 'admin':
             if self.request.user.adminprofile.region == '':
-                return reverse('admins:update-profile', kwargs={'pk': self.request.user.pk})
+                return reverse('admins:update-profile',
+                               kwargs={'pk': self.request.user.pk})
             else:
                 return reverse('admins:dashboard')
         else:
@@ -73,17 +82,22 @@ def signup(request):
         # send confirmation email
         token = account_activation_token.make_token(user)
         user_id = urlsafe_base64_encode(force_bytes(user.id))
-        url = 'http://127.0.0.1:8000' + reverse('accounts:confirm-email', kwargs={'user_id': user_id, 'token': token})
-        message = get_template('accounts/account_activation_email.html').render({
-            'confirm_url': url
-        })
-        mail = EmailMessage('Fagrimacs Account Confirmation', message, to=[user_email], from_email=settings.EMAIL_HOST_USER)
+        url = BASE_URL + reverse('accounts:confirm-email',
+                                 kwargs={'user_id': user_id, 'token': token})
+        message = get_template(
+            'accounts/account_activation_email.html').render(
+                {'confirm_url': url})
+        mail = EmailMessage(
+            'Fagrimacs Account Confirmation',
+            message,
+            to=[user_email],
+            from_email=settings.EMAIL_HOST_USER)
         mail.content_subtype = 'html'
         mail.send()
 
-        return render(request, 'accounts/registration_pending.html',{
-            'message': f'A confirmation email has been sent to your email. Please confirm to finish registration.'
-            })
+        return render(request, 'accounts/registration_pending.html',
+                      {'message': f'A confirmation email has been sent to your email. Please confirm to finish registration.'}
+                      )
     return render(request, 'accounts/signup.html', {
         'form': form,
     })
