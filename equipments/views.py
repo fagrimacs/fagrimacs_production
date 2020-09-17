@@ -1,13 +1,14 @@
 from django.shortcuts import render, redirect, reverse, get_object_or_404
-from django.views.generic.edit import CreateView, DeleteView, UpdateView, FormView
-from django.views.generic import ListView, TemplateView, DetailView
+from django.views.generic import (ListView, TemplateView, DetailView,
+                                  CreateView, DeleteView, UpdateView,
+                                  FormView)
 from django.urls import reverse_lazy
 from django.contrib.auth.mixins import LoginRequiredMixin, UserPassesTestMixin
 
 
 from .forms import TractorForm, ImplementForm
-from .models import Tractor, Implement, ImplementSubCategory, TractorCategory, ImplementCategory
-
+from .models import (Tractor, Implement, ImplementSubCategory,
+                     TractorCategory, ImplementCategory)
 
 
 class TractorView(LoginRequiredMixin, UserPassesTestMixin, FormView):
@@ -29,7 +30,6 @@ class TractorView(LoginRequiredMixin, UserPassesTestMixin, FormView):
                 return self.form_valid(form)
             else:
                 return self.form_invalid(form)
-
 
     def test_func(self):
         if self.request.user.role == 'owner':
@@ -55,7 +55,7 @@ class ImplementView(LoginRequiredMixin, UserPassesTestMixin, CreateView):
                 return self.form_valid(form)
             else:
                 context = {
-                    'form':form,
+                    'form': form,
                 }
                 return render(request, 'equipments/implement_form.html', context)
 
@@ -90,7 +90,7 @@ class TractorDetailView(DetailView):
 
     def get_context_data(self, **kwargs):
         context = super(TractorDetailView, self).get_context_data(**kwargs)
-        context['tractors'] = Tractor.objects.all()   
+        context['tractors'] = Tractor.objects.all()
         return context
 
 
@@ -101,7 +101,7 @@ class ImplementDetailView(DetailView):
 
     def get_context_data(self, **kwargs):
         context = super(ImplementDetailView, self).get_context_data(**kwargs)
-        context['implements'] = Implement.objects.all()   
+        context['implements'] = Implement.objects.all()
         return context
 
 
@@ -114,8 +114,7 @@ class ListImplement(LoginRequiredMixin, UserPassesTestMixin, ListView):
         return Implement.objects.all().filter(user=self.request.user)
 
     def test_func(self):
-        if self.request.user.role == 'owner':
-            return True
+        return self.request.user.role == 'owner'
 
 
 class UpdateTractor(LoginRequiredMixin, UserPassesTestMixin, UpdateView):
@@ -124,10 +123,8 @@ class UpdateTractor(LoginRequiredMixin, UserPassesTestMixin, UpdateView):
     success_url = reverse_lazy('equipments:tractors')
     queryset = Tractor.objects.all()
 
-
     def test_func(self):
-        if self.request.user.role == 'owner':
-            return True
+        return self.request.user.role == 'owner'
 
 
 class UpdateImplement(LoginRequiredMixin, UserPassesTestMixin, UpdateView):
@@ -135,7 +132,6 @@ class UpdateImplement(LoginRequiredMixin, UserPassesTestMixin, UpdateView):
     template_name = 'equipments/update_implement_form.html'
     success_url = reverse_lazy('equipments:implements')
     queryset = Implement.objects.all()
-
 
     def test_func(self):
         if self.request.user.role == 'owner':
@@ -166,7 +162,6 @@ class TractorListHome(TemplateView):
     def get_context_data(self, **kwargs):
         context = super(TractorListHome, self).get_context_data(**kwargs)
         context['tractors'] = Tractor.objects.all()
-        
         return context
 
 
@@ -176,13 +171,13 @@ class ImplementListHome(TemplateView):
     def get_context_data(self, **kwargs):
         context = super(ImplementListHome, self).get_context_data(**kwargs)
         context['implements'] = Implement.objects.all()
-        
         return context
+
 
 class TractorCategoryList(ListView):
     model = Tractor
     template_name = 'equipments/tractor_category_list.html'
-    
+
     def get_queryset(self):
         self.tractor_type = get_object_or_404(TractorCategory, pk=self.kwargs['pk'])
         return Tractor.objects.filter(tractor_type=self.tractor_type)
@@ -196,7 +191,7 @@ class TractorCategoryList(ListView):
 class ImplementCategoryList(ListView):
     model = Implement
     template_name = 'equipments/implement_category_list.html'
-    
+
     def get_queryset(self):
         self.category = get_object_or_404(ImplementCategory, pk=self.kwargs['pk'])
         return Implement.objects.filter(category=self.category)
