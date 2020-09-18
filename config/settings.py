@@ -47,7 +47,6 @@ INSTALLED_APPS = [
     'main.apps.MainConfig',
     'farmers',
     'owners',
-    'admins',
     'equipments',
     'experts.apps.ExpertsConfig',
 

@@ -26,8 +26,6 @@
                 <li><a href="{% url 'owners:dashboard' %}"><span class="title ">Dashboard</span></a></li>
                 {% elif request.user.role == 'expert' %}
                 <li><a href="{% url 'experts:dashboard' %}"><span class="title ">Dashboard</span></a></li>
-                {% else %}
-                <li><a href="{% url 'admins:dashboard' %}"><span class="title ">Dashboard</span></a></li>
                 {% endif %}
                 {% else %}
                 <div class="pull-right dn-smd mt-3">

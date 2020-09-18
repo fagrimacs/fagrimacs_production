@@ -12,7 +12,6 @@ from accounts.forms import SignUpForm
 from accounts.tokens import account_activation_token
 from farmers.models import FarmerProfile
 from owners.models import OwnerProfile
-from admins.models import AdminProfile
 
 User = get_user_model()
 
@@ -64,9 +63,6 @@ def signup(request):
         elif role == 'expert':
             expert_profile = ExpertProfile(user=user)
             expert_profile.save()
-        else:
-            admin_profile = AdminProfile(user=user)
-            admin_profile.save()
 
         # send confirmation email
         token = account_activation_token.make_token(user)
@@ -85,7 +81,9 @@ def signup(request):
         mail.send()
 
         return render(request, 'accounts/registration_pending.html',
-                      {'message': f'A confirmation email has been sent to your email. Please confirm to finish registration.'}
+                      {'message': (
+                          'A confirmation email has been sent to your email'
+                          '. Please confirm to finish registration.')}
                       )
     return render(request, 'accounts/signup.html', {
         'form': form,
