@@ -3,6 +3,7 @@ from django.contrib.auth.admin import UserAdmin as BaseUserAdmin
 from django.contrib.auth.models import Group
 from django.contrib.auth import get_user_model
 
+from .models import UserProfile
 from . import forms
 
 User = get_user_model()
@@ -84,3 +85,8 @@ class UserAdmin(BaseUserAdmin):
 # Unregister the Group model from admin.
 # since we're not using Django's built-in permissions,
 admin.site.unregister(Group)
+
+
+@admin.register(UserProfile)
+class UserProfileAdmin(admin.ModelAdmin):
+    pass

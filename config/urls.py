@@ -4,10 +4,10 @@ from django.conf import settings
 from django.conf.urls.static import static
 
 urlpatterns = [
-    path('fagrimacs-admin/', admin.site.urls),
+    path('admin/', admin.site.urls),
     path('', include('main.urls', namespace='main')),
     path('accounts/', include('accounts.urls', namespace='accounts')),
-    path('admin/', include('admins.urls', namespace='admins')),
+    # path('admin/', include('admins.urls', namespace='admins')),
     path('farmer/', include('farmers.urls',namespace='farmers')),
     path('owner/', include('owners.urls', namespace='owners')),
     path('equipment/', include('equipments.urls', namespace='equipments')),

@@ -62,3 +62,25 @@ class User(AbstractBaseUser):
         "Is the user a member of staff?"
         # Simplest possible answer: All admins are staff
         return self.is_superuser
+
+
+def profile_pic_filename(instance, filename):
+    ext = filename.split('.')[1]
+    new_filename = f'{uuid4()}.{ext}'
+    return f'profile_pics/{new_filename}'
+
+
+class UserProfile(models.Model):
+    user = models.OneToOneField(
+        User, on_delete=models.CASCADE, primary_key=True)
+    profile_pic = models.ImageField(
+        verbose_name='Profile Picture',
+        default='profile_pics/user.png',
+        upload_to=profile_pic_filename)
+    website = models.URLField(blank=True, max_length=200)
+
+    class Meta:
+        verbose_name = 'Profile'
+
+    def __str__(self):
+        return f'{self.user.name} Profile'
