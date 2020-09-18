@@ -1,11 +1,13 @@
 from django import forms
+from django.contrib.auth import get_user_model
 
-from accounts.models import CustomUser
 from .models import AdminProfile
+
+User = get_user_model()
 
 
 class AdminProfileForm(forms.ModelForm):
-
     class Meta:
         model = AdminProfile
-        fields = ['company','website','region','street','profile_pic',]
+        fields = ['company', 'website', 'region', 'street',
+                  'profile_pic',]

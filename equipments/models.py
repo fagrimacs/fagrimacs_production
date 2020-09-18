@@ -1,7 +1,9 @@
 from django.db import models
 from multiselectfield import MultiSelectField
 
-from accounts.models import CustomUser
+from django.contrib.auth import get_user_model
+
+User = get_user_model()
 
 
 class TractorCategory(models.Model):
@@ -57,7 +59,7 @@ STATUS = (
 class Tractor(models.Model):
     created = models.DateTimeField(auto_now_add=True)
     modified = models.DateTimeField(auto_now=True)
-    user = models.ForeignKey(CustomUser, on_delete=models.CASCADE)
+    user = models.ForeignKey(User, on_delete=models.CASCADE)
     tractor_type = models.ForeignKey(
         TractorCategory, verbose_name='What type of Tractor?',
         on_delete=models.SET('others'))
@@ -147,7 +149,7 @@ OPERATION_MODE = (
 class Implement(models.Model):
     created = models.DateTimeField(auto_now_add=True)
     modified = models.DateTimeField(auto_now=True)
-    user = models.ForeignKey(CustomUser, on_delete=models.CASCADE)
+    user = models.ForeignKey(User, on_delete=models.CASCADE)
     name = models.CharField(
         max_length=100, verbose_name='Name/Models of Implement')
     category = models.ForeignKey(

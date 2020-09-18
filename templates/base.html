@@ -10,10 +10,10 @@
 <meta name="keywords" content="candidates, career, employment, freelance, glassdoor, Human Resource Management, indeed, job board, job listing, job portal, job postings, jobs, listings, recruitment, resume">
 <meta name="CreativeLayers" content="ATFN">
 <!-- css file -->
-<link rel="stylesheet" href="{% static 'mains/css/bootstrap.min.css' %}">
-<link rel="stylesheet" href="{% static 'mains/css/style.css' %}">
+<link rel="stylesheet" href="{% static 'main/css/bootstrap.min.css' %}">
+<link rel="stylesheet" href="{% static 'main/css/style.css' %}">
 <!-- Responsive stylesheet -->
-<link rel="stylesheet" href="{% static 'mains/css/responsive.css' %}">
+<link rel="stylesheet" href="{% static 'main/css/responsive.css' %}">
 <!-- Fengyuan Chen's Datepicker -->
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/datepicker/0.6.5/datepicker.min.css" integrity="sha256-b88RdwbRJEzRx95nCuuva+hO5ExvXXnpX+78h8DjyOE=" crossorigin="anonymous" />
 
@@ -21,7 +21,7 @@
 <!-- Title -->
 <title>{% block title %}Fagrimacs - Farm Equipments Rental Platform{% endblock title %}</title>
 <!-- Favicon -->
-<link href="{% static 'mains/images/favicon.png' %}" sizes="128x128" rel="shortcut icon" type="image/x-icon" />
+<link href="{% static 'main/images/favicon.png' %}" sizes="128x128" rel="shortcut icon" type="image/x-icon" />
 <link href="{% static 'main/images/favicon.png' %}" sizes="128x128" rel="shortcut icon" />
 
     {% block stylesheet %}
@@ -39,17 +39,17 @@
 	<div id="page" class="stylehome1 home6 h0">
 		<div class="mobile-menu">
 			<div class="header stylehome1 home6">
-	            <img class="nav_logo_img img-fluid float-left mt25" src="{% static 'mains/images/logo.png' %}" alt="logo">
+	            <img class="nav_logo_img img-fluid float-left mt25" src="{% static 'main/images/logo.png' %}" alt="logo">
 				<a class="bgc-seagreen" href="#menu"><span></span></a>
 			</div>
 		</div><!-- /.mobile-menu -->
 		<nav id="menu" class="stylehome1">
 			<ul>
 				<li><a href="/"><span class="title">Home</span></a></li>
-				<li><a href="{% url 'mains:about' %}"><span class="title">About us</span></a></li>
+				<li><a href="{% url 'main:about' %}"><span class="title">About us</span></a></li>
 				<li><a href="#"><span class="title">Browse Equipments</span></a></li>
-				<li><a href="{% url 'mains:experts' %}"><span class="title">Hire Experts</span></a></li>
-				<li><a href="{% url 'mains:contact' %}"><span class="title">Contact us</span></a></li>
+				<li><a href="{# url 'main:experts' #}"><span class="title">Hire Experts</span></a></li>
+				<li><a href="{% url 'main:contact' %}"><span class="title">Contact us</span></a></li>
 				{% if request.user.is_authenticated %}
 		        	{% if request.user.role == 'farmer' %}
 					<li><a href="{% url 'farmers:dashboard' %}"><span class="title ">Dashboard</span></a></li>

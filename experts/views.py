@@ -3,9 +3,10 @@ from django.views.generic import TemplateView, View, DetailView, UpdateView
 from django.views.generic import CreateView
 from django.urls import reverse_lazy
 from django.contrib.auth.mixins import LoginRequiredMixin, UserPassesTestMixin
+from django.contrib.auth import get_user_model
+
 from .forms import ExpertProfileForm
 from .models import ExpertProfile
-from accounts.models import CustomUser
 from accounts.forms import UserUpdateForm
 
 
@@ -13,7 +14,7 @@ class ExpertDashboard(LoginRequiredMixin, UserPassesTestMixin, TemplateView):
     template_name = 'experts/dashboard.html'
 
     def test_func(self):
-        expert = CustomUser.objects.get(email=self.request.user)
+        expert = User.objects.get(email=self.request.user)
         expert_profile = ExpertProfile.objects.filter(user=expert)
         if self.request.user.role == 'expert' and self.request.user.expertprofile.region != '':
             return True

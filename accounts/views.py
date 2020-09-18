@@ -9,7 +9,6 @@ from django.views.generic import TemplateView
 from django.contrib.auth import get_user_model
 
 from accounts.forms import SignUpForm
-from accounts.models import User
 from accounts.tokens import account_activation_token
 from farmers.models import FarmerProfile
 from owners.models import OwnerProfile

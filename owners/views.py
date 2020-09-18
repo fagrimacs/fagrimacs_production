@@ -3,17 +3,20 @@ from django.views.generic import TemplateView, View, DetailView, UpdateView
 from django.views.generic import CreateView
 from django.urls import reverse_lazy
 from django.contrib.auth.mixins import LoginRequiredMixin, UserPassesTestMixin
+from django.contrib.auth import get_user_model
+
 from .forms import OwnerProfileForm
 from .models import OwnerProfile
-from accounts.models import CustomUser
 from accounts.forms import UserUpdateForm
+
+User = get_user_model()
 
 
 class OwnerDashboard(LoginRequiredMixin, UserPassesTestMixin, TemplateView):
     template_name = 'owners/dashboard.html'
 
     def test_func(self):
-        owner = CustomUser.objects.get(email=self.request.user)
+        owner = User.objects.get(email=self.request.user)
         owner_profile = OwnerProfile.objects.filter(user=owner)
         if self.request.user.role == 'owner' and self.request.user.ownerprofile.region != '':
             return True
@@ -58,7 +61,7 @@ class OwnerProfileDetailView(LoginRequiredMixin, UserPassesTestMixin, DetailView
     context_object_name = 'owner_profile'
 
     def test_func(self):
-        owner = CustomUser.objects.get(email=self.request.user)
+        owner = User.objects.get(email=self.request.user)
         owner_profile = OwnerProfile.objects.filter(user=owner)
         if self.request.user.ownerprofile == OwnerProfile.objects.get(user_id=self.request.user.id) and self.request.user.ownerprofile.region != '':
             return True

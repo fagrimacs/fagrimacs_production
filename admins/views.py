@@ -2,25 +2,27 @@ from django.shortcuts import render, reverse, redirect
 from django.views.generic import TemplateView, View, DetailView, UpdateView
 from django.views.generic import CreateView
 from django.urls import reverse_lazy
+from django.contrib.auth import get_user_model
 from django.contrib.auth.mixins import LoginRequiredMixin, UserPassesTestMixin
+
 from .forms import AdminProfileForm
 from .models import AdminProfile
-from accounts.models import CustomUser
 from accounts.forms import UserUpdateForm
+
+User = get_user_model()
 
 
 class AdminDashboard(LoginRequiredMixin, UserPassesTestMixin, TemplateView):
     template_name = 'admins/dashboard.html'
 
     def test_func(self):
-        admin = CustomUser.objects.get(email=self.request.user)
+        admin = User.objects.get(email=self.request.user)
         admin_profile = AdminProfile.objects.filter(user=admin)
         if self.request.user.role == 'admin' and self.request.user.adminprofile.region != '':
             return True
 
     def handle_no_permission(self):
         return redirect(reverse('admins:update-profile', kwargs={'pk': self.request.user.id}))
-
 
 
 class AdminProfileView(LoginRequiredMixin, UserPassesTestMixin, View):
@@ -53,13 +55,14 @@ class AdminProfileView(LoginRequiredMixin, UserPassesTestMixin, View):
         return False
 
 
-class AdminProfileDetailView(LoginRequiredMixin, UserPassesTestMixin, DetailView):
+class AdminProfileDetailView(LoginRequiredMixin,
+                             UserPassesTestMixin, DetailView):
     model = AdminProfile
     template_name = 'admins/profile.html'
     context_object_name = 'admin_profile'
 
     def test_func(self):
-        admin = CustomUser.objects.get(email=self.request.user)
+        admin = User.objects.get(email=self.request.user)
         admin_profile = AdminProfile.objects.filter(user=admin)
         if self.request.user.adminprofile == AdminProfile.objects.get(user_id=self.request.user.id) and self.request.user.adminprofile.region != '':
             return True

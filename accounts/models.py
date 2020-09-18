@@ -1,6 +1,5 @@
 from django.contrib.auth.models import AbstractBaseUser, BaseUserManager
 from django.db import models
-from phonenumber_field.modelfields import PhoneNumberField
 
 
 class UserManager(BaseUserManager):
@@ -36,25 +35,6 @@ class User(AbstractBaseUser):
         unique=True,
     )
     name = models.CharField(max_length=100, verbose_name='Full name')
-    phone = PhoneNumberField(verbose_name='Phone Number',
-                             help_text='+255 xxx xxx xxx')
-    ABOUT_US = [
-        (None, 'Please Select'),
-        ('Whatsapp status', 'Whatsapp status'),
-        ('Internet search', 'Internet Search'),
-        ('Instagram', 'Instagram'),
-        ('Facebook', 'Facebook'),
-        ('Twitter', 'twitter'),
-        ('Linkedln', 'Linkedln'),
-        ('Industry Conference', 'Industry Conference'),
-        ('Industry Publication', 'Industry Publication'),
-        ('Fagrimacs publications', 'Fagrimacs publications'),
-        ('Word of mouth', 'Word of mouth'),
-        ('Other', 'Other'),
-    ]
-    hear_about_us = models.CharField(
-        max_length=150, verbose_name='How did you hear about us?',
-        choices=ABOUT_US)
     is_active = models.BooleanField(default=False)
     is_expert = models.BooleanField(default=False)
     is_superuser = models.BooleanField(default=False)

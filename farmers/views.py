@@ -3,17 +3,20 @@ from django.views.generic import TemplateView, View, DetailView, UpdateView
 from django.views.generic import CreateView
 from django.urls import reverse_lazy
 from django.contrib.auth.mixins import LoginRequiredMixin, UserPassesTestMixin
+from django.contrib.auth import get_user_model
+
 from .forms import FarmerProfileForm
 from .models import FarmerProfile
-from accounts.models import CustomUser
 from accounts.forms import UserUpdateForm
+
+User = get_user_model()
 
 
 class FarmerDashboard(LoginRequiredMixin, UserPassesTestMixin, TemplateView):
     template_name = 'farmers/dashboard.html'
 
     def test_func(self):
-        farmer = CustomUser.objects.get(email=self.request.user)
+        farmer = User.objects.get(email=self.request.user)
         farmer_profile = FarmerProfile.objects.filter(user=farmer)
         if self.request.user.role == 'farmer' and self.request.user.farmerprofile.region != '':
             return True
@@ -59,7 +62,7 @@ class FarmerProfileDetailView(LoginRequiredMixin, UserPassesTestMixin, DetailVie
     context_object_name = 'farmer_profile'
 
     def test_func(self):
-        farmer = CustomUser.objects.get(email=self.request.user)
+        farmer = User.objects.get(email=self.request.user)
         farmer_profile = FarmerProfile.objects.filter(user=farmer)
         if self.request.user.farmerprofile == FarmerProfile.objects.get(user_id=self.request.user.id) and self.request.user.farmerprofile.region != '':
             return True

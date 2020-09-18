@@ -2,8 +2,9 @@ from uuid import uuid4
 
 from django.db import models
 from django.urls import reverse
+from django.contrib.auth import get_user_model
 
-from accounts.models import CustomUser
+User = get_user_model()
 
 
 def profile_pic_filename(instance, filename):
@@ -14,7 +15,7 @@ def profile_pic_filename(instance, filename):
 
 class AdminProfile(models.Model):
     user = models.OneToOneField(
-        CustomUser, on_delete=models.CASCADE, primary_key=True)
+        User, on_delete=models.CASCADE, primary_key=True)
     profile_pic = models.ImageField(verbose_name='Profile Picture',
                                     default='profile_pics/user.png',
                                     upload_to=profile_pic_filename)

@@ -43,13 +43,13 @@ else:
 # Application definition
 
 INSTALLED_APPS = [
-    'accounts',
-    'mains',
+    'accounts.apps.AccountsConfig',
+    'main.apps.MainConfig',
     'farmers',
     'owners',
-    'experts',
     'admins',
     'equipments',
+    'experts.apps.ExpertsConfig',
 
     'django.contrib.admin',
     'django.contrib.auth',
@@ -150,7 +150,7 @@ else:
     EMAIL_BACKEND = 'django.core.mail.backends.filebased.EmailBackend'
     EMAIL_FILE_PATH = os.path.join(BASE_DIR, 'sent_mails')
 
-AUTH_USER_MODEL = 'accounts.CustomUser'
+AUTH_USER_MODEL = 'accounts.User'
 
 CRISPY_TEMPLATE_PACK = 'bootstrap4'
 
