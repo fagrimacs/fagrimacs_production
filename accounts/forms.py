@@ -1,29 +1,19 @@
 from django import forms
 from django.contrib.auth.forms import ReadOnlyPasswordHashField
 from django.db import transaction
+from django.contrib.auth import get_user_model
 
-from .models import CustomUser
+User = get_user_model()
 
-ROLE_CHOICES = [
-        ('', 'Please select'),
-        ('farmer', 'Farmer'),
-        ('owner', 'Equipment Owner'),
-        ('expert', 'Expert'),
-    ]
 
 class UserCreationForm(forms.ModelForm):
     password1 = forms.CharField(label='Password', widget=forms.PasswordInput)
-    password2 = forms.CharField(label='Password confirmation', widget=forms.PasswordInput)
-    role = forms.ChoiceField(
-        widget=forms.Select,
-        choices=ROLE_CHOICES,
-        label='What is your primary role in platform?'
-    )
+    password2 = forms.CharField(
+        label='Password confirmation', widget=forms.PasswordInput)
 
     class Meta:
-        model = CustomUser
-        fields = ('name', 'email', 'phone', 'role', 'hear_about_us', )
-        
+        model = User
+        fields = ('name', 'email', )
 
     def clean_password2(self):
         # Check that the two password entries match
@@ -32,7 +22,8 @@ class UserCreationForm(forms.ModelForm):
         if password1 and password2 and password1 != password2:
             raise forms.ValidationError("Passwords don't match")
         if len(password1) < 8:
-            raise forms.ValidationError('Password too short, It must be 8 character or more')
+            raise forms.ValidationError(('Password too short, '
+                                         'It must be 8 character or more'))
         return password2
 
     def save(self, commit=True):
@@ -49,7 +40,7 @@ class UserChangeForm(forms.ModelForm):
     password = ReadOnlyPasswordHashField()
 
     class Meta:
-        model = CustomUser
+        model = User
         fields = ('email', 'password', 'name', 'is_active',)
 
     def clean_password(self):
@@ -62,11 +53,11 @@ class UserChangeForm(forms.ModelForm):
 class SignUpForm(UserCreationForm):
 
     class Meta(UserCreationForm.Meta):
-        model = CustomUser
+        model = User
 
 
 class UserUpdateForm(forms.ModelForm):
 
     class Meta:
-        model = CustomUser
-        fields = ['name', 'email', 'phone', ]
+        model = User
+        fields = ['name', 'email', ]

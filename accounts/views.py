@@ -1,19 +1,21 @@
 from django.conf import settings
-from django.contrib.auth.views import LoginView, LogoutView
+from django.contrib.auth.views import LoginView
 from django.core.mail import EmailMessage
 from django.shortcuts import render, reverse
 from django.template.loader import get_template
 from django.utils.encoding import force_bytes, force_text
 from django.utils.http import urlsafe_base64_decode, urlsafe_base64_encode
 from django.views.generic import TemplateView
+from django.contrib.auth import get_user_model
 
 from accounts.forms import SignUpForm
-from accounts.models import CustomUser
+from accounts.models import User
 from accounts.tokens import account_activation_token
 from farmers.models import FarmerProfile
 from owners.models import OwnerProfile
-from experts.models import ExpertProfile
 from admins.models import AdminProfile
+
+User = get_user_model()
 
 if not settings.DEBUG:
     BASE_URL = 'https://fagrimacs.com'
@@ -41,18 +43,6 @@ class UserLoginView(LoginView):
                                kwargs={'pk': self.request.user.pk})
             else:
                 return reverse('owners:dashboard')
-        elif self.request.user.role == 'expert':
-            if self.request.user.expertprofile.region == '':
-                return reverse('experts:update-profile',
-                               kwargs={'pk': self.request.user.pk})
-            else:
-                return reverse('experts:dashboard')
-        elif self.request.user.role == 'admin':
-            if self.request.user.adminprofile.region == '':
-                return reverse('admins:update-profile',
-                               kwargs={'pk': self.request.user.pk})
-            else:
-                return reverse('admins:dashboard')
         else:
             return f'/admin/'
 
@@ -108,7 +98,7 @@ class ConfirmRegistrationView(TemplateView):
     def get(self, request, user_id, token):
         user_id = force_text(urlsafe_base64_decode(user_id))
 
-        user = CustomUser.objects.get(pk=user_id)
+        user = User.objects.get(pk=user_id)
 
         context = {
             'message': 'Registration confirmation error. Please click the reset password to generate a new confirmation email.'

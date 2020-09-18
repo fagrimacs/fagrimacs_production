@@ -3,7 +3,7 @@ from django.db import models
 from phonenumber_field.modelfields import PhoneNumberField
 
 
-class CustomUserManager(BaseUserManager):
+class UserManager(BaseUserManager):
     def create_user(self, email, name, password=None):
         if not email:
             raise ValueError('You must have an Email Address')
@@ -17,8 +17,7 @@ class CustomUserManager(BaseUserManager):
         user.save(using=self._db)
         return user
 
-    def create_superuser(self, email, name, role, phone,
-                         hear_about_us, password=None):
+    def create_superuser(self, email, name, password=None):
         user = self.create_user(
             email,
             password=password,
@@ -30,7 +29,7 @@ class CustomUserManager(BaseUserManager):
         return user
 
 
-class CustomUser(AbstractBaseUser):
+class User(AbstractBaseUser):
     email = models.EmailField(
         verbose_name='Email Address',
         max_length=255,
@@ -53,27 +52,17 @@ class CustomUser(AbstractBaseUser):
         ('Word of mouth', 'Word of mouth'),
         ('Other', 'Other'),
     ]
-    ROLE = [
-        (None, 'Please Select'),
-        ('farmer', 'Farmer'),
-        ('owner', 'Equipment Owner'),
-        ('expert', 'Expert'),
-        ('admin', 'Admin'),
-        ('superuser', 'Superuser'),
-    ]
     hear_about_us = models.CharField(
         max_length=150, verbose_name='How did you hear about us?',
         choices=ABOUT_US)
-    role = models.CharField(
-        choices=ROLE, max_length=100,
-        verbose_name='What is your primary role in platform?')
     is_active = models.BooleanField(default=False)
+    is_expert = models.BooleanField(default=False)
     is_superuser = models.BooleanField(default=False)
 
-    objects = CustomUserManager()
+    objects = UserManager()
 
     USERNAME_FIELD = 'email'
-    REQUIRED_FIELDS = ['name', 'role', 'phone', 'hear_about_us',]
+    REQUIRED_FIELDS = ['name', ]
 
     def __str__(self):
         return self.email

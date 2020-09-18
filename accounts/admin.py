@@ -1,12 +1,15 @@
 from django.contrib import admin
 from django.contrib.auth.admin import UserAdmin as BaseUserAdmin
 from django.contrib.auth.models import Group
+from django.contrib.auth import get_user_model
 
 from . import forms
-from . models import CustomUser
+
+User = get_user_model()
 
 
-class CustomUserAdmin(BaseUserAdmin):
+@admin.register(User)
+class UserAdmin(BaseUserAdmin):
     # The forms to add and change user instances
     form = forms.UserChangeForm
     add_form = forms.UserCreationForm
@@ -14,12 +17,12 @@ class CustomUserAdmin(BaseUserAdmin):
     # The fields to be used in displaying the User model.
     # These override the definitions on the base UserAdmin
     # that reference specific fields on auth.User.
-    list_display = ('email', 'name','phone','role','hear_about_us','is_active' )
+    list_display = ('email', 'name', 'is_active' )
     list_filter = ('email',)
     readonly_fields = ('email', )
     fieldsets = (
-        (None, {'fields': ('email', 'password', 'hear_about_us','role',)}),
-        ('Personal Info', {'fields': ('name','phone', )}),
+        (None, {'fields': ('email', 'password', )}),
+        ('Personal Info', {'fields': ('name', )}),
     )
     # add_fieldsets is not a standard ModelAdmin attribute. UserAdmin
     # overrides get_fieldsets to use this attribute when creating a user.
@@ -54,19 +57,16 @@ class CustomUserAdmin(BaseUserAdmin):
                 'role',
             }
 
-
         for f in disabled_fields:
             if f in form.base_fields:
                 form.base_fields[f].disabled=True
 
         return form
 
-
     # Custom Actions
     actions = [
         'activate_users',
     ]
-    
 
     def activate_users(self, request, queryset):
         cnt = queryset.filter(is_active=False).update(is_active=True)
@@ -74,16 +74,12 @@ class CustomUserAdmin(BaseUserAdmin):
 
     activate_users.short_description = 'Activate Users'
 
-
     # Overidding user permissions regardless of their permissions.
     def has_delete_permission(self, request, obj=None):
         if request.user.is_superuser:
             return True
         return False
 
-
-# Register the new UserAdmin...
-admin.site.register(CustomUser, CustomUserAdmin)
 
 # Unregister the Group model from admin.
 # since we're not using Django's built-in permissions,
