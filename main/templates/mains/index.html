@@ -1,0 +1,111 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block content %}
+	<!-- Home Design -->
+	<section class="home-six parallax ulockd_bgi5" data-stellar-background-ratio="0.3">
+		<div class="container">
+			<div class="row home-content">
+				<div class="col-lg-8">
+					<div class="home-text">
+						<h1 class="fz40">Rent-in & Rent-out</h1>
+						<h3 class="color-white" style="font-size:16px">A web platform where farmers can easy rent-out their Tractors & Implement’s which they don’t need and rent-in what they want to use.</h3>
+					</div>
+				</div>
+			</div>
+		</div>
+	</section>
+	<section class="green-strip bgc-deep-green">
+		<div class="container">
+			<div class="row">
+				<div class="col-md-8">
+					<h1>Are you ready to Make Profit?</h1>
+				</div>
+				<div class="col-md-4 text-center">
+					<a class="btn btn-light btn-lg" href="{% url 'accounts:signup' %}">Signup Now!</a>
+				</div>
+			</div>
+		</div>
+	</section>
+
+	<section class="expert-freelancer bgc-fa pb20">
+		<div class="container">
+			<div class="row">
+				<div class="col-lg-12">
+					<div class="ulockd-main-title">
+						<h4>POPULAR EQUIPMENTS</h4>
+						<h3 class="mt0">Quality equipment, ready to go</h3>
+					</div>
+				</div>
+			</div>
+			<div class="row">
+				<div class="col-lg-12">
+					<div class="ef_slider2">
+						{% for category in tractor_categories %}
+						<div class="item">
+							<div class="ef_post home6">
+								<div class="ef_header">
+									<h4 class="hr_rate">{{category.name}}</h4>
+								</div>
+								<a href="{% url 'equipments:tractor-category' category.pk %}">
+									<div class="thumb text-center" style="margin-top: 100px;">
+										<img class="img-fluid" src="{{category.image.url }}" alt="">
+									</div>
+								</a>
+								
+							</div>
+						</div>
+						{% endfor %}
+					</div>
+				</div>
+			</div>
+		</div>
+	</section>
+
+
+	<section class="popular-job bgc-fa">
+		<div class="container">
+			<div class="row">
+				<div class="col-lg-12">
+					<div class="ulockd-main-title">
+						<h4>EQUIPMENTS</h4>
+						<h3 class="mt0">Browse the largest Equipments in the industry</h3>
+					</div>
+				</div>
+			</div>
+			<div class="row">
+				{% for category in tractor_categories %}
+				<div class="col-6 col-sm-4 col-lg-3 pt-3">
+					<a href="{% url 'equipments:tractor-category' category.pk %}" class="icon_hvr_img_box card">
+						<div class="overlay">
+							<div class="icon"></div>
+							<div class="details">
+								<div class="row">
+									<div class="col-8"><h5>{{category.name}}</h5></div>
+								<div class="col-4"><img src="{{category.image.url }}" alt="icon" class="float-right mr-3" style="width: 50px; height:auto;"></div>
+								</div>
+							</div>
+						</div>
+					</a>
+				</div>
+				{% endfor %}
+				{% for category in implement_categories %}
+				<div class="col-6 col-sm-4 col-lg-3 pt-3">
+					<a href="{% url 'equipments:implement-category' category.pk %}" class="icon_hvr_img_box card">
+						<div class="overlay">
+							<div class="icon"></div>
+							<div class="details">
+								<div class="row">
+									<div class="col-8"><h5>{{category.name}} Implements</h5></div>
+								<div class="col-4"><img src="{{category.image.url }}" alt="icon" class="float-right mr-3" style="width: 50px; height:auto;"></div>
+								</div>
+							</div>
+						</div>
+					</a>
+				</div>
+				{% endfor %}
+			</div>
+		</div>
+	</section>
+
+{% endblock content %}
