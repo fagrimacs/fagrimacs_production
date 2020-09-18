@@ -19,14 +19,7 @@
             <!-- Responsive Menu Structure-->
             <ul id="respMenu" class="ace-responsive-menu" data-menu-style="horizontal">
                 {% if request.user.is_authenticated %}
-                <li><a href="{% url 'accounts:logout' %}"><span class="title">Logout</span></a></li>
-                {% if request.user.role == 'farmer' %}
-                <li><a href="{% url 'farmers:dashboard' %}"><span class="title ">Dashboard</span></a></li>
-                {% elif request.user.role == 'owner' %}
-                <li><a href="{% url 'owners:dashboard' %}"><span class="title ">Dashboard</span></a></li>
-                {% elif request.user.role == 'expert' %}
-                <li><a href="{% url 'experts:dashboard' %}"><span class="title ">Dashboard</span></a></li>
-                {% endif %}
+
                 {% else %}
                 <div class="pull-right dn-smd mt-3">
                     <a href="{% url 'accounts:login' %}" class="btn btn-outline-success">Login</a>

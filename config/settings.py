@@ -45,9 +45,7 @@ else:
 INSTALLED_APPS = [
     'accounts.apps.AccountsConfig',
     'main.apps.MainConfig',
-    'farmers',
-    'owners',
-    'equipments',
+    'equipments.apps.EquipmentsConfig',
     'experts.apps.ExpertsConfig',
 
     'django.contrib.admin',

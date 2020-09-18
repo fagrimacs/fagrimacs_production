@@ -11,8 +11,6 @@ from django.contrib.auth.mixins import LoginRequiredMixin
 
 from accounts.forms import SignUpForm
 from accounts.tokens import account_activation_token
-from farmers.models import FarmerProfile
-from owners.models import OwnerProfile
 
 User = get_user_model()
 

@@ -51,13 +51,6 @@
 				<li><a href="{# url 'main:experts' #}"><span class="title">Hire Experts</span></a></li>
 				<li><a href="{% url 'main:contact' %}"><span class="title">Contact us</span></a></li>
 				{% if request.user.is_authenticated %}
-		        	{% if request.user.role == 'farmer' %}
-					<li><a href="{% url 'farmers:dashboard' %}"><span class="title ">Dashboard</span></a></li>
-					{% elif request.user.role == 'owner' %}
-					<li><a href="{% url 'owners:dashboard' %}"><span class="title ">Dashboard</span></a></li>
-					{% elif request.user.role == 'expert' %}
-					<li><a href="{% url 'experts:dashboard' %}"><span class="title ">Dashboard</span></a></li>
-					{% endif %}
 				<li><a href="{% url 'accounts:logout' %}"><span class="title">Logout</span></a></li>
 				{% else %}
 				<li><a href="{% url 'accounts:login' %}"><span class="title">Login</span></a></li>
