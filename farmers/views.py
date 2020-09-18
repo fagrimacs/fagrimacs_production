@@ -12,21 +12,21 @@ from accounts.forms import UserUpdateForm
 User = get_user_model()
 
 
-class FarmerDashboard(LoginRequiredMixin, UserPassesTestMixin, TemplateView):
+class FarmerDashboard(LoginRequiredMixin, TemplateView):
     template_name = 'farmers/dashboard.html'
 
-    def test_func(self):
-        farmer = User.objects.get(email=self.request.user)
-        farmer_profile = FarmerProfile.objects.filter(user=farmer)
-        if self.request.user.role == 'farmer' and self.request.user.farmerprofile.region != '':
-            return True
+    # def test_func(self):
+    #     farmer = User.objects.get(email=self.request.user)
+    #     farmer_profile = FarmerProfile.objects.filter(user=farmer)
+    #     if self.request.user.role == 'farmer' and self.request.user.farmerprofile.region != '':
+    #         return True
 
     def handle_no_permission(self):
         return redirect(reverse('farmers:update-profile', kwargs={'pk': self.request.user.id}))
 
 
 
-class FarmerProfileView(LoginRequiredMixin, UserPassesTestMixin, View):
+class FarmerProfileView(LoginRequiredMixin, View):
 
     def get(self, request, pk):
         context = {
@@ -50,10 +50,10 @@ class FarmerProfileView(LoginRequiredMixin, UserPassesTestMixin, View):
             profile_form = FarmerProfileUpdateForm(instance=request.user.farmerprofile)
 
 
-    def test_func(self):
-        if self.request.user.farmerprofile == FarmerProfile.objects.get(user_id=self.request.user.id):
-            return True
-        return False
+    # def test_func(self):
+    #     if self.request.user.farmerprofile == FarmerProfile.objects.get(user_id=self.request.user.id):
+    #         return True
+    #     return False
 
 
 class FarmerProfileDetailView(LoginRequiredMixin, UserPassesTestMixin, DetailView):

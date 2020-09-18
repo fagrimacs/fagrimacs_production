@@ -7,6 +7,7 @@ from django.utils.encoding import force_bytes, force_text
 from django.utils.http import urlsafe_base64_decode, urlsafe_base64_encode
 from django.views.generic import TemplateView
 from django.contrib.auth import get_user_model
+from django.contrib.auth.mixins import LoginRequiredMixin
 
 from accounts.forms import SignUpForm
 from accounts.tokens import account_activation_token
@@ -26,23 +27,15 @@ class UserLoginView(LoginView):
     template_name = 'accounts/login.html'
 
     def get_success_url(self):
+        """Url which user redirected when log in."""
         url = self.get_redirect_url()
         if url:
             return url
-        elif self.request.user.role == 'farmer':
-            if self.request.user.farmerprofile.region == '':
-                return reverse('farmers:update-profile',
-                               kwargs={'pk': self.request.user.pk})
-            else:
-                return reverse('farmers:dashboard')
-        elif self.request.user.role == 'owner':
-            if self.request.user.ownerprofile.region == '':
-                return reverse('owners:update-profile',
-                               kwargs={'pk': self.request.user.pk})
-            else:
-                return reverse('owners:dashboard')
+        elif not self.request.user.is_superuser:
+            # Non superuser should be redirected to their profiles
+            return '/'
         else:
-            return f'/admin/'
+            return '/admin/'
 
 
 def signup(request):
@@ -51,18 +44,6 @@ def signup(request):
         user = form.save()
         user_email = form.cleaned_data['email']
         user.save()
-
-        # Create profile
-        role = request.POST.get('role')
-        if role == 'farmer':
-            farmer_profile = FarmerProfile(user=user)
-            farmer_profile.save()
-        elif role == 'owner':
-            owner_profile = OwnerProfile(user=user)
-            owner_profile.save()
-        elif role == 'expert':
-            expert_profile = ExpertProfile(user=user)
-            expert_profile.save()
 
         # send confirmation email
         token = account_activation_token.make_token(user)
@@ -107,3 +88,7 @@ class ConfirmRegistrationView(TemplateView):
             context['message'] = 'Registration complete. Please login'
 
         return render(request, 'accounts/registration_complete.html', context)
+
+
+class UserProfileView(LoginRequiredMixin, TemplateView):
+    template_name = 'accounts/profile.html'
