@@ -18,7 +18,7 @@ class UserAdmin(BaseUserAdmin):
     # The fields to be used in displaying the User model.
     # These override the definitions on the base UserAdmin
     # that reference specific fields on auth.User.
-    list_display = ('email', 'name', 'is_active' )
+    list_display = ('email', 'name', 'is_active', )
     list_filter = ('email',)
     readonly_fields = ('email', )
     fieldsets = (
@@ -60,7 +60,7 @@ class UserAdmin(BaseUserAdmin):
 
         for f in disabled_fields:
             if f in form.base_fields:
-                form.base_fields[f].disabled=True
+                form.base_fields[f].disabled = True
 
         return form
 
