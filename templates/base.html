@@ -1,109 +1,70 @@
 {% load static %}
+
 <!DOCTYPE html>
-<html dir="ltr" lang="en">
+<html lang="en">
+    <head>
+        <meta charset="utf-8" />
+        <title>Fagrimacs - Make Money with Farm Equipments rental Platform</title>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <meta name="description" content="A web platform where farmers can easy rent-out their Tractors & Implements which they don’t need and rent-in what they want to use from nearby farmers" />
+        <meta name="keywords" content="fagrimacs, tractor, implement, disc plough, disc harrow, cultivator, chisel plow, power tiller, rotary tiller, rotavator, rototiller, subsoiler, Broadcast seeder" />
+        <meta content="Fagrimacs" name="author" />
+        <!-- favicon -->
+        <link rel="shortcut icon" href="{% static 'main/images/favicon.ico' %}">
+        <!-- Bootstrap css -->
+        <link href="{% static 'main/css/bootstrap.min.css' %}" rel="stylesheet" type="text/css" />
+        <!-- Icons -->
+        <link href="{% static 'main/css/materialdesignicons.min.css' %}" rel="stylesheet" type="text/css" />
+        <!-- Icons -->
+        <link href="{% static 'main/css/magnific-popup.css' %}" rel="stylesheet" type="text/css" />
+        <!-- Slider -->               
+        <link rel="stylesheet" href="{% static 'main/css/owl.carousel.min.css' %}"/> 
+        <link rel="stylesheet" href="{% static 'main/css/owl.theme.default.min.css' %}"/> 
+        <!-- Main css File -->
+		<link href="{% static 'main/css/style.css' %}" rel="stylesheet" type="text/css" />
+		{% block stylesheet %}
+		{% endblock stylesheet %}
+    </head>
 
-<!-- Mirrored from grandetest.com/theme/careerup-html/index6.html by HTTrack Website Copier/3.x [XR&CO'2014], Sat, 28 Dec 2019 19:10:01 GMT -->
-<head>
-<meta charset="utf-8">
-<meta http-equiv="X-UA-Compatible" content="IE=edge">
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<meta name="keywords" content="candidates, career, employment, freelance, glassdoor, Human Resource Management, indeed, job board, job listing, job portal, job postings, jobs, listings, recruitment, resume">
-<meta name="CreativeLayers" content="ATFN">
-<!-- css file -->
-<link rel="stylesheet" href="{% static 'main/css/bootstrap.min.css' %}">
-<link rel="stylesheet" href="{% static 'main/css/style.css' %}">
-<!-- Responsive stylesheet -->
-<link rel="stylesheet" href="{% static 'main/css/responsive.css' %}">
-<!-- Fengyuan Chen's Datepicker -->
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/datepicker/0.6.5/datepicker.min.css" integrity="sha256-b88RdwbRJEzRx95nCuuva+hO5ExvXXnpX+78h8DjyOE=" crossorigin="anonymous" />
+    <body>
+        <!-- Loader Start -->
+        <div id="preloader">
+            <div id="status">
+                <div class="sk-chase mt-4">
+                    <div class="sk-chase-dot"></div>
+                    <div class="sk-chase-dot"></div>
+                    <div class="sk-chase-dot"></div>
+                    <div class="sk-chase-dot"></div>
+                    <div class="sk-chase-dot"></div>
+                    <div class="sk-chase-dot"></div>
+                </div>
+            </div>
+        </div>
+		<!-- Loader End -->
+		
 
+		<!-- Main Header Nav -->
+		{% include 'header.html' %}
 
-<!-- Title -->
-<title>{% block title %}Fagrimacs - Farm Equipments Rental Platform{% endblock title %}</title>
-<!-- Favicon -->
-<link href="{% static 'main/images/favicon.png' %}" sizes="128x128" rel="shortcut icon" type="image/x-icon" />
-<link href="{% static 'main/images/favicon.png' %}" sizes="128x128" rel="shortcut icon" />
-
-    {% block stylesheet %}
-    {% endblock stylesheet %}
-</head>
-<body>
-<div class="wrapper">
-	<div class="preloader"></div>
-
-	<!-- Main Header Nav -->
-	{% include 'header.html' %}
-
-
-	<!-- Main Header Nav For Mobile -->
-	<div id="page" class="stylehome1 home6 h0">
-		<div class="mobile-menu">
-			<div class="header stylehome1 home6">
-	            <img class="nav_logo_img img-fluid float-left mt25" src="{% static 'main/images/logo.png' %}" alt="logo">
-				<a class="bgc-seagreen" href="#menu"><span></span></a>
-			</div>
-		</div><!-- /.mobile-menu -->
-		<nav id="menu" class="stylehome1">
-			<ul>
-				<li><a href="/"><span class="title">Home</span></a></li>
-				<li><a href="{% url 'main:about' %}"><span class="title">About us</span></a></li>
-				<li><a href="#"><span class="title">Browse Equipments</span></a></li>
-				<li><a href="{# url 'main:experts' #}"><span class="title">Hire Experts</span></a></li>
-				<li><a href="{% url 'main:contact' %}"><span class="title">Contact us</span></a></li>
-				{% if request.user.is_authenticated %}
-				<li><a href="{% url 'accounts:logout' %}"><span class="title">Logout</span></a></li>
-				{% else %}
-				<li><a href="{% url 'accounts:login' %}"><span class="title">Login</span></a></li>
-				<li><a href="{% url 'accounts:signup' %}"><span class="title">Signup</span></a></li>
-				{% endif %}
-			</ul>
-		</nav>
-	</div>
-
-	{% if messages %}
-	{% for message in messages %}
-	<div class="alert alert-{{ message.tags }} alert-dismissible fade show mt-5" role="alert">
-		<button type="button" class="close" data-dismiss="alert" aria-label="Close">
-			<span aria-hidden="true">&times;</span>
-			<span class="sr-only">Close</span>
-		</button>
-		{{ message }}
-	</div>
-	{% endfor %}
-	{% endif %}
-  {% block content %}
-  {% endblock content %}
-
-
-	<!-- Our Footer -->
-	<section class="footer_one home6">
-		{% include 'footer.html' %}
-	</section>
-
-	<!-- Our Footer Bottom Area -->
-	<section class="footer_bottom_area home6 p0">
-		<div class="container">
-			<div class="row pt30 pb20">
-				<div class="col-lg-6">
-					<div class="copyright-widget tac-smd">
-						<p>&copy; 2020 <a href="/" class="text-light">Fagrimacs Entreprise</a>. All Rights Reserved.</p>
-					</div>
-				</div>
-				<div class="col-lg-6">
-					<div class="footer_social_widget home6">
-						<ul>
-							<li class="list-inline-item"><a href="#"><i class="fa fa-facebook"></i></a></li>
-							<li class="list-inline-item"><a href="#"><i class="fa fa-instagram"></i></a></li>
-						</ul>
-					</div>
-				</div>
-			</div>
+		{% if messages %}
+		{% for message in messages %}
+		<div class="alert alert-{{ message.tags }} alert-dismissible fade show mt-5" role="alert">
+			<button type="button" class="close" data-dismiss="alert" aria-label="Close">
+				<span aria-hidden="true">&times;</span>
+				<span class="sr-only">Close</span>
+			</button>
+			{{ message }}
 		</div>
-	</section>
-<a class="scrollToHome text-thm" href="#"><i class="flaticon-rocket-launch"></i></a>
-</div>
-<!-- Wrapper End -->
+		{% endfor %}
+		{% endif %}
 
-{% include 'scripts.html' %}
-</body>
+
+		{% block content %}
+		{% endblock content %}
+
+
+		{% include 'footer.html' %}
+		
+		{% include 'scripts.html' %}
+    </body>
 </html>
