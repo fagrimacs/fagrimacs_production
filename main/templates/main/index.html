@@ -2,68 +2,60 @@
 {% load static %}
 
 {% block content %}
-	<!-- Home Design -->
-	<section class="home-six parallax ulockd_bgi5" data-stellar-background-ratio="0.3">
+	<!-- Home Start --> 
+	<section class="bg-half-170 d-table w-100 overflow-hidden" id="home">
 		<div class="container">
-			<div class="row home-content">
-				<div class="col-lg-8">
-					<div class="home-text">
-						<h1 class="fz40">Rent-in & Rent-out</h1>
-						<h3 class="color-white" style="font-size:16px">A web platform where farmers can easy rent-out their Tractors & Implement’s which they don’t need and rent-in what they want to use.</h3>
-					</div>
-				</div>
-			</div>
-		</div>
-	</section>
-	<section class="green-strip bgc-deep-green">
-		<div class="container">
-			<div class="row">
-				<div class="col-md-8">
-					<h1>Are you ready to Make Profit?</h1>
-				</div>
-				<div class="col-md-4 text-center">
-					<a class="btn btn-light btn-lg" href="{% url 'accounts:signup' %}">Signup Now!</a>
-				</div>
-			</div>
-		</div>
-	</section>
-
-	<section class="expert-freelancer bgc-fa pb20">
-		<div class="container">
-			<div class="row">
-				<div class="col-lg-12">
-					<div class="ulockd-main-title">
-						<h4>POPULAR EQUIPMENTS</h4>
-						<h3 class="mt0">Quality equipment, ready to go</h3>
-					</div>
-				</div>
-			</div>
-			<div class="row">
-				<div class="col-lg-12">
-					<div class="ef_slider2">
-						{% for category in tractor_categories %}
-						<div class="item">
-							<div class="ef_post home6">
-								<div class="ef_header">
-									<h4 class="hr_rate">{{category.name}}</h4>
-								</div>
-								<a href="{% url 'equipments:tractor-category' category.pk %}">
-									<div class="thumb text-center" style="margin-top: 100px;">
-										<img class="img-fluid" src="{{category.image.url }}" alt="">
-									</div>
-								</a>
-								
-							</div>
+			<div class="row align-items-center">
+				<div class="col-lg-8 col-md-6">
+					<div class="title-heading">
+						<h1 class="heading mb-3 text-light">Make Money with <br>Farm Equipments Rental Platform.</h1>
+						<p class="para-desc text-muted text-light">A web platform where farmers can easy rent-out their Tractors & Implements which they don’t need and rent-in what they want to use from nearby farmers.</p>
+						<div class="mt-4">
+							<a href="{% url 'accounts:signup' %}" class="btn btn-orange btn-lg">Get Started</a>
 						</div>
-						{% endfor %}
 					</div>
-				</div>
-			</div>
-		</div>
+				</div><!--end col-->
+
+				<div class="col-lg-4 col-md-6">
+				</div><!--end col-->
+			</div><!--end row-->
+		</div><!--end container-->
+	</section><!--end section-->
+	<!-- Home End -->
+
+	<!-- Client start -->
+	<section class="py-4 border-top border-bottom position-relative">
+		<div class="container">
+			<div class="row justify-content-center">
+				<div class="col-lg-2 col-md-2 col-4 text-center py-3">
+					<img src="{% static 'main/images/client/1.png' %}" class="avatar avatar-m-md partner-img" alt="">
+				</div><!--end col-->
+
+				<div class="col-lg-2 col-md-2 col-4 text-center py-3">
+					<img src="{% static 'main/images/client/2.png' %}" class="avatar avatar-m-md partner-img" alt="">
+				</div><!--end col-->
+				
+				<div class="col-lg-2 col-md-2 col-4 text-center py-3">
+					<img src="{% static 'main/images/client/3.png' %}" class="avatar avatar-m-md partner-img" alt="">
+				</div><!--end col-->
+				
+				<div class="col-lg-2 col-md-2 col-4 text-center py-3">
+					<img src="{% static 'main/images/client/4.png' %}" class="avatar avatar-m-md partner-img" alt="">
+				</div><!--end col-->
+				
+				<div class="col-lg-2 col-md-2 col-4 text-center py-3">
+					<img src="{% static 'main/images/client/5.png' %}" class="avatar avatar-m-md partner-img" alt="">
+				</div><!--end col-->
+				
+				<div class="col-lg-2 col-md-2 col-4 text-center py-3">
+					<img src="{% static 'main/images/client/6.png' %}" class="avatar avatar-m-md partner-img" alt="">
+				</div><!--end col-->
+			</div><!--end row-->
+		</div><!--end container-->
 	</section>
+	<!-- Client end -->
 
-
-	<section class="popular-job bgc-fa">
+	<section class="popular-job bgc-fa mt-100 mb-60">
 		<div class="container">
 			<div class="row">
 				<div class="col-lg-12">

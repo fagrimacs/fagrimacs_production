@@ -1,1 +1,81 @@
-!function(e){"use strict";e(document).on("ready",function(){e("#respMenu").aceResponsiveMenu({resizeWidth:"768",animationSpeed:"fast",accoridonExpAll:!1})}),e(".tags-bar > span i").on("click",function(){e(this).parent().fadeOut()}),e(function(){e(".btns").on("click",function(){e(".content_details").toggleClass("is-full-width")})}),e(function(){e(".closebtn").on("click",function(){e(".content_details").removeClass("is-full-width")})}),e(window).on("scroll",function(){if(e(".scroll-to-top").length){e(window).scrollTop()>100?e(".scroll-to-top").fadeIn(500):e(this).scrollTop()<=100&&e(".scroll-to-top").fadeOut(500)}if(e(".stricky").length){var t=e(".header-navigation").next().offset().top,i=e(".stricky");e(window).scrollTop()>t?(i.removeClass("slideIn animated"),i.addClass("stricky-fixed slideInDown animated")):e(this).scrollTop()<=t&&(i.removeClass("stricky-fixed slideInDown animated"),i.addClass("slideIn animated"))}}),e(document).on("ready",function(){e(".collapse").on("show.bs.collapse",function(){e(this).siblings(".card-header").addClass("active")}),e(".collapse").on("hide.bs.collapse",function(){e(this).siblings(".card-header").removeClass("active")}),e(function(){e('[data-toggle="tooltip"]').tooltip()})}),e(".circlechart").circlechart(),e(function(){e("nav#menu").mmenu()}),e(function(){e("#slider-range, #slider-range2").slider({range:!0,min:12e3,max:1e5,values:[12e3,7e4],slide:function(t,i){e("#amount, #amount2").val("$"+i.values[0]+" - $"+i.values[1])}}),e("#amount, #amount2").val("$"+e("#slider-range, #slider-range2").slider("values",0)+" - $"+e("#slider-range, #slider-range2").slider("values",1))}),e(document).on("ready",function(){e(".slider-range").slider({range:!0,min:1998,max:2040,values:[1998,2018],slide:function(t,i){e(".amount").val(i.values[0]),e(".amount2").val(i.values[1])}}),e(".amount").change(function(){e(".slider-range").slider("values",0,e(this).val())}),e(".amount2").change(function(){e(".slider-range").slider("values",1,e(this).val())})}),e(".progress-levels .progress-box .bar-fill").length&&e(".progress-box .bar-fill").each(function(){var t=e(this).attr("data-percent");e(this).css("width",t+"%"),e(this).children(".percent").html(t+"%")}),e(".progressbar1").progressBar({shadow:!1,percentage:!1,animation:!0,barColor:"#79b530"}),e(".progressbar2").progressBar({shadow:!1,percentage:!1,animation:!0,barColor:"#79b530"}),e(".progressbar3").progressBar({shadow:!1,percentage:!1,animation:!0,animateTarget:!0,barColor:"#79b530"}),e(".lightbox-image").length&&e(".lightbox-image").fancybox();var t={Android:function(){return navigator.userAgent.match(/Android/i)},BlackBerry:function(){return navigator.userAgent.match(/BlackBerry/i)},iOS:function(){return navigator.userAgent.match(/iPhone|iPad|iPod/i)},Opera:function(){return navigator.userAgent.match(/Opera Mini/i)},Windows:function(){return navigator.userAgent.match(/IEMobile/i)},any:function(){return t.Android()||t.BlackBerry()||t.iOS()||t.Opera()||t.Windows()}};jQuery(document).on("ready",function(){jQuery(window).stellar({horizontalScrolling:!1,hideDistantElements:!0,verticalScrolling:!t.any(),scrollProperty:"scroll",responsive:!0})}),e(".datepicker").length&&e(".datepicker").datetimepicker(),e("#js-main-slider").length&&e("#js-main-slider").pogoSlider({autoplay:!0,autoplayTimeout:5e3,displayProgess:!1,generateNav:!1,preserveTargetSize:!0,targetWidth:1e3,targetHeight:300,responsive:!0}).data("plugin_pogoSlider"),e(".testimonial_slider").length&&e(".testimonial_slider").owlCarousel({loop:!0,margin:15,dots:!0,nav:!1,rtl:!1,autoplayHoverPause:!1,autoplay:!1,singleItem:!0,smartSpeed:1200,navText:['<i class="fa fa-arrow-left"></i>','<i class="fa fa-arrow-right"></i>'],responsive:{0:{items:1,center:!1},480:{items:1,center:!1},600:{items:1,center:!1},767:{items:1},768:{items:2},992:{items:2},1200:{items:2}}}),e(".ef_slider").length&&e(".ef_slider").owlCarousel({loop:!0,margin:30,dots:!0,nav:!1,rtl:!1,autoplayHoverPause:!1,autoplay:!0,singleItem:!0,smartSpeed:1200,navText:['<i class="fa fa-arrow-left"></i>','<i class="fa fa-arrow-right"></i>'],responsive:{0:{items:1,center:!1},480:{items:1,center:!1},600:{items:1,center:!1},768:{items:2},992:{items:3},1200:{items:3}}}),e(".ef_slider2").length&&e(".ef_slider2").owlCarousel({loop:!0,margin:15,dots:!1,nav:!0,rtl:!1,autoplayHoverPause:!1,autoplay:!0,singleItem:!0,smartSpeed:1200,navText:['<i class="flaticon-left-arrow"></i>','<i class="flaticon-right-arrow"></i>'],responsive:{0:{items:1,center:!1},480:{items:1,center:!1},600:{items:1,center:!1},768:{items:2},992:{items:3},1200:{items:3}}}),e(".company_reg_slider").length&&e(".company_reg_slider").owlCarousel({loop:!0,margin:0,dots:!0,nav:!1,rtl:!1,autoplayHoverPause:!1,autoplay:!0,singleItem:!0,smartSpeed:1200,navText:['<i class="flaticon-left-arrow"></i>','<i class="flaticon-right-arrow"></i>'],responsive:{0:{items:1,center:!1},480:{items:1,center:!1},520:{items:1,center:!1},600:{items:1,center:!1},768:{items:2},992:{items:3},1200:{items:4}}}),e(".team_slider").length&&e(".team_slider").owlCarousel({loop:!0,margin:30,dots:!1,nav:!0,rtl:!1,autoplayHoverPause:!1,autoplay:!1,singleItem:!0,smartSpeed:1200,navText:['<i class="flaticon-left-arrow"></i>','<i class="flaticon-right-arrow"></i>'],responsive:{0:{items:1,center:!1},480:{items:1,center:!1},520:{items:2,center:!1},600:{items:2,center:!1},768:{items:2},992:{items:3},1200:{items:4}}}),e(".carrer_tips_slider").length&&e(".carrer_tips_slider").owlCarousel({loop:!0,margin:30,dots:!1,nav:!0,rtl:!1,autoplayHoverPause:!1,autoplay:!0,autoplayTimeout:6e3,singleItem:!0,smartSpeed:2e3,navText:['<i class="flaticon-left-arrow"></i>','<i class="flaticon-right-arrow"></i>'],responsive:{0:{items:1,center:!1},480:{items:1,center:!1},520:{items:1,center:!1},600:{items:1,center:!1},768:{items:2},992:{items:3},1200:{items:3}}}),e(".carrer_tips_slider2").length&&e(".carrer_tips_slider2").owlCarousel({loop:!0,margin:15,dots:!0,nav:!1,rtl:!1,autoplayHoverPause:!1,autoplay:!0,singleItem:!0,smartSpeed:1200,navText:['<i class="flaticon-left-arrow"></i>','<i class="flaticon-right-arrow"></i>'],responsive:{0:{items:1,center:!1},480:{items:1,center:!1},520:{items:1,center:!1},600:{items:1,center:!1},768:{items:2},992:{items:3},1200:{items:3}}}),e(".testimonial_slider_home3").length&&e(".testimonial_slider_home3").owlCarousel({animateIn:"fadeIn",loop:!0,margin:15,dots:!0,nav:!0,rtl:!1,autoplayHoverPause:!1,autoplay:!0,smartSpeed:2e3,singleItem:!0,navText:['<i class="flaticon-left-arrow"></i>','<i class="flaticon-right-arrow"></i>'],responsive:{320:{items:1,center:!1},480:{items:1,center:!1},600:{items:1,center:!1},768:{items:1},992:{items:1},1200:{items:1}}}),e(".main-slider-home5").length&&e(".main-slider-home5").owlCarousel({animateIn:"fadeIn",loop:!0,margin:0,dots:!1,nav:!0,rtl:!1,autoplayHoverPause:!1,autoplay:!1,autoHeight:!0,smartSpeed:2e3,navText:['<i class="flaticon-left-arrow"></i>','<i class="flaticon-right-arrow"></i>'],responsive:{0:{items:1,center:!1},480:{items:1,center:!1},600:{items:1,center:!1},768:{items:1},992:{items:1},1200:{items:1}}}),e(document).on("ready",function(){!function(){e(".navbar-scrolltofixed").scrollToFixed();var t=e(".summary");t.each(function(i){var a=e(t[i]),r=t[i+1];a.scrollToFixed({marginTop:e(".navbar-scrolltofixed").outerHeight(!0)+10,limit:function(){return r?e(r).offset().top-e(this).outerHeight(!0)-10:e(".footer").offset().top-e(this).outerHeight(!0)-10},zIndex:999})})}(),e(window).scroll(function(){e(this).scrollTop()>600?e(".scrollToHome").fadeIn():e(".scrollToHome").fadeOut()}),e(".scrollToHome").on("click",function(){return e("html, body").animate({scrollTop:0},800),!1}),new WOW({animateClass:"animated",mobile:!0,offset:0}).init(),e.fn.extend({toggleText:function(e,t){return this.text(this.text()==t?e:t)}}),e(".showFilter").length&&e(".showFilter").on("click",function(){e(this).toggleText("Show Filter","Hide Filter"),e(this).toggleClass("flaticon-close flaticon-filter-1 sidebarOpended sidebarClosed"),e(".job_list_three.sidenav").toggleClass("opened"),e("body").toggleClass("translated")})}),e(window).on("load",function(){e("div.timer").counterUp({delay:5,time:2e3}),e(".preloader").length&&e(".preloader").delay(200).fadeOut(300),e(".preloader_disabler").on("click",function(){e("#preloader").hide()})}),e(window).on("scroll",function(){})}(window.jQuery);
+//jQuery time
+var current_fs, next_fs, previous_fs; //fieldsets
+var left, opacity, scale; //fieldset properties which we will animate
+var animating; //flag to prevent quick multi-click glitches
+
+$(".next").click(function(){
+	if(animating) return false;
+	animating = true;
+
+	current_fs = $(this).parent();
+	next_fs = $(this).parent().next();
+
+	//activate next step on progressbar using the index of next_fs
+	$("#progressbar li").eq($("fieldset").index(next_fs)).addClass("active");
+
+	//show the next fieldset
+	next_fs.show();
+	//hide the current fieldset with style
+	current_fs.animate({opacity: 0}, {
+		step: function(now, mx) {
+			//as the opacity of current_fs reduces to 0 - stored in "now"
+			//1. scale current_fs down to 80%
+			scale = 1 - (1 - now) * 0.2;
+			//2. bring next_fs from the right(50%)
+			left = (now * 50)+"%";
+			//3. increase opacity of next_fs to 1 as it moves in
+			opacity = 1 - now;
+			current_fs.css({
+        'transform': 'scale('+scale+')',
+        'position': 'absolute'
+      });
+			next_fs.css({'left': left, 'opacity': opacity});
+		},
+		duration: 800,
+		complete: function(){
+			current_fs.hide();
+			animating = false;
+		},
+		//this comes from the custom easing plugin
+		easing: 'easeInOutBack'
+	});
+});
+
+$(".previous").click(function(){
+	if(animating) return false;
+	animating = true;
+
+	current_fs = $(this).parent();
+	previous_fs = $(this).parent().prev();
+
+	//de-activate current step on progressbar
+	$("#progressbar li").eq($("fieldset").index(current_fs)).removeClass("active");
+
+	//show the previous fieldset
+	previous_fs.show();
+	//hide the current fieldset with style
+	current_fs.animate({opacity: 0}, {
+		step: function(now, mx) {
+			//as the opacity of current_fs reduces to 0 - stored in "now"
+			//1. scale previous_fs from 80% to 100%
+			scale = 0.8 + (1 - now) * 0.2;
+			//2. take current_fs to the right(50%) - from 0%
+			left = ((1-now) * 50)+"%";
+			//3. increase opacity of previous_fs to 1 as it moves in
+			opacity = 1 - now;
+			current_fs.css({'left': left});
+			previous_fs.css({'transform': 'scale('+scale+')', 'opacity': opacity});
+		},
+		duration: 800,
+		complete: function(){
+			current_fs.hide();
+			animating = false;
+		},
+		//this comes from the custom easing plugin
+		easing: 'easeInOutBack'
+	});
+});
+
+$(".submit").click(function(){
+	return false;
+})

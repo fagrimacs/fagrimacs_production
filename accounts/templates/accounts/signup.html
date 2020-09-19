@@ -1,23 +1,89 @@
-{% extends 'base.html' %}
+{% load static %}
 {% load crispy_forms_tags %}
+<!DOCTYPE html>
+    <html lang="en">
+    <head>
+        <meta charset="utf-8" />
+        <title>Signup - Fagrimacs</title>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <meta name="description" content="A web platform where farmers can easy rent-out their Tractors & Implements which they don’t need and rent-in what they want to use from nearby farmers" />
+        <meta name="keywords" content="fagrimacs signup" />
+        <meta content="Fagrimacs" name="author" />
+        <!-- favicon -->
+        <link rel="shortcut icon" href="{% static 'main/images/favicon.ico' %}">
+        <!-- Bootstrap css -->
+        <link href="{% static 'main/css/bootstrap.min.css' %}" rel="stylesheet" type="text/css" />
+        <!-- Icons -->
+        <link href="{% static 'main/css/materialdesignicons.min.css' %}" rel="stylesheet" type="text/css" />
+        <!-- Main Css -->
+        <link href="{% static 'main/css/style.css' %}" rel="stylesheet" type="text/css" />
+    </head>
 
-{% block content %}
-<div class="signup-area mt60">
-  <div class="container">
-    <div class="row">
-      <div class="col-md-6 offset-md-3 form">
-        <h2 class="text-center pt-5">Create Account</h2>
-        <form method="post" class="pt-2" autocomplete="off" novalidate>
-          {% csrf_token %}
-          {{ form | crispy }}
-          <p>By continuing, you agree to Fagrimacs' <a href="" target="_blank">Terms & Conditions</a></p>
-          <button type="submit" name="submit" class="btn btn-success mt-3 btn-lg">Register</button>
-        </form>
-        <div class="pt-3 pb-3">
-          <p>Already on Fagrimacs? <a href="{% url 'accounts:login' %}">Login</a></p>
+    <body>
+        <!-- Loader Start -->
+        <div id="preloader">
+            <div id="status">
+                <div class="sk-chase mt-4">
+                    <div class="sk-chase-dot"></div>
+                    <div class="sk-chase-dot"></div>
+                    <div class="sk-chase-dot"></div>
+                    <div class="sk-chase-dot"></div>
+                    <div class="sk-chase-dot"></div>
+                    <div class="sk-chase-dot"></div>
+                </div>
+            </div>
         </div>
-      </div>
-    </div>
-  </div>
-</div>
-{% endblock %}
+        <!-- Loader End -->
+        
+        <!-- Back to home Start -->
+        <div class="back-to-home rounded d-none d-sm-block">
+            <a href="/" class="text-white rounded d-inline-block text-center"><span class="fa fa-home"></span></a>
+        </div>
+        <!-- Back to home End -->
+
+        <!-- Hero Start -->
+        <section class="user-pages d-flex align-items-center">
+            <div class="bg-green"></div>
+            <div class="container">
+                <div class="row justify-content-center">
+                    <div class="col-lg-5 col-md-8">
+                        <div class="login-page bg-white shadow-lg rounded p-4 mt-4 position-relative">
+                            <div class="text-center">
+                                <h5 class="mb-4 pb-2">Create Account</h5>  
+                            </div>
+                            <form class="login-form" method="POST" autocomplete="off">
+                                {% csrf_token %}
+                                <div class="row">
+                                    <div class="col-12">
+                                        <div class="form-group position-relative">
+                                            {{form|crispy}}
+                                        </div>
+                                    </div><!--end col-->
+
+                                    <div class="col-12 mb-0">
+                                        <button class="btn btn-orange w-100">Sign Up</button>
+                                    </div><!--end col-->
+
+                                    <div class="col-12 text-center">
+                                        <p class="mb-0 mt-3"><small class="text-dark mr-2">Don't have an account ?</small> <a href="{% url 'accounts:login' %}" class="text-dark font-weight-bold">Login</a></p>
+                                    </div><!--end col-->
+                                </div><!--end row-->
+                            </form><!--end form-->
+                        </div><!--end login-->
+                    </div>
+                </div><!--end row-->
+            </div> <!--end container-->
+        </section><!--end section-->
+        <!-- Hero End -->
+
+        <!-- Javascript -->
+        <script src="{% static 'main/js/jquery-3.5.1.min.js' %}"></script>
+        <script src="{% static 'main/js/bootstrap.bundle.min.js' %}"></script>
+        <!-- Feather icon -->
+        <script src="{% static 'main/js/feather.min.js' 5}"></script>
+        <script src="https://unicons.iconscout.com/release/v2.1.9/script/monochrome/bundle.js"/></script>
+        <!-- Main Js -->
+        <script src="{% static 'main/js/app.js' %}"></script>
+    </body>
+
+</html>
