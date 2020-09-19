@@ -2,14 +2,16 @@ from django.conf import settings
 from django.contrib.auth.views import LoginView
 from django.core.mail import EmailMessage
 from django.shortcuts import render, reverse
+from django.urls import reverse_lazy
 from django.template.loader import get_template
 from django.utils.encoding import force_bytes, force_text
 from django.utils.http import urlsafe_base64_decode, urlsafe_base64_encode
-from django.views.generic import TemplateView
+from django.views.generic import TemplateView, DetailView, UpdateView
 from django.contrib.auth import get_user_model
 from django.contrib.auth.mixins import LoginRequiredMixin
+from django.contrib.messages.views import SuccessMessageMixin
 
-from accounts.forms import SignUpForm
+from accounts.forms import SignUpForm, UserProfileForm
 from accounts.tokens import account_activation_token
 from accounts.models import UserProfile
 
@@ -90,5 +92,14 @@ class ConfirmRegistrationView(TemplateView):
         return render(request, 'accounts/registration_complete.html', context)
 
 
-class UserProfileView(LoginRequiredMixin, TemplateView):
+class UserProfileView(LoginRequiredMixin, DetailView):
     template_name = 'accounts/profile.html'
+    model = UserProfile
+
+
+class UserProfileUpdateView(LoginRequiredMixin,
+                            SuccessMessageMixin, UpdateView):
+    model = UserProfile
+    form_class = UserProfileForm
+    success_url = reverse_lazy('accounts:user-profile')
+    success_message = 'Profile update successful.'

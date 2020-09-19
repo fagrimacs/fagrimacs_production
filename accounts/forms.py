@@ -3,6 +3,8 @@ from django.contrib.auth.forms import ReadOnlyPasswordHashField
 from django.db import transaction
 from django.contrib.auth import get_user_model
 
+from accounts.models import UserProfile
+
 User = get_user_model()
 
 
@@ -61,3 +63,9 @@ class UserUpdateForm(forms.ModelForm):
     class Meta:
         model = User
         fields = ['name', 'email', ]
+
+
+class UserProfileForm(forms.ModelForm):
+    class Meta:
+        model = UserProfile
+        exclude = ['user', 'slug', ]

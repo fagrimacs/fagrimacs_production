@@ -89,4 +89,4 @@ admin.site.unregister(Group)
 
 @admin.register(UserProfile)
 class UserProfileAdmin(admin.ModelAdmin):
-    pass
+    readonly_fields = ('user', 'slug', )

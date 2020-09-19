@@ -1,5 +1,8 @@
+from uuid import uuid4
+
 from django.contrib.auth.models import AbstractBaseUser, BaseUserManager
 from django.db import models
+from django.utils.text import slugify
 
 
 class UserManager(BaseUserManager):
@@ -77,6 +80,7 @@ class UserProfile(models.Model):
     """
     user = models.OneToOneField(
         User, on_delete=models.CASCADE, primary_key=True)
+    slug = models.SlugField()
     profile_pic = models.ImageField(
         verbose_name='Profile Picture',
         default='profile_pics/user.png',
@@ -87,4 +91,9 @@ class UserProfile(models.Model):
         verbose_name = 'Profile'
 
     def __str__(self):
-        return f'{self.user.name} Profile'
+        return f'{self.user.name.title} Profile'
+
+    def save(self, *args, **kwargs):
+        if not self.slug:
+            self.slug = slugify(self.user.name)
+        return super().save(*args, **kwargs)
