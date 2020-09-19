@@ -11,6 +11,7 @@ from django.contrib.auth.mixins import LoginRequiredMixin
 
 from accounts.forms import SignUpForm
 from accounts.tokens import account_activation_token
+from accounts.models import UserProfile
 
 User = get_user_model()
 
@@ -82,6 +83,7 @@ class ConfirmRegistrationView(TemplateView):
 
         if user and account_activation_token.check_token(user, token):
             user.is_active = True
+            UserProfile.objects.create(user=user)
             user.save()
             context['message'] = 'Registration complete. Please login'
 

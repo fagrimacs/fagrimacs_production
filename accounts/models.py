@@ -73,7 +73,7 @@ def profile_pic_filename(instance, filename):
 class UserProfile(models.Model):
     """
     Profile of the user to be created when user complete
-    account activation using signal.
+    account activation.
     """
     user = models.OneToOneField(
         User, on_delete=models.CASCADE, primary_key=True)
