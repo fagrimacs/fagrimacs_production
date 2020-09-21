@@ -11,7 +11,7 @@ from .models import (Tractor, Implement, ImplementSubCategory,
                      TractorCategory, ImplementCategory)
 
 
-class TractorView(LoginRequiredMixin, UserPassesTestMixin, FormView):
+class AddTractorView(LoginRequiredMixin, FormView):
     form_class = TractorForm
     template_name = 'equipments/tractor_form.html'
     success_url = reverse_lazy('equipments:tractors')
@@ -31,9 +31,6 @@ class TractorView(LoginRequiredMixin, UserPassesTestMixin, FormView):
             else:
                 return self.form_invalid(form)
 
-    def test_func(self):
-        if self.request.user.role == 'owner':
-            return True
 
 
 class ImplementView(LoginRequiredMixin, UserPassesTestMixin, CreateView):
