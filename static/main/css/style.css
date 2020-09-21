@@ -37,7 +37,7 @@ p {
 }
 
 .section-two {
-  padding: 60px 0;
+  padding: 40px 0;
   position: relative;
 }
 
@@ -2431,4 +2431,20 @@ footer .footer-text {
   height:50px;
   width:50px
 }
+/* mobile */
+@media only screen and (max-width: 480px) {
+  .how-it-work .desktop-img{
+    display: none;
+  }
+  .how-it-work .mobile-img{
+    margin-left: 25px;
+  }
+}
+/* Dekstop */
+@media only screen and (min-width: 481px) {
+  .how-it-work .mobile-img{
+    display: none;
+  }
+}
+
 /*# sourceMappingURL=style.css.map */
