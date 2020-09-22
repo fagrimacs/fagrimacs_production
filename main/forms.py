@@ -30,7 +30,7 @@ class ContactForm(forms.Form):
         send_mail(
             'Mail from the site',
             message,
-            'webmail@fagrimacs.com',
-            ['customerservices@fagrimacs.com'],
+            'noreply@fagrimacs.com',
+            ['info@fagrimacs.com'],
             fail_silently=False,
         )
