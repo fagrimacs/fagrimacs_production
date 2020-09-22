@@ -204,7 +204,3 @@ class Equipment(models.Model):
 
     def __str__(self):
         return self.name
-
-
-class Phone(models.Model):
-    phone = models.CharField(max_length=18)
