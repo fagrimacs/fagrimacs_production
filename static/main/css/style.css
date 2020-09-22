@@ -2100,6 +2100,18 @@ button:not(:disabled) {
   background-position: center center;
 }
 
+.bg-about {
+  padding: 170px 0;
+  background-image: url(../images/about.jpg);
+  background-size: cover;
+  -ms-flex-item-align: center;
+      -ms-grid-row-align: center;
+      align-self: center;
+  position: relative;
+  background-position: center center;
+  z-index: -9;
+}
+
 .bg-half {
   padding: 184px 0 110px;
   background-size: cover;
@@ -2436,9 +2448,9 @@ footer .footer-text {
   .how-it-work .desktop-img{
     display: none;
   }
-  .how-it-work .mobile-img{
-    margin-left: 25px;
-  }
+  /* .how-it-work .mobile-img{
+    margin-left: 10px;
+  } */
 }
 /* Dekstop */
 @media only screen and (min-width: 481px) {
@@ -2497,5 +2509,42 @@ footer .footer-text {
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
+}
+.what-we-do{
+  background-color: rgb(1, 146, 1);
+}
+.what-we-do .box{
+  margin-top: 60px;
+}
+.what-we-do li{
+  font-size: 20px;
+}
+.our-presence{
+  background-color: rgb(209, 236, 209);
+}
+
+#team .card {
+  border: none;
+  background: #ffffff;
+}
+
+.frontside {
+  position: relative;
+  z-index: 2;
+  margin-bottom: 30px;
+}
+
+.frontside .card {
+  min-height: 312px;
+}
+
+.frontside .card .card-title{
+  color: #007b5e !important;
+}
+
+.frontside .card .card-body img {
+  width: 120px;
+  height: 120px;
+  border-radius: 50%;
 }
 /*# sourceMappingURL=style.css.map */
