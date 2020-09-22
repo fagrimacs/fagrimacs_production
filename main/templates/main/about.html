@@ -1,7 +1,104 @@
 {% extends 'base.html' %}
+{% load static %}
 
 {% block content %}
-<div class="container mt-5 pt-5">
-    <h1>About Us</h1>
-</div>
+    <section class="bg-about d-table w-100 overflow-hidden">
+    </section>
+
+    <section class="about-us">
+        <div class="container"  style="margin-top: -50px; z-index: 2; background-color: white;">
+            <div class="row">
+                <div class="col-12 pt-3 pb-5">
+                    <h2>About us</h2>
+                    <p>Fagrimacs is a digital platform enable farmers to easy rent-out and rent-in their tractor and farming equipment from nearby farmer. The platform ensures fast and easily availability of tractor or implements and on-time farming solution such as soil cultivation, planting, fertilizing & pest control, Drainage & Irrigation, loading, harvesting & post-harvesting and Hay making.</p>
+                    <p>A majority of farmers are unable to reach out to the tractor services or operators as few existing mechanization centers cannot easily reached by farmers, compromise on quality of tractor or implements and often disappointment. The tractor owners incur losses due to high cost of implement, high fuel cost, small size of farm holdings, high repair and maintenance cost, the equipment remain idle depending on cultivation cycle. That’s where Fagrimacs comes into the picture.</p>
+                    <p>Coupled with this is the need to achieve efficient utilization rates of agricultural machinery as well the timeliness of performing field operations. In fact, timely availability of machinery equipment is essential for successful and sustainable agricultural mechanization.</p>
+                    <p><em>“Our goal is to send the hand hoe to the museum and liberate the African farmer from the backbreaking drudgery of tilling the land by hand.”</em><br>-Dr. Nkosazana Dlamini Zuma, Chairperson – African Union Commission (2012 – 2017)
+                        </p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="overflow-hidden">
+        <div class="container-fluid">
+            <div class="row"  style="min-height: 100vh;">
+                <div class="col-lg-6 what-we-do">
+                    <div class="col-12 box">
+                        <div class="pt-5 pb-5">
+                            <h3 class="text-light">What we do?</h3>
+                            <ul class="list-unstyled text-light">
+                                <li class="mt-4">Provide pay-per-use farm mechanization solutions to farmers & corporates.</li>
+                                <li class="mt-4">Tractors, implements or self-propelled equipment on rent.</li>
+                                <li class="mt-4">Hire experts on part-time, contract, remote or fulltime basis.</li>
+                            </ul>
+                        </div>
+
+                    </div>
+                </div>
+                <div class="col-lg-6 our-presence">
+                    <div class="col-12">
+                        <img class="img-fluid" src="{% static 'main/images/morogoro.png' %}" alt="morogoro">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Team -->
+    <section id="team" class="section-two overflow-hiden">
+        <div class="container">
+            <div class="text-center mb-4">
+                <h2>Our Team</h2>
+            </div>
+            <div class="row">
+                <!-- Team member -->
+                <div class="col-xs-12 col-sm-6 col-md-4">
+                    <div class="frontside">
+                        <div class="card">
+                            <div class="card-body text-center">
+                                <p><img class=" img-fluid" src="{% static 'main/images/medson.png' %}" alt="card image"></p>
+                                <h5 class="card-title">Medson naftali</h5>
+                                <p class="text-muted">CEO & Founder</p>
+                                <p class="card-text">Holder of Bsc. Of Agricultural Engineering from Sokoine University of Agriculture.</p>
+                                <a href="https://www.linkedin.com/in/eng-medson-naftali-7586b9121/" target="_blank" class="btn btn-primary btn-md"><i class="fa fa-linkedin"></i> linkedin</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!-- ./Team member -->
+                <!-- Team member -->
+                <div class="col-xs-12 col-sm-6 col-md-4">
+                    <div class="frontside">
+                        <div class="card">
+                            <div class="card-body text-center">
+                                <p><img class=" img-fluid" src="{% static 'main/images/inno.jpg' %}" alt="card image"></p>
+                                <h5 class="card-title">Innocent Zenda</h5>
+                                <p class="text-muted">Chief Technical Officer</p>
+                                <p class="card-text">Holder of Bsc. Of Agricultural Engineering from Sokoine University of Agriculture.</p>
+                                <a href="https://www.linkedin.com/in/zendainnocent/" target="_blank" class="btn btn-primary btn-md"><i class="fa fa-linkedin"></i> linkedin</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!-- ./Team member -->
+                <!-- Team member -->
+                <div class="col-xs-12 col-sm-6 col-md-4">
+                    <div class="frontside">
+                        <div class="card">
+                            <div class="card-body text-center">
+                                <p><img class=" img-fluid" src="{% static 'main/images/gasto.jpg' %}" alt="card image"></p>
+                                <h5 class="card-title">Gasto Mgoya</h5>
+                                <p class="text-muted">Sales Manager</p>
+                                <p class="card-text">Holder of Bsc. Of Agricultural Engineering from Sokoine University of Agriculture.</p>
+                                <a href="https://www.linkedin.com/in/gasto-mgoya-9a516a155/" target="_blank" class="btn btn-primary btn-md"><i class="fa fa-linkedin"></i> linkedin</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!-- ./Team member -->
+            </div>
+        </div>
+    </section>
+    <!-- Team -->
 {% endblock content %}
