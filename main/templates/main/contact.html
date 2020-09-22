@@ -1,13 +1,114 @@
 {% extends 'base.html' %}
 {% load crispy_forms_tags %}
+{% load static %}
 
 {% block content %}
-    <div class="container pt-5 mt-5">
-        <h1>Contact Us</h1>
-        <form method="POST" class="py-4">
-            {% csrf_token %}
-            {{ form | crispy }}
-            <button class="btn btn-primary">Send Message</button>
-        </form>
-    </div>
+    <!-- Hero Start -->
+    <section class="bg-contact d-table w-100">
+        <div class="container">
+            <div class="row justify-content-center">
+                <div class="col-lg-12 text-center">
+                    <div class="title-heading text-white">
+                        <h4>Get In Touch !</h4>
+                        <p class="para-desc mx-auto mt-3 mb-0 text-white">Hello, Contact now it's free.</p> 
+                        <nav aria-label="breadcrumb" class="d-inline-block mt-4">
+                            <ul class="breadcrumb mb-0">
+                                <li class="breadcrumb-item"><a class="text-light" href="/">Fagrimacs</a></li>
+                                <li class="breadcrumb-item active text-light" aria-current="page">Contact Us</li>
+                            </ul>
+                        </nav>
+                    </div>
+                </div><!--end col-->
+                <div class="home-shape-arrow">
+                    <a href="#contact" class="scroll-down"><i class="mdi mdi-arrow-down arrow-icon bg-light text-dark h5"></i></a>
+                </div>
+            </div><!--end row-->
+        </div> <!--end container-->
+    </section><!--end section-->
+    <!-- Hero End -->
+
+    <!-- About Start -->
+    <section class="section pb-0" id="contact">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-4 col-md-6 col-12">
+                    <div class="contact-detail d-flex align-items-center">
+                        <div class="contact-icon rounded-circle bg-orange text-center">
+                            <i data-feather="phone" class="fea icon-md-md text-white"></i>
+                        </div>
+                        <div class="content ml-3">
+                            <h5 class="title">Phone Number</h5>
+                            <a href="tel:+255-754-044-385" class="text-green">+255 754 044 385</a>
+                        </div>
+                    </div>
+                </div><!--end col-->
+
+                <div class="col-lg-4 col-md-6 col-12 mt-4 mt-sm-0 pt-2 pt-sm-0">
+                    <div class="contact-detail d-flex align-items-center">
+                        <div class="contact-icon rounded-circle bg-orange text-center">
+                            <i data-feather="mail" class="fea icon-md-md text-white"></i>
+                        </div>
+                        <div class="content ml-3">
+                            <h5 class="title">Email Address</h5>
+                            <a href="mailto:sales@fagrimacs.com" class="text-green">sales@fagrimacs.com</a>
+                        </div>
+                    </div>
+                </div><!--end col-->
+
+                <div class="col-lg-4 col-md-6 col-12 mt-4 mt-lg-0 pt-2 pt-lg-0">
+                    <div class="contact-detail d-flex align-items-center">
+                        <div class="contact-icon rounded-circle bg-orange text-center">
+                            <i data-feather="map-pin" class="fea icon-md-md text-white"></i>
+                        </div>
+                        <div class="content ml-3">
+                            <h5 class="title">Map</h5>
+                            <a href="https://www.google.com/maps/embed?pb=!1m14!1m8!1m3!1d15845.985193429304!2d37.6642772!3d-6.8309395!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x8ec817d11a11b50!2sTechnology%20homesite%20ltd!5e0!3m2!1sen!2stz!4v1600781143353!5m2!1sen!2stz" class="video-play-icon text-primary">View on Google map</a>
+                        </div>
+                    </div>
+                </div><!--end col-->
+            </div><!--end row-->
+
+            <div class="row align-items-center">
+                <div class="col-md-6 order-md-1 order-2 mt-md-5 mt-4 pt-2">
+                    <div class="mr-lg-5">
+                        <img src="{% static 'main/images/svg/revenue-graph-colour.svg' %}" class="img-fluid" alt="">
+                    </div>
+                </div><!--end col-->
+
+                <div class="col-md-6 order-md-2 order-1 mt-md-5 mt-4 pt-2">
+                    <div class="custom-form rounded shadow p-4">
+                        <div id="message"></div>
+                        <form method="POST" id="contact-form" novalidate>
+                            {% csrf_token %}
+                            <div class="row">
+                                <div class="col-md-12">
+                                    <div class="form-group">
+                                       {{ form | crispy }}
+                                    </div>
+                                </div><!--end col-->
+                            </div><!--end row-->
+                            <div class="row">
+                                <div class="col-sm-12 text-center">
+                                    <input type="submit" id="submit" name="send" class="submitBnt btn btn-green btn-block" value="Send Message">
+                                    <div id="simple-msg"></div>
+                                </div><!--end col-->
+                            </div><!--end row-->
+                        </form><!--end form--> 
+                    </div><!--end custom-form-->
+                </div><!--end col-->
+            </div><!--end row-->
+        </div><!--end container-->
+
+        <div class="container-fluid px-0 mt-100 mt-60">
+            <div class="row">
+                <div class="col-12">
+                    <div class="map">
+                        <iframe src="https://www.google.com/maps/embed?pb=!1m14!1m8!1m3!1d15845.985193429304!2d37.6642772!3d-6.8309395!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x8ec817d11a11b50!2sTechnology%20homesite%20ltd!5e0!3m2!1sen!2stz!4v1600781143353!5m2!1sen!2stz" style="border:0" class="rounded" allowfullscreen></iframe>
+                    </div>
+                </div><!--end col-->
+            </div><!--end row-->
+        </div><!--end container-->
+    </section><!--end section-->
+    <!-- About End -->
+
 {% endblock content %}
