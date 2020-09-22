@@ -1,68 +1,116 @@
 {% load static %}
 {% load crispy_forms_tags %}
 <!DOCTYPE html>
-<html lang="zxx">
-<head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="keywords" content="">
-    <meta name="description" content="">
+    <html lang="en">
 
-    <title>Fagrimacs - Login</title>
+    <head>
+        <meta charset="utf-8" />
+        <title>Login - Fagrimacs</title>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <meta name="description" content="A web platform where farmers can easy rent-out their Tractors & Implements which they don’t need and rent-in what they want to use from nearby farmers" />
+        <meta name="keywords" content="fagrimacs login" />
+        <meta content="Fagrimacs" name="author" />
+        <!-- favicon -->
+        <link rel="shortcut icon" href="{% static 'main/images/favicon.ico' %}">
+        <!-- Bootstrap css -->
+        <link href="{% static 'main/css/bootstrap.min.css' %}" rel="stylesheet" type="text/css" />
+        <!-- Icons -->
+        <link href="{% static 'main/css/materialdesignicons.min.css' %}" rel="stylesheet" type="text/css" />
+        <!-- Main Css -->
+        <link href="{% static 'main/css/style.css' %}" rel="stylesheet" type="text/css" />
+    </head>
 
-    <!-- Loading Bootstrap -->
-    <link href="{% static 'main/css/bootstrap.min.css' %}" rel="stylesheet">
+    <body>
+        <!-- Loader Start -->
+        <div id="preloader">
+            <div id="status">
+                <div class="sk-chase mt-4">
+                    <div class="sk-chase-dot"></div>
+                    <div class="sk-chase-dot"></div>
+                    <div class="sk-chase-dot"></div>
+                    <div class="sk-chase-dot"></div>
+                    <div class="sk-chase-dot"></div>
+                    <div class="sk-chase-dot"></div>
+                </div>
+            </div>
+        </div>
+        <!-- Loader End -->
+        
+        <!-- Back to home Start -->
+        <div class="back-to-home rounded d-none d-sm-block">
+            <a href="/" class="text-white rounded d-inline-block text-center"><span class="fa fa-home"></span></a>
+        </div>
+        <!-- Back to home End -->
 
-    <!-- Loading Template CSS -->
-    <link href="{% static 'main/css/custom.css' %}" rel="stylesheet">
-    <link href="{% static 'main/css/animate.css' %}" rel="stylesheet">
-    <link rel="stylesheet" href="{% static 'main/css/pe-icon-7-stroke.css' %}">
-    <link href="{% static 'main/css/style-magnific-popup.css' %}" rel="stylesheet">
+        <!-- Hero Start -->
+        <section class="user-pages d-flex align-items-center">
+            <div class="container">
+                <div class="row justify-content-center">
+                    <div class="col-lg-5 col-md-8">
+                        <div class="login-page bg-white shadow-lg rounded p-4 mt-4 position-relative">
+                            <div class="text-center">
+                                <h5 class="mb-4 pb-2">Sign In</h5>  
+                            </div>
+                            <form class="login-form" method="POST" autocomplete="off">
+                                {% csrf_token %}
+                                <div class="row">
+                                    <div class="col-12">
+                                        <div class="form-group position-relative">
+                                            {{form|crispy}}
+                                        </div>
+                                    </div><!--end col-->
 
-    <!-- Awsome Fonts -->
-    <link rel="stylesheet" href="{% static 'main/css/all.min.css' %}">
+                                    <div class="col-12">
+                                        <div class="d-flex justify-content-between">
+                                            <div class="form-group d-inline-block">
+                                                <div class="custom-control custom-checkbox">
+                                                    <input type="checkbox" class="custom-control-input" id="customCheck1">
+                                                    <label class="custom-control-label" for="customCheck1">Remember me</label>
+                                                </div>
+                                            </div>
+                                            <p class="forgot-pass mb-0"><a href="" class="text-dark font-weight-bold">Forgot password ?</a></p>
+                                        </div>
+                                    </div><!--end col-->
 
-    <!-- Fonts -->
-    <link href="https://fonts.googleapis.com/css?family=Open+Sans:400,400i&display=swap" rel="stylesheet">
-    <link href="https://fonts.googleapis.com/css?family=Roboto:400,500&display=swap" rel="stylesheet">
+                                    <div class="col-12 mb-0">
+                                        <button class="btn btn-orange w-100">Sign in</button>
+                                    </div><!--end col-->
 
-    <!-- Font Favicon -->
-    <link rel="shortcut icon" href="{% static 'main/images/favicon.ico' %}">
+                                    <div class="col-12 mt-4 text-center">
+                                        <h6 class="mb-0">Or Login With</h6>
+                                    </div><!--end col-->
 
-</head>
-<body>
-<div class="main-login">
-	<div class="login-form">
-		<form method="post" autocomplete="off" novalidate>{% csrf_token %}
-			<div class="heading">
-				<h2 class="text-center">Login</h2>
-				<p class="text-center">Don't have an account? <a href="{% url 'accounts:signup' %}">Sign Up!</a></p>
-			</div>
-			<div class="form-group">
-				{{ form | crispy }}
-			</div>
-			<div class="form-group form-check">
-				<input type="checkbox" class="form-check-input" id="exampleCheck1">
-				<label class="form-check-label" for="exampleCheck1">
-                    Remember me
-                </label>
-				<a class="tdu text-thm float-right" href="">Forgot Password?</a>
-			</div>
-			<button type="submit" class="btn btn-lg btn-block btn-dark">Login</button>
-			<p class="text-center pt-3"><a href="/">Back to Home</a></p>
-		</form>
-	</div>
-</div>
+                                    <div class="col-12">
+                                        <div class="row">
+                                            <div class="col-sm-6 mt-4">
+                                                <a href="#" class="btn btn-block btn-light"><i class="mdi mdi-linkedin text-primary"></i> Linkedin</a>
+                                            </div>
+                                            <div class="col-sm-6 mt-4">
+                                                <a href="#" class="btn btn-block btn-light"><i class="mdi mdi-google text-danger"></i> Google</a>
+                                            </div>
+                                        </div>
+                                    </div><!--end col-->
 
-<!-- Load JS here for greater good -->
-<script src="{% static 'main/js/jquery-3.3.1.min.js' %}"></script>
-<script src="{% static 'main/js/bootstrap.min.js' %}"></script>
-<script src="{% static 'main/js/jquery.scrollTo-min.js' %}"></script>
-<script src="{% static 'main/js/jquery.magnific-popup.min.js' %}"></script>
-<script src="{% static 'main/js/jquery.nav.js' %}"></script>
-<script src="{% static 'main/js/wow.js' %}"></script>
-<script src="{% static 'main/js/plugins.js' %}"></script>
-<script src="{% static 'main/js/custom.js' %}"></script>
+                                    <div class="col-12 text-center">
+                                        <p class="mb-0 mt-3"><small class="text-dark mr-2">Don't have an account ?</small> <a href="{% url 'accounts:login' %}" class="text-dark font-weight-bold">Login</a></p>
+                                    </div><!--end col-->
+                                </div><!--end row-->
+                            </form><!--end form-->
+                        </div><!--end login-->
+                    </div>
+                </div><!--end row-->
+            </div> <!--end container-->
+        </section><!--end section-->
+        <!-- Hero End -->
 
-</body>
+        <!-- Javascript -->
+        <script src="{% static 'main/js/jquery-3.5.1.min.js' %}"></script>
+        <script src="{% static 'main/js/bootstrap.bundle.min.js' %}"></script>
+        <!-- Feather icon -->
+        <script src="{% static 'main/js/feather.min.js' 5}"></script>
+        <script src="https://unicons.iconscout.com/release/v2.1.9/script/monochrome/bundle.js"/></script>
+        <!-- Main Js -->
+        <script src="{% static 'main/js/app.js' %}"></script>
+    </body>
+
 </html>

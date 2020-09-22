@@ -1,0 +1,4 @@
+/*Hide all except first fieldset*/
+.login-form fieldset:not(:first-of-type) {
+    display: none;
+}
