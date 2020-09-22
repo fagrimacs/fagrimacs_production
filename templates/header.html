@@ -8,7 +8,7 @@
             <a class="logo" href="/">
                 <img src="{% static 'main/images/logo.png' %}" height="60" alt="logo">
             </a>
-        </div>                 
+        </div>
         <div class="buy-button">
             <a href="{% url 'accounts:signup' %}" class="btn btn-green">Signup</a>
         </div><!--end login button-->
@@ -28,7 +28,7 @@
         </div>
 
         <div id="navigation">
-            <!-- Navigation Menu-->   
+            <!-- Navigation Menu-->
             <ul class="navigation-menu">
                 <li><a href="/">Menu</a></li>
                 <li><a href="{% url 'main:about' %}">About Us</a></li>
@@ -39,10 +39,49 @@
                 {% if request.user.is_authenticated %}
                 <li><a href="{% url 'accounts:logout' %}">Logout</a></li>
                 {% else %}
-                <li><a href="{% url 'accounts:login' %}">Login</a></li>
-				{% endif %}
-            </ul><!--end navigation menu-->
-        </div><!--end navigation-->
-    </div><!--end container-->
-</header><!--end header-->
-<!-- Navbar End -->
+                <div class="pull-right dn-smd mt-3">
+                    <a href="{% url 'accounts:login' %}" class="btn btn-outline-success">Login</a>
+                    <a href="{% url 'accounts:signup' %}" class="btn btn-success">Signup</a>
+                </div>
+                {% endif %}
+                <li>
+                    <a href="{% url 'main:contact' %}"><span class="title ">
+                            Contact us</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="{# url 'main:experts' #}">
+                        <span class="title">Hire Experts</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="#"><span class="title">Browse Equipments</span></a>
+                    <ul>
+                        <li>
+                            <a href="{% url 'equipments:tractors-list' %}">
+                                <span class="title">Tractors</span>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="{% url 'equipments:implements-list' %}">
+                                <span class="title">Implements</span>
+                            </a>
+                        </li>
+                    </ul>
+                </li>
+                <li>
+                    <a href="{% url 'main:about' %}">
+                        <span class="title">About us</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="/">
+                        <span class="title">Home</span>
+                    </a>
+                </li>
+
+            </ul>
+        </nav>
+        <!-- End of Responsive Menu -->
+    </div>
+</header>

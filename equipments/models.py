@@ -8,7 +8,8 @@ User = get_user_model()
 
 class TractorCategory(models.Model):
     name = models.CharField(max_length=100)
-    image = models.ImageField(upload_to='tractor_category')
+    image = models.ImageField(upload_to='tractor_category',
+                              blank=True, null=True)
 
     class Meta:
         verbose_name_plural = 'Tractor Categories'
@@ -49,10 +50,6 @@ FARM_SERVICES = (
     ('loading', 'Loading'),
     ('hay making', 'Hay making'),
     ('miscellaneous', 'Miscellaneous'),
-)
-STATUS = (
-    ('pending', 'Pending'),
-    ('approved', 'Approved'),
 )
 
 
@@ -110,8 +107,7 @@ class Tractor(models.Model):
         verbose_name='What are farming service(s) do you offer?')
     agree_terms = models.BooleanField(
         default=False, verbose_name='Do your Accept our Terms and Conditions?')
-    status = models.CharField(
-        choices=STATUS, max_length=100, default='pending')
+    approved = models.BooleanField(default=False)
 
     def __str__(self):
         return self.name
@@ -119,7 +115,8 @@ class Tractor(models.Model):
 
 class ImplementCategory(models.Model):
     name = models.CharField(max_length=100)
-    image = models.ImageField(upload_to='implements_category')
+    image = models.ImageField(upload_to='implements_category',
+                              blank=True, null=True)
 
     class Meta:
         verbose_name_plural = 'Implement Categories'
@@ -184,8 +181,7 @@ class Implement(models.Model):
         verbose_name='Specify the price per Hectare')
     agree_terms = models.BooleanField(
         default=False, verbose_name='Do your Accept our Terms and Conditions?')
-    status = models.CharField(
-        choices=STATUS, max_length=100, default='pending')
+    approved = models.BooleanField(default=False)
 
     def __str__(self):
         return self.name
