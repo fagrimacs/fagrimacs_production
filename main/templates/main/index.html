@@ -61,30 +61,38 @@
 					</div><!--end col-->
 				</div><!--end row-->
 				<div class="row pt-4 text-center">
-					<div class="col-md-4"></div>
-					<div class="col-md-2">
-						<a class="btn btn-success btn-block mt-2" href="">Join us Now!  <span class="fa fa-arrow-circle-o-right"></span></a>
+					<div class="col-md-3"></div>
+					<div class="col-md-3">
+						<a class="btn btn-green btn-block mt-2" href="{% url 'accounts:signup' %}">Join us Now!  <span class="fa fa-arrow-circle-o-right"></span></a>
 					</div>
-					<div class="col-md-2">
-						<a class="btn btn-success btn-block mt-2" href="">Order Now!  <span class="fa fa-arrow-circle-o-right"></span></a>
+					<div class="col-md-3">
+						<a class="btn btn-green btn-block mt-2" href="">Place an order!  <span class="fa fa-arrow-circle-o-right"></span></a>
 					</div>
-					<div class="col-md-4"></div>
+					<div class="col-md-3"></div>
 				</div>
 			</div>
 
 		</div><!--end container-->
 	</section>
 
-	<section class="section-two overflow-hidden">
-		<div class="row">
-			<div class="col-md-6">
-				<div class="col-12">
-
+	<section class="overflow-hidden">
+		<div class="row" style="min-height: 100vh;">
+			<div class="col-lg-6 service-back1">
+				<div class="overlay-effect h-100 w-100"></div>
+				<div class="col-12 text-center box">
+					<h3>Looking for <br> Tractor or Implement</h3>
+					<div class="pt-3">
+						<a class="btn btn-orange" href="">Place an Order <span class="fa fa-arrow-circle-o-right"></span></a>
+					</div>
 				</div>
 			</div>
-			<div class="col-md-6">
-				<div class="col-12">
-
+			<div class="col-lg-6 service-back2">
+				<div class="overlay-effect h-100 w-100"></div>
+				<div class="col-12 text-center box">
+					<h3>Looking to rent-out <br> your agricultural Equipment</h3>
+					<div class="pt-3">
+						<a class="btn btn-orange" href="{% url 'accounts:signup' %}">Partner with us <span class="fa fa-arrow-circle-o-right"></span></a>
+					</div>
 				</div>
 			</div>
 		</div>

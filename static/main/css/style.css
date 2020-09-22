@@ -2447,4 +2447,55 @@ footer .footer-text {
   }
 }
 
+.overlay-effect{
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  opacity: 0.4;
+  transition: .5s ease;
+  background-color: rgba(0, 0, 0, 0.5);
+  overflow:hidden;
+}
+
+.service-back1:hover .overlay-effect, .service-back2:hover .overlay-effect{
+  opacity: 1;
+  cursor: pointer;
+}
+
+.service-back1 {
+  position: relative;
+  background-image: url(../images/1.jpg);
+  background-repeat: no-repeat;
+  background-position: 0px 0px;
+  background-size: cover;
+}
+.service-back1 h3{
+  color: white;
+}
+.service-back2 h3{
+  color: white;
+}
+.service-back1 .box{
+  margin: 0;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+.service-back2 {
+  position: relative;
+  background-image: url(../images/2.jpg);
+  background-repeat: no-repeat;
+  background-position: 0px 0px;
+  background-size: cover;
+}
+.service-back2 .box{
+  margin: 0;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
 /*# sourceMappingURL=style.css.map */
