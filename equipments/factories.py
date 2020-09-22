@@ -58,7 +58,10 @@ class ImplementFactory(factory.django.DjangoModelFactory):
     name = factory.Faker('name')
     category = factory.SubFactory(ImplementCategoryFactory)
     subcategory = factory.SubFactory(ImplementSubCategoryFactory)
+<<<<<<< HEAD
     file = factory.Faker('file_name', extension='jpg', category='image')
+=======
+>>>>>>> f9cc928... Add factories for models
     width = factory.Faker('numerify', text='%%')
     weight = factory.Faker('numerify', text='%%')
     pto = factory.Faker('random_number', digits=3)

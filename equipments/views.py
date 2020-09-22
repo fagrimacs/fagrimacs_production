@@ -66,7 +66,11 @@ class ImplementListView(ListView):
 
     The owner must accept terms and conditions for it to be shown here.
     """
+<<<<<<< HEAD
     queryset = Implement.objects.filter(agree_terms=True, approved=True)
+=======
+    queryset = Implement.objects.filter(status='approved', agree_terms=True)
+>>>>>>> 96ec1d7... resolve conflicts
 
 
 class ImplementDetailView(DetailView):
