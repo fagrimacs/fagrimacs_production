@@ -66,6 +66,18 @@ class ImplementListView(ListView):
     queryset = Implement.objects.filter(agree_terms=True, approved=True)
 
 
+class UserImplementListView(ListView):
+    """A view for showing implements added by a particular user."""
+    template_name = 'equipments/user_implement_list.html'
+
+    def get_queryset(self):
+        return Implement.objects.filter(user=self.request.user)
+
+    def form_valid(self, form):
+        form.instance.user = self.request.user
+        return super().form_valid(form)
+
+
 class ImplementDetailView(DetailView):
     """A view for showing details of single implement."""
     model = Implement
@@ -78,25 +90,7 @@ class ImplementAddView(LoginRequiredMixin, CreateView):
     """
     form_class = ImplementForm
     template_name = 'equipments/implement_form.html'
-    success_url = reverse_lazy('equipments:implements')
-
-    def post(self, request, *args, **kwargs):
-        form_class = self.get_form_class()
-        form = self.get_form(form_class)
-        files = request.FILES.getlist('file')
-        if request.method == 'POST':
-            if form.is_valid():
-                form.instance.user = self.request.user
-                for file in files:
-                    # to do
-                    pass
-                form.save()
-                return self.form_valid(form)
-            else:
-                context = {
-                    'form': form,
-                }
-                return render(request, 'equipments/implement_form.html', context)
+    success_url = reverse_lazy('equipments:user-implements-list')
 
 
 class ImplementUpdateView(LoginRequiredMixin, UpdateView):

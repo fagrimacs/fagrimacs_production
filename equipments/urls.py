@@ -18,6 +18,8 @@ urlpatterns = [
          name='tractor-delete'),
     path('implements/', views.ImplementListView.as_view(),
          name='implements-list'),
+    path('user-implements/', views.UserImplementListView.as_view(),
+         name='user-implements-list'),
     path('add-implement/', views.ImplementAddView.as_view(),
          name='implement-add'),
     path('implement/<int:pk>/detail/', views.ImplementDetailView.as_view(),
