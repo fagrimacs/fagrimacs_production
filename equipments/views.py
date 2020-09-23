@@ -19,34 +19,31 @@ class TractorListView(ListView):
     queryset = Tractor.objects.filter(agree_terms=True, approved=True)
 
 
+class UserTractorListView(ListView):
+    """A view for showing tractors added by a particular user."""
+    template_name = 'equipments/user_tractor_list.html'
+
+    def get_queryset(self):
+        return Tractor.objects.filter(user=self.request.user)
+
+
 class TractorDetailView(DetailView):
     """A view for showing all details for a single tractor."""
     model = Tractor
 
 
-class TractorAddView(LoginRequiredMixin, FormView):
+class TractorAddView(LoginRequiredMixin, CreateView):
     """A view for adding a Tractor.
 
     User must be logged in.
     """
     form_class = TractorForm
     template_name = 'equipments/tractor_form.html'
-    success_url = reverse_lazy('equipments:tractors')
+    success_url = reverse_lazy('equipments:user-tractors-list')
 
-    def post(self, request, *args, **kwargs):
-        form_class = self.get_form_class()
-        form = self.get_form(form_class)
-        files = request.FILES.getlist('file')
-        if request.method == 'POST':
-            if form.is_valid():
-                form.instance.user = self.request.user
-                for file in files:
-                    # to do
-                    pass
-                form.save()
-                return self.form_valid(form)
-            else:
-                return self.form_invalid(form)
+    def form_valid(self, form):
+        form.instance.user = self.request.user
+        return super().form_valid(form)
 
 
 class TractorUpdateView(LoginRequiredMixin, UpdateView):

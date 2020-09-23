@@ -7,6 +7,8 @@ app_name = 'equipments'
 urlpatterns = [
     path('tractors/', views.TractorListView.as_view(),
          name='tractors-list'),
+    path('user-tractors/', views.UserTractorListView.as_view(),
+         name='user-tractors-list'),
     path('add-tractor/', views.TractorAddView.as_view(), name='tractor-add'),
     path('tractor/<int:pk>/', views.TractorDetailView.as_view(),
          name='tractor-detail'),

@@ -17,7 +17,7 @@ class Command(BaseCommand):
         self.stdout.write("\nPopulate dabatase with initial data.\n")
         c = Counter()
         fixtures_dir = os.path.join(settings.BASE_DIR, 'equipments/fixtures/')
-        images_dir = os.path.join(fixtures_dir, 'images/tractor_category)
+        images_dir = os.path.join(fixtures_dir, 'images/tractor_category')
         datafile = fixtures_dir + 'tractorcategories.csv'
 
         with open(datafile, 'r') as f:
