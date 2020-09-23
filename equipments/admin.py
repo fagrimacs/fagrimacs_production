@@ -5,7 +5,7 @@ from .models import (Tractor, Implement, ImplementCategory,
 
 @admin.register(Tractor)
 class TractorAdmin(admin.ModelAdmin):
-    list_display = ('name', 'agree_terms', 'approved', )
+    list_display = ('name', 'user', 'agree_terms', 'approved', )
 
 
 @admin.register(Implement)
