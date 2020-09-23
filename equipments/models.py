@@ -1,4 +1,5 @@
 from django.db import models
+from django.urls import reverse
 from multiselectfield import MultiSelectField
 
 from django.contrib.auth import get_user_model
@@ -112,6 +113,9 @@ class Tractor(models.Model):
     def __str__(self):
         return self.name
 
+    def get_absolute_url(self):
+        return reverse('equipments:tractor-detail', kwargs={'pk': self.id})
+
 
 class ImplementCategory(models.Model):
     name = models.CharField(max_length=100)
@@ -186,17 +190,5 @@ class Implement(models.Model):
     def __str__(self):
         return self.name
 
-
-class Equipment(models.Model):
-    TYPE = (
-        (None, 'Please select'),
-        ('tractor', 'Tractor'),
-        ('implement', 'Implement'),
-        ('other_equipment', 'Other Equipment'),
-    )
-    type = models.CharField(max_length=100,
-                            verbose_name='What Equipment you want to Add?',
-                            choices=TYPE)
-
-    def __str__(self):
-        return self.name
+    def get_absolute_url(self):
+        return reverse('equipments:implement-detail', kwargs={'pk': self.id})

@@ -5,7 +5,7 @@
 {% block content %}
 <div class="container py-5 mt-5">
     {% for tractor in object_list %}
-    <li>{{ tractor }}</li>
+    <li><a href="{{ tractor.get_absolute_url }}">{{ tractor }}</a></li>
     {% endfor %}
 </div>
 {% endblock content %}

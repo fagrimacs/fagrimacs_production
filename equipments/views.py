@@ -50,12 +50,12 @@ class TractorUpdateView(LoginRequiredMixin, UpdateView):
     model = Tractor
     form_class = TractorForm
     template_name = 'equipments/update_tractor_form.html'
-    success_url = reverse_lazy('equipments:tractors')
+    success_url = reverse_lazy('equipments:user-tractors-list')
 
 
 class TractorDeleteView(LoginRequiredMixin, DeleteView):
     model = Tractor
-    success_url = reverse_lazy('equipments:tractors')
+    success_url = reverse_lazy('equipments:user-tractors-list')
 
 
 class ImplementListView(ListView):
@@ -97,12 +97,12 @@ class ImplementUpdateView(LoginRequiredMixin, UpdateView):
     model = Implement
     form_class = ImplementForm
     template_name = 'equipments/update_implement_form.html'
-    success_url = reverse_lazy('equipments:implements')
+    success_url = reverse_lazy('equipments:user-implements-list')
 
 
 class ImplementDeleteView(LoginRequiredMixin, DeleteView):
     model = Implement
-    success_url = reverse_lazy('equipments:implements')
+    success_url = reverse_lazy('equipments:user-implements-list')
 
 
 class TractorCategoryList(ListView):
