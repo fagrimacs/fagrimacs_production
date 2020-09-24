@@ -1,4 +1,5 @@
 from django.db import models
+from django.urls import reverse
 from multiselectfield import MultiSelectField
 
 from django.contrib.auth import get_user_model
@@ -8,7 +9,8 @@ User = get_user_model()
 
 class TractorCategory(models.Model):
     name = models.CharField(max_length=100)
-    image = models.ImageField(upload_to='tractor_category')
+    image = models.ImageField(upload_to='tractor_category',
+                              blank=True, null=True)
 
     class Meta:
         verbose_name_plural = 'Tractor Categories'
@@ -49,10 +51,6 @@ FARM_SERVICES = (
     ('loading', 'Loading'),
     ('hay making', 'Hay making'),
     ('miscellaneous', 'Miscellaneous'),
-)
-STATUS = (
-    ('pending', 'Pending'),
-    ('approved', 'Approved'),
 )
 
 
@@ -110,16 +108,19 @@ class Tractor(models.Model):
         verbose_name='What are farming service(s) do you offer?')
     agree_terms = models.BooleanField(
         default=False, verbose_name='Do your Accept our Terms and Conditions?')
-    status = models.CharField(
-        choices=STATUS, max_length=100, default='pending')
+    approved = models.BooleanField(default=False)
 
     def __str__(self):
         return self.name
 
+    def get_absolute_url(self):
+        return reverse('equipments:tractor-detail', kwargs={'pk': self.id})
+
 
 class ImplementCategory(models.Model):
     name = models.CharField(max_length=100)
-    image = models.ImageField(upload_to='implements_category')
+    image = models.ImageField(upload_to='implements_category',
+                              blank=True, null=True)
 
     class Meta:
         verbose_name_plural = 'Implement Categories'
@@ -184,27 +185,10 @@ class Implement(models.Model):
         verbose_name='Specify the price per Hectare')
     agree_terms = models.BooleanField(
         default=False, verbose_name='Do your Accept our Terms and Conditions?')
-    status = models.CharField(
-        choices=STATUS, max_length=100, default='pending')
+    approved = models.BooleanField(default=False)
 
     def __str__(self):
         return self.name
 
-
-class Equipment(models.Model):
-    TYPE = (
-        (None, 'Please select'),
-        ('tractor', 'Tractor'),
-        ('implement', 'Implement'),
-        ('other_equipment', 'Other Equipment'),
-    )
-    type = models.CharField(max_length=100,
-                            verbose_name='What Equipment you want to Add?',
-                            choices=TYPE)
-
-    def __str__(self):
-        return self.name
-
-
-class Phone(models.Model):
-    phone = models.CharField(max_length=18)
+    def get_absolute_url(self):
+        return reverse('equipments:implement-detail', kwargs={'pk': self.id})

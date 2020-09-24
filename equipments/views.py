@@ -55,12 +55,14 @@ class ImplementView(LoginRequiredMixin, CreateView):
                 }
                 return render(request, 'equipments/implement_form.html', context)
 
+              
+class TractorListView(ListView):
+    """A view for showing all the approved tractors.
 
+    The owner must accept terms and conditions for it to be shown here.
+    """
+    queryset = Tractor.objects.filter(agree_terms=True, approved=True)
 
-def implement_subcategory(request):
-    category_id = request.GET.get('category')
-    subcategories = ImplementSubCategory.objects.filter(category_id=category_id).order_by('name')
-    return render(request, 'equipments/subcategory.html', {'subcategories': subcategories})
 
 
 class ListTractor(LoginRequiredMixin, ListView):
@@ -68,31 +70,38 @@ class ListTractor(LoginRequiredMixin, ListView):
     template_name = 'equipments/tractors.html'
     context_object_name = 'tractors'
 
-    def get_queryset(self, *args, **kwargs):
-        return Tractor.objects.all().filter(user=self.request.user)
+class UserTractorListView(LoginRequiredMixin, ListView):
+    """A view for showing tractors added by a particular user.
+
+
+    - User must be logged in.
+    """
+    template_name = 'equipments/user_tractor_list.html'
+
+
+    def get_queryset(self):
+        return Tractor.objects.filter(user=self.request.user)
 
 
 
 class TractorDetailView(DetailView):
+    """A view for showing all details for a single tractor."""
     model = Tractor
-    template_name = 'equipments/tractor_detail.html'
-    context_object_name = 'tractor'
-
-    def get_context_data(self, **kwargs):
-        context = super(TractorDetailView, self).get_context_data(**kwargs)
-        context['tractors'] = Tractor.objects.all()
-        return context
 
 
-class ImplementDetailView(DetailView):
-    model = Implement
-    template_name = 'equipments/implement_detail.html'
-    context_object_name = 'implement'
+class TractorAddView(LoginRequiredMixin, CreateView):
+    """A view for adding a Tractor.
 
-    def get_context_data(self, **kwargs):
-        context = super(ImplementDetailView, self).get_context_data(**kwargs)
-        context['implements'] = Implement.objects.all()
-        return context
+    - User must be logged in.
+    """
+    form_class = TractorForm
+    template_name = 'equipments/tractor_form.html'
+    success_url = reverse_lazy('equipments:user-tractors-list')
+
+    def form_valid(self, form):
+        form.instance.user = self.request.user
+        return super().form_valid(form)
+
 
 
 class ListImplement(LoginRequiredMixin, ListView):
@@ -100,8 +109,17 @@ class ListImplement(LoginRequiredMixin, ListView):
     template_name = 'equipments/implements.html'
     context_object_name = 'implements'
 
-    def get_queryset(self, *args, **kwargs):
-        return Implement.objects.all().filter(user=self.request.user)
+class TractorUpdateView(LoginRequiredMixin, UpdateView):
+    """A view for updating a tractor.
+
+
+    - User must be logged in.
+    - User can update the tractor he/she added only.
+    """
+    form_class = TractorForm
+    template_name = 'equipments/update_tractor_form.html'
+    success_url = reverse_lazy('equipments:user-tractors-list')
+
 
 
 
@@ -111,8 +129,22 @@ class UpdateTractor(LoginRequiredMixin, UpdateView):
     success_url = reverse_lazy('equipments:tractors')
     queryset = Tractor.objects.all()
 
+    def get_queryset(self):
+        return Tractor.objects.filter(user=self.request.user)
 
 
+class TractorDeleteView(LoginRequiredMixin, DeleteView):
+    """A view to confirm deletion of the Tractor.
+
+    - User must be logged in.
+    - User can delete the tractor he/she added only.
+    """
+    success_url = reverse_lazy('equipments:user-tractors-list')
+
+    def get_queryset(self):
+        return Tractor.objects.filter(user=self.request.user)
+
+      
 class UpdateImplement(LoginRequiredMixin, UpdateView):
     form_class = ImplementForm
     template_name = 'equipments/update_implement_form.html'
@@ -126,26 +158,68 @@ class DeleteTractor(LoginRequiredMixin, DeleteView):
 
 
 class DeleteImplement(LoginRequiredMixin, DeleteView):
+
+class ImplementListView(ListView):
+    """A view showing list of approved implements.
+
+    The owner must accept terms and conditions for it to be shown.
+    """
+    queryset = Implement.objects.filter(agree_terms=True, approved=True)
+
+
+class UserImplementListView(LoginRequiredMixin, ListView):
+    """A view for showing implements added by a particular user.
+
+    - User must be logged in.
+    """
+    template_name = 'equipments/user_implement_list.html'
+
+    def get_queryset(self):
+        return Implement.objects.filter(user=self.request.user)
+
+    def form_valid(self, form):
+        form.instance.user = self.request.user
+        return super().form_valid(form)
+
+
+class ImplementDetailView(DetailView):
+    """A view for showing details of single implement."""
     model = Implement
-    success_url = reverse_lazy('equipments:implements')
+
+class ImplementAddView(LoginRequiredMixin, CreateView):
+    """A view for adding an Implement.
+    
+    - User must be logged in.
+    """
+    form_class = ImplementForm
+    template_name = 'equipments/implement_form.html'
+    success_url = reverse_lazy('equipments:user-implements-list')
 
 
-class TractorListHome(TemplateView):
-    template_name = 'equipments/tractor_list.html'
+class ImplementUpdateView(LoginRequiredMixin, UpdateView):
+    """A view to update the implement.
 
-    def get_context_data(self, **kwargs):
-        context = super(TractorListHome, self).get_context_data(**kwargs)
-        context['tractors'] = Tractor.objects.all()
-        return context
+    - User must be logged in.
+    - User can update the tractor he/she added only.
+    """
+    form_class = ImplementForm
+    template_name = 'equipments/update_implement_form.html'
+    success_url = reverse_lazy('equipments:user-implements-list')
+
+    def get_queryset(self):
+        return Implement.objects.filter(user=self.request.user)
 
 
-class ImplementListHome(TemplateView):
-    template_name = 'equipments/implement_list.html'
+class ImplementDeleteView(LoginRequiredMixin, DeleteView):
+    """A view to confirm deletion of the Implement.
 
-    def get_context_data(self, **kwargs):
-        context = super(ImplementListHome, self).get_context_data(**kwargs)
-        context['implements'] = Implement.objects.all()
-        return context
+    - User must be logged in.
+    - User can delete the implement he/she added only.
+    """
+    success_url = reverse_lazy('equipments:user-implements-list')
+
+    def get_queryset(self):
+        return Implement.objects.filter(user=self.request.user)
 
 
 class TractorCategoryList(ListView):
@@ -163,14 +237,21 @@ class TractorCategoryList(ListView):
 
 
 class ImplementCategoryList(ListView):
-    model = Implement
     template_name = 'equipments/implement_category_list.html'
 
     def get_queryset(self):
-        self.category = get_object_or_404(ImplementCategory, pk=self.kwargs['pk'])
+        self.category = get_object_or_404(
+            ImplementCategory, pk=self.kwargs['pk'])
         return Implement.objects.filter(category=self.category)
 
     def get_context_data(self, **kwargs):
-        context = super(ImplementCategoryList, self).get_context_data(**kwargs)
+        context = super().get_context_data(**kwargs)
         context['category'] = self.category
         return context
+
+
+def implement_subcategory(request):
+    category_id = request.GET.get('category')
+    subcategories = ImplementSubCategory.objects.filter(
+        category_id=category_id).order_by('name')
+    return render(request, 'equipments/subcategory.html', {'subcategories': subcategories})
