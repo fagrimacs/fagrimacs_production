@@ -32,9 +32,9 @@
             <ul class="navigation-menu">
                 <li><a href="/">Menu</a></li>
                 <li><a href="{% url 'main:about' %}">About Us</a></li>
-                <li><a href="{# url 'main:make-order' #}">Make an order</a></li>
-                <li><a href="{# url 'main:blog' #}">Blog</a></li>
-                <li><a href="{# url 'main:experts' #}">Hire expert</a></li>
+                <!-- <li><a href="{# url 'main:make-order' #}">Make an order</a></li> -->
+                <!-- <li><a href="{% url 'blog:all' %}">Blog</a></li> -->
+                <!-- <li><a href="{# url 'main:experts' #}">Hire expert</a></li> -->
                 <li><a href="{% url 'main:contact' %}">Contact Us</a></li>
                 {% if request.user.is_authenticated %}
                 <li><a href="{% url 'accounts:logout' %}">Logout</a></li>
