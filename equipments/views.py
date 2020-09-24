@@ -16,7 +16,7 @@ class TractorListView(ListView):
 
     The owner must accept terms and conditions for it to be shown here.
     """
-    queryset = Tractor.objects.filter(agree_terms=True, approved=True)
+    queryset = Tractor.objects.approved()
 
 
 class UserTractorListView(LoginRequiredMixin, ListView):
@@ -144,7 +144,8 @@ class TractorCategoryList(ListView):
     template_name = 'equipments/tractor_category_list.html'
 
     def get_queryset(self):
-        self.tractor_type = get_object_or_404(TractorCategory, pk=self.kwargs['pk'])
+        self.tractor_type = get_object_or_404(
+            TractorCategory, pk=self.kwargs['pk'])
         return Tractor.objects.filter(tractor_type=self.tractor_type)
 
     def get_context_data(self, **kwargs):
@@ -171,4 +172,5 @@ def implement_subcategory(request):
     category_id = request.GET.get('category')
     subcategories = ImplementSubCategory.objects.filter(
         category_id=category_id).order_by('name')
-    return render(request, 'equipments/subcategory.html', {'subcategories': subcategories})
+    return render(request, 'equipments/subcategory.html',
+                  {'subcategories': subcategories})

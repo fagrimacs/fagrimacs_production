@@ -19,42 +19,46 @@ class TractorCategory(models.Model):
         return self.name
 
 
-DRIVE_TYPE = (
-    (None, 'Please Select'),
-    ('two wheel drive', 'Two wheel Drive'),
-    ('four wheel drive', 'Four wheel Drive'),
-)
-TRANSMISSION_MODE = (
-    (None, 'Please Select'),
-    ('gear', 'Gear'),
-    ('manual', 'Manual'),
-    ('hydrostatic', 'Hydrostatic'),
-    ('turbochanged', 'Turbocharged'),
-)
-HITCHING_TYPE = (
-    (None, 'Please Select'),
-    ('two point hitches', 'Two-point hitches'),
-    ('three point hitches', 'Three-point hitches'),
-)
-ATTACHMENT_MODE = (
-    (None, 'Please select'),
-    ('frontend loader', 'frontend loader'),
-    ('backhoe', 'Backhoe'),
-    ('both', 'Both'),
-)
-FARM_SERVICES = (
-    ('soil cultivations', 'Soil cultivations'),
-    ('planting', 'Planting'),
-    ('haversting/post-haversting', 'Haversting/Post-Haversting'),
-    ('fertilizing & pest-control', 'Fertilizing & Pest-control'),
-    ('drainage & irrigation', 'Drainage & Irrigation'),
-    ('loading', 'Loading'),
-    ('hay making', 'Hay making'),
-    ('miscellaneous', 'Miscellaneous'),
-)
+class TractorManager(models.Manager):
+    def approved(self):
+        return self.filter(agree_terms=True, approved=True)
 
 
 class Tractor(models.Model):
+    DRIVE_TYPE = (
+        (None, 'Please Select'),
+        ('two wheel drive', 'Two wheel Drive'),
+        ('four wheel drive', 'Four wheel Drive'),
+    )
+    TRANSMISSION_MODE = (
+        (None, 'Please Select'),
+        ('gear', 'Gear'),
+        ('manual', 'Manual'),
+        ('hydrostatic', 'Hydrostatic'),
+        ('turbochanged', 'Turbocharged'),
+    )
+    HITCHING_TYPE = (
+        (None, 'Please Select'),
+        ('two point hitches', 'Two-point hitches'),
+        ('three point hitches', 'Three-point hitches'),
+    )
+    ATTACHMENT_MODE = (
+        (None, 'Please select'),
+        ('frontend loader', 'frontend loader'),
+        ('backhoe', 'Backhoe'),
+        ('both', 'Both'),
+    )
+    FARM_SERVICES = (
+        ('soil cultivations', 'Soil cultivations'),
+        ('planting', 'Planting'),
+        ('haversting/post-haversting', 'Haversting/Post-Haversting'),
+        ('fertilizing & pest-control', 'Fertilizing & Pest-control'),
+        ('drainage & irrigation', 'Drainage & Irrigation'),
+        ('loading', 'Loading'),
+        ('hay making', 'Hay making'),
+        ('miscellaneous', 'Miscellaneous'),
+    )
+
     created = models.DateTimeField(auto_now_add=True)
     modified = models.DateTimeField(auto_now=True)
     user = models.ForeignKey(User, on_delete=models.CASCADE)
@@ -110,6 +114,8 @@ class Tractor(models.Model):
         default=False, verbose_name='Do your Accept our Terms and Conditions?')
     approved = models.BooleanField(default=False)
 
+    objects = TractorManager()
+
     def __str__(self):
         return self.name
 
@@ -140,14 +146,12 @@ class ImplementSubCategory(models.Model):
         return self.name
 
 
-OPERATION_MODE = (
-    (None, 'Please Select'),
-    ('tractor drive', 'Tractor drive'),
-    ('self-propelled', 'Self-propelled'),
-)
-
-
 class Implement(models.Model):
+    OPERATION_MODE = (
+        (None, 'Please Select'),
+        ('tractor drive', 'Tractor drive'),
+        ('self-propelled', 'Self-propelled'),
+    )
     created = models.DateTimeField(auto_now_add=True)
     modified = models.DateTimeField(auto_now=True)
     user = models.ForeignKey(User, on_delete=models.CASCADE)
