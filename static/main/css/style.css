@@ -1646,23 +1646,22 @@ button:not(:disabled) {
   color: #3c4858;
   font-size: 16px;
   background-color: transparent !important;
-  font-weight: 400;
+  font-weight: 500;
   letter-spacing: 0.8px;
   line-height: 24px;
   -webkit-transition: all 0.5s;
   transition: all 0.5s;
-  font-family: "Muli", sans-serif;
+  font-family: "Roboto", sans-serif;
   padding-left: 8px;
   padding-right: 8px;
 }
 
 #topnav .navigation-menu > li > a:hover, #topnav .navigation-menu > li > a:active {
-  color: #0666db;
+  color: green;
 }
 
-#topnav .navigation-menu > li:hover > a,
 #topnav .navigation-menu > li.active > a {
-  color: #0666db !important;
+  color:#fd9902 !important;
 }
 
 #topnav .navigation-menu .has-submenu .menu-arrow {
@@ -2186,8 +2185,8 @@ button:not(:disabled) {
   .bg-half-170,
   .bg-half-260,
   .user-pages {
-    padding: 120px 0;
-    height: auto;
+    padding: 20px 0;
+    height: 100vh;
   }
   .dashboard-shape-two:before {
     bottom: -5rem;
@@ -2548,5 +2547,9 @@ footer .footer-text {
   width: 120px;
   height: 120px;
   border-radius: 50%;
+}
+
+.card{
+  border: 0;
 }
 /*# sourceMappingURL=style.css.map */

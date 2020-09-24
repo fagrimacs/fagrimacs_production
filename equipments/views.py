@@ -11,7 +11,7 @@ from .models import (Tractor, Implement, ImplementSubCategory,
                      TractorCategory, ImplementCategory)
 
 
-class TractorView(LoginRequiredMixin, UserPassesTestMixin, FormView):
+class TractorView(LoginRequiredMixin, FormView):
     form_class = TractorForm
     template_name = 'equipments/tractor_form.html'
     success_url = reverse_lazy('equipments:tractors')
@@ -31,12 +31,8 @@ class TractorView(LoginRequiredMixin, UserPassesTestMixin, FormView):
             else:
                 return self.form_invalid(form)
 
-    def test_func(self):
-        if self.request.user.role == 'owner':
-            return True
 
-
-class ImplementView(LoginRequiredMixin, UserPassesTestMixin, CreateView):
+class ImplementView(LoginRequiredMixin, CreateView):
     form_class = ImplementForm
     template_name = 'equipments/implement_form.html'
     success_url = reverse_lazy('equipments:implements')
@@ -59,9 +55,6 @@ class ImplementView(LoginRequiredMixin, UserPassesTestMixin, CreateView):
                 }
                 return render(request, 'equipments/implement_form.html', context)
 
-    def test_func(self):
-        if self.request.user.role == 'owner':
-            return True
 
 
 def implement_subcategory(request):
@@ -70,7 +63,7 @@ def implement_subcategory(request):
     return render(request, 'equipments/subcategory.html', {'subcategories': subcategories})
 
 
-class ListTractor(LoginRequiredMixin, UserPassesTestMixin, ListView):
+class ListTractor(LoginRequiredMixin, ListView):
     model = Tractor
     template_name = 'equipments/tractors.html'
     context_object_name = 'tractors'
@@ -78,9 +71,6 @@ class ListTractor(LoginRequiredMixin, UserPassesTestMixin, ListView):
     def get_queryset(self, *args, **kwargs):
         return Tractor.objects.all().filter(user=self.request.user)
 
-    def test_func(self):
-        if self.request.user.role == 'owner':
-            return True
 
 
 class TractorDetailView(DetailView):
@@ -105,7 +95,7 @@ class ImplementDetailView(DetailView):
         return context
 
 
-class ListImplement(LoginRequiredMixin, UserPassesTestMixin, ListView):
+class ListImplement(LoginRequiredMixin, ListView):
     model = Implement
     template_name = 'equipments/implements.html'
     context_object_name = 'implements'
@@ -113,47 +103,31 @@ class ListImplement(LoginRequiredMixin, UserPassesTestMixin, ListView):
     def get_queryset(self, *args, **kwargs):
         return Implement.objects.all().filter(user=self.request.user)
 
-    def test_func(self):
-        return self.request.user.role == 'owner'
 
 
-class UpdateTractor(LoginRequiredMixin, UserPassesTestMixin, UpdateView):
+class UpdateTractor(LoginRequiredMixin, UpdateView):
     form_class = TractorForm
     template_name = 'equipments/update_tractor_form.html'
     success_url = reverse_lazy('equipments:tractors')
     queryset = Tractor.objects.all()
 
-    def test_func(self):
-        return self.request.user.role == 'owner'
 
 
-class UpdateImplement(LoginRequiredMixin, UserPassesTestMixin, UpdateView):
+class UpdateImplement(LoginRequiredMixin, UpdateView):
     form_class = ImplementForm
     template_name = 'equipments/update_implement_form.html'
     success_url = reverse_lazy('equipments:implements')
     queryset = Implement.objects.all()
 
-    def test_func(self):
-        if self.request.user.role == 'owner':
-            return True
 
-
-class DeleteTractor(LoginRequiredMixin, UserPassesTestMixin, DeleteView):
+class DeleteTractor(LoginRequiredMixin, DeleteView):
     model = Tractor
     success_url = reverse_lazy('equipments:tractors')
 
-    def test_func(self):
-        if self.request.user.role == 'owner':
-            return True
 
-
-class DeleteImplement(LoginRequiredMixin, UserPassesTestMixin, DeleteView):
+class DeleteImplement(LoginRequiredMixin, DeleteView):
     model = Implement
     success_url = reverse_lazy('equipments:implements')
-
-    def test_func(self):
-        if self.request.user.role == 'owner':
-            return True
 
 
 class TractorListHome(TemplateView):
