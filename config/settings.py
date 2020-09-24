@@ -46,6 +46,7 @@ INSTALLED_APPS = [
     'accounts.apps.AccountsConfig',
     'main.apps.MainConfig',
     'equipments.apps.EquipmentsConfig',
+    'blog.apps.BlogConfig',
 
     'django.contrib.admin',
     'django.contrib.auth',

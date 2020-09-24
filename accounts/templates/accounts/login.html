@@ -62,13 +62,7 @@
 
                                     <div class="col-12">
                                         <div class="d-flex justify-content-between">
-                                            <div class="form-group d-inline-block">
-                                                <div class="custom-control custom-checkbox">
-                                                    <input type="checkbox" class="custom-control-input" id="customCheck1">
-                                                    <label class="custom-control-label" for="customCheck1">Remember me</label>
-                                                </div>
-                                            </div>
-                                            <p class="forgot-pass mb-0"><a href="" class="text-dark font-weight-bold">Forgot password ?</a></p>
+                                            <p class="forgot-pass mb-5"><a href="{% url 'accounts:password-reset' %}" class="text-dark font-weight-bold">Forgot password ?</a></p>
                                         </div>
                                     </div><!--end col-->
 
@@ -76,23 +70,8 @@
                                         <button class="btn btn-orange w-100">Sign in</button>
                                     </div><!--end col-->
 
-                                    <div class="col-12 mt-4 text-center">
-                                        <h6 class="mb-0">Or Login With</h6>
-                                    </div><!--end col-->
-
-                                    <div class="col-12">
-                                        <div class="row">
-                                            <div class="col-sm-6 mt-4">
-                                                <a href="#" class="btn btn-block btn-light"><i class="mdi mdi-linkedin text-primary"></i> Linkedin</a>
-                                            </div>
-                                            <div class="col-sm-6 mt-4">
-                                                <a href="#" class="btn btn-block btn-light"><i class="mdi mdi-google text-danger"></i> Google</a>
-                                            </div>
-                                        </div>
-                                    </div><!--end col-->
-
                                     <div class="col-12 text-center">
-                                        <p class="mb-0 mt-3"><small class="text-dark mr-2">Don't have an account ?</small> <a href="{% url 'accounts:login' %}" class="text-dark font-weight-bold">Login</a></p>
+                                        <p class="mb-0 mt-3"><small class="text-dark mr-2">Don't have an account ?</small> <a href="{% url 'accounts:signup' %}" class="text-dark font-weight-bold">Sign Up</a></p>
                                     </div><!--end col-->
                                 </div><!--end row-->
                             </form><!--end form-->

@@ -91,7 +91,7 @@ class UserProfile(models.Model):
         verbose_name = 'Profile'
 
     def __str__(self):
-        return f'{self.user.name.title()} Profile'
+        return f'{self.user.name.title} Profile'
 
     def save(self, *args, **kwargs):
         if not self.slug:
