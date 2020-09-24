@@ -11,6 +11,51 @@ from .models import (Tractor, Implement, ImplementSubCategory,
                      TractorCategory, ImplementCategory)
 
 
+class TractorView(LoginRequiredMixin, FormView):
+    form_class = TractorForm
+    template_name = 'equipments/tractor_form.html'
+    success_url = reverse_lazy('equipments:tractors')
+
+    def post(self, request, *args, **kwargs):
+        form_class = self.get_form_class()
+        form = self.get_form(form_class)
+        files = request.FILES.getlist('file')
+        if request.method == 'POST':
+            if form.is_valid():
+                form.instance.user = self.request.user
+                for file in files:
+                    # to do
+                    pass
+                form.save()
+                return self.form_valid(form)
+            else:
+                return self.form_invalid(form)
+
+
+class ImplementView(LoginRequiredMixin, CreateView):
+    form_class = ImplementForm
+    template_name = 'equipments/implement_form.html'
+    success_url = reverse_lazy('equipments:implements')
+
+    def post(self, request, *args, **kwargs):
+        form_class = self.get_form_class()
+        form = self.get_form(form_class)
+        files = request.FILES.getlist('file')
+        if request.method == 'POST':
+            if form.is_valid():
+                form.instance.user = self.request.user
+                for file in files:
+                    # to do
+                    pass
+                form.save()
+                return self.form_valid(form)
+            else:
+                context = {
+                    'form': form,
+                }
+                return render(request, 'equipments/implement_form.html', context)
+
+              
 class TractorListView(ListView):
     """A view for showing all the approved tractors.
 
@@ -19,15 +64,24 @@ class TractorListView(ListView):
     queryset = Tractor.objects.filter(agree_terms=True, approved=True)
 
 
+
+class ListTractor(LoginRequiredMixin, ListView):
+    model = Tractor
+    template_name = 'equipments/tractors.html'
+    context_object_name = 'tractors'
+
 class UserTractorListView(LoginRequiredMixin, ListView):
     """A view for showing tractors added by a particular user.
+
 
     - User must be logged in.
     """
     template_name = 'equipments/user_tractor_list.html'
 
+
     def get_queryset(self):
         return Tractor.objects.filter(user=self.request.user)
+
 
 
 class TractorDetailView(DetailView):
@@ -49,8 +103,15 @@ class TractorAddView(LoginRequiredMixin, CreateView):
         return super().form_valid(form)
 
 
+
+class ListImplement(LoginRequiredMixin, ListView):
+    model = Implement
+    template_name = 'equipments/implements.html'
+    context_object_name = 'implements'
+
 class TractorUpdateView(LoginRequiredMixin, UpdateView):
     """A view for updating a tractor.
+
 
     - User must be logged in.
     - User can update the tractor he/she added only.
@@ -58,6 +119,15 @@ class TractorUpdateView(LoginRequiredMixin, UpdateView):
     form_class = TractorForm
     template_name = 'equipments/update_tractor_form.html'
     success_url = reverse_lazy('equipments:user-tractors-list')
+
+
+
+
+class UpdateTractor(LoginRequiredMixin, UpdateView):
+    form_class = TractorForm
+    template_name = 'equipments/update_tractor_form.html'
+    success_url = reverse_lazy('equipments:tractors')
+    queryset = Tractor.objects.all()
 
     def get_queryset(self):
         return Tractor.objects.filter(user=self.request.user)
@@ -74,6 +144,20 @@ class TractorDeleteView(LoginRequiredMixin, DeleteView):
     def get_queryset(self):
         return Tractor.objects.filter(user=self.request.user)
 
+      
+class UpdateImplement(LoginRequiredMixin, UpdateView):
+    form_class = ImplementForm
+    template_name = 'equipments/update_implement_form.html'
+    success_url = reverse_lazy('equipments:implements')
+    queryset = Implement.objects.all()
+
+
+class DeleteTractor(LoginRequiredMixin, DeleteView):
+    model = Tractor
+    success_url = reverse_lazy('equipments:tractors')
+
+
+class DeleteImplement(LoginRequiredMixin, DeleteView):
 
 class ImplementListView(ListView):
     """A view showing list of approved implements.
@@ -102,10 +186,9 @@ class ImplementDetailView(DetailView):
     """A view for showing details of single implement."""
     model = Implement
 
-
 class ImplementAddView(LoginRequiredMixin, CreateView):
     """A view for adding an Implement.
-
+    
     - User must be logged in.
     """
     form_class = ImplementForm

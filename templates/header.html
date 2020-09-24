@@ -8,10 +8,12 @@
             <a class="logo" href="/">
                 <img src="{% static 'main/images/logo.png' %}" height="60" alt="logo">
             </a>
-        </div>                 
+        </div>
+        {% if not request.user.is_authenticated %}            
         <div class="buy-button">
             <a href="{% url 'accounts:signup' %}" class="btn btn-green">Signup</a>
-        </div><!--end login button-->
+        </div>
+        {% endif %}
         <!-- End Logo container-->
         <div class="menu-extras">
             <div class="menu-item">
@@ -30,14 +32,21 @@
         <div id="navigation">
             <!-- Navigation Menu-->   
             <ul class="navigation-menu">
-                <li><a href="/">Menu</a></li>
+                <li><a href="/">Home</a></li>
                 <li><a href="{% url 'main:about' %}">About Us</a></li>
                 <!-- <li><a href="{# url 'main:make-order' #}">Make an order</a></li> -->
                 <!-- <li><a href="{% url 'blog:all' %}">Blog</a></li> -->
                 <!-- <li><a href="{# url 'main:experts' #}">Hire expert</a></li> -->
                 <li><a href="{% url 'main:contact' %}">Contact Us</a></li>
                 {% if request.user.is_authenticated %}
-                <li><a href="{% url 'accounts:logout' %}">Logout</a></li>
+                <li class="has-submenu">
+                    <a href="javascript:void(0)">My Account</a><span class="menu-arrow"></span>
+                    <ul class="submenu">
+                        <li><a href="#">Dashboard</a></li>
+                        <li><a href="#">Profile</a></li>
+                        <li><a href="{% url 'accounts:logout' %}">Logout</a></li>
+                    </ul>
+                </li>
                 {% else %}
                 <li><a href="{% url 'accounts:login' %}">Login</a></li>
 				{% endif %}
